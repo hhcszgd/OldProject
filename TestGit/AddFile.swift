@@ -20,4 +20,5 @@ class AddFile: NSObject {
     ///write sth in dev
     ///write sth in dev again
     ///write sth in dev again again
+    ///write sth in bug after merge master
 }
