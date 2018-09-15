@@ -10,4 +10,11 @@ import Cocoa
 
 class AddFile: NSObject {
     //switch back to master
+
+    ///create branch dev
+    ///test push to branch dev
+    ///create branch bug
+    ///write sth in dev
+    ///write sth in dev again
+    ///write sth in dev again again
 }
