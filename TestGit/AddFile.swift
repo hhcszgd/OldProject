@@ -15,4 +15,5 @@ class AddFile: NSObject {
     ///create branch bug
     ///write sth in dev
     ///write sth in dev again
+    ///write after merge to master
 }
