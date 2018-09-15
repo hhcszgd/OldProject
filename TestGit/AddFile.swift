@@ -14,4 +14,5 @@ class AddFile: NSObject {
     ///test push to branch dev
     ///create branch bug
     /// test first push : git push --set-upstream origin bug
+    /// write sth in bug
 }
