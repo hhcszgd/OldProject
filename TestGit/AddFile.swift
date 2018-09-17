@@ -9,11 +9,17 @@
 import Cocoa
 
 class AddFile: NSObject {
+    //switch back to master
 
     ///create branch dev
     ///test push to branch dev
     ///create branch bug
     /// test first push : git push --set-upstream origin bug
     /// write sth in bug
+    //switch back to master
+    ///write sth in dev
+    ///write sth in dev again
+    ///write sth in dev again again
+    ///write sth in bug after merge master
     /// add tag 1.0
 }
