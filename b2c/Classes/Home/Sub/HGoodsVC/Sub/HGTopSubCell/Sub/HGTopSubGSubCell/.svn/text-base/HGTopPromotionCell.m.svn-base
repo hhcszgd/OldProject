@@ -1,0 +1,213 @@
+//
+//  HGTopPromotionCell.m
+//  b2c
+//
+//  Created by 0 on 16/4/29.
+//  Copyright © 2016年 www.16lao.com. All rights reserved.
+//
+
+
+#import "HGTopPromotionCell.h"
+#import "HGoodsSubGPSubModel.h"
+@interface HGTopPromotionCell()
+/**催销*/
+@property (nonatomic, strong) UILabel *promotion;
+
+
+/**催销方式1*/
+@property (nonatomic, strong) UILabel *promotionStyle1;
+/**催销内容1*/
+@property (nonatomic, strong) UILabel *promotionDetail1;
+/**催销方式2*/
+@property (nonatomic, strong) UILabel *promotionStyle2;
+/**催销内容2*/
+@property (nonatomic, strong) UILabel *promotionDetail2;
+
+
+
+
+@property (nonatomic, strong)  MASConstraint *contraintTop;
+@property (nonatomic, strong) MASConstraint *contraintLeft;
+@property (nonatomic, strong) MASConstraint *contraintRight;
+@property (nonatomic, strong) MASConstraint *contraintHeight;
+@property (nonatomic, strong) MASConstraint *contraintWidth;
+@property (nonatomic, weak) UIView *lineView;
+@end
+@implementation HGTopPromotionCell
+- (UILabel *)promotion{
+    if (_promotion == nil) {
+        _promotion = [[UILabel alloc] init];
+        [_promotion configmentfont:[UIFont systemFontOfSize:13 * zkqScale] textColor:[UIColor colorWithHexString:@"999999"] backColor:[UIColor colorWithHexString:@"ffffff"] textAligement:0 cornerRadius:0 text:@"促销"];
+        [_promotion sizeToFit];
+        [self.contentView addSubview:_promotion];
+    }
+    return _promotion;
+}
+
+
+
+
+- (UILabel *)promotionStyle1{
+    if (_promotionStyle1 == nil) {
+        _promotionStyle1 = [[UILabel alloc] init];
+        [_promotionStyle1 configmentfont:[UIFont systemFontOfSize:11 * zkqScale] textColor:[UIColor colorWithHexString:@"ffffff"] backColor:THEMECOLOR textAligement:1 cornerRadius:(13 * zkqScale)/2.0 text:@""];
+        [_promotionStyle1 sizeToFit];
+        [self.contentView addSubview:_promotionStyle1];
+    }
+    return _promotionStyle1;
+}
+- (UILabel *)promotionDetail1{
+    if (_promotionDetail1 == nil) {
+        _promotionDetail1 = [[UILabel alloc] init];
+        [_promotionDetail1 configmentfont:[UIFont systemFontOfSize:13 * zkqScale] textColor:[UIColor colorWithHexString:@"333333"] backColor:[UIColor colorWithHexString:@"ffffff"] textAligement:0 cornerRadius:0 text:@""];
+        [_promotionDetail1 sizeToFit];
+        [self.contentView addSubview:_promotionDetail1];
+    }
+    return _promotionDetail1;
+}
+
+- (UILabel *)promotionStyle2{
+    if (_promotionStyle2 == nil) {
+        _promotionStyle2 = [[UILabel alloc] init];
+        [_promotionStyle2 configmentfont:[UIFont systemFontOfSize:11 * zkqScale] textColor:[UIColor colorWithHexString:@"ffffff"] backColor:THEMECOLOR textAligement:1 cornerRadius:(13 * zkqScale)/2.0 text:@""];
+        [_promotionStyle2 sizeToFit];
+        [self.contentView addSubview:_promotionStyle2];
+    }
+    return _promotionStyle2;
+}
+- (UILabel *)promotionDetail2{
+    if (_promotionDetail2 == nil) {
+        _promotionDetail2 = [[UILabel alloc] init];
+        [_promotionDetail2 configmentfont:[UIFont systemFontOfSize:13 * zkqScale] textColor:[UIColor colorWithHexString:@"333333"] backColor:[UIColor colorWithHexString:@"ffffff"] textAligement:0 cornerRadius:0 text:@""];
+        [_promotionDetail2 sizeToFit];
+        [self.contentView addSubview:_promotionDetail2];
+    }
+    return _promotionDetail2;
+}
+
+
+
+
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        
+        //布局促销
+        [self.promotion mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentView.mas_top).offset(14);
+            make.left.equalTo(self.contentView.mas_left).offset(10);
+             make.width.equalTo(@(33 * zkqScale));
+            make.height.equalTo(@(15 * zkqScale));
+        }];
+        //布局满减
+        [self.promotionStyle1 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.promotion.mas_right).offset(20);
+            make.centerY.equalTo(self.promotion.mas_centerY);
+            make.width.equalTo(@(33 * zkqScale));
+            make.height.equalTo(@(14 * zkqScale));
+        }];
+        [self.promotionDetail1 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.promotionStyle1);
+            make.left.equalTo(self.promotionStyle1.mas_right).offset(13);
+            make.right.equalTo(self.contentView.mas_right).offset(-10);
+        }];
+        //布局赠品
+        [self.promotionStyle2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.promotionStyle1.mas_left).offset(0);
+            make.top.equalTo(self.promotionStyle1.mas_bottom).offset(5);
+             make.width.equalTo(@(33 * zkqScale));
+            make.height.equalTo(@(14 * zkqScale));
+        }];
+        [self.promotionDetail2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.promotionStyle2);
+            make.left.equalTo(self.promotionStyle2.mas_right).offset(13);
+            make.right.equalTo(self.contentView.mas_right).offset(-10);
+        }];
+        //分割线
+        UIView *lineView = [[UIView alloc] init];
+        self.lineView = lineView;
+        [self.contentView addSubview:lineView];
+        [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+          self.contraintTop =   make.top.equalTo(self.promotionStyle2.mas_bottom).offset(10);
+           self.contraintLeft =  make.left.equalTo(self.promotionStyle2.mas_left).offset(0);
+           self.contraintRight = make.right.bottom.equalTo(self.contentView).offset(0);
+           
+            //设置高度
+           self.contraintHeight = make.height.equalTo(@(1));
+           self.contraintWidth =  make.width.equalTo(@(screenW));
+        }];
+        lineView.backgroundColor = BackgroundGray;
+        
+        
+    }
+    return self;
+}
+
+
+
+- (void)awakeFromNib {
+    // Initialization code
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
+
+- (void)setPromotModel:(HGoodsSubGPromotModel *)promotModel{
+//
+    if (promotModel.items.count == 1) {
+        [self.contraintHeight uninstall];
+        [self.contraintRight uninstall];
+        [self.contraintLeft uninstall];
+        [self.contraintTop uninstall];
+        [self.contraintWidth uninstall];
+        HGoodsSubGPSubModel *subModel = promotModel.items[0];
+        self.promotionStyle1.text = @"满减";
+        NSInteger discount = [subModel.discount_price integerValue]/100;
+        NSInteger full = [subModel.full_price integerValue]/100;
+        self.promotionDetail1.text = [NSString stringWithFormat:@"满%ld元减%ld",full,discount];
+        [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            self.contraintTop =   make.top.equalTo(self.promotionStyle1.mas_bottom).offset(10);
+            self.contraintLeft =  make.left.equalTo(self.promotionStyle1.mas_left).offset(0);
+            self.contraintRight = make.right.bottom.equalTo(self.contentView).offset(0);
+            //设置高度
+            self.contraintHeight = make.height.equalTo(@(1));
+            self.contraintWidth = make.width.equalTo(@(screenW));
+        }];
+        self.promotionStyle2.hidden = YES;
+        self.promotionDetail2.hidden = YES;
+    }
+    
+    
+    if (promotModel.items &&([promotModel.items isKindOfClass:[NSArray class]]) && (promotModel.items.count == 2)) {
+        for (NSInteger i = 0; i < promotModel.items.count; i++) {
+            HGoodsSubGPSubModel *subModel = promotModel.items[i];
+            if (i == 0) {
+                
+                self.promotionStyle1.text = @"满减";
+                NSInteger discount = [subModel.discount_price integerValue]/100;
+                NSInteger full = [subModel.full_price integerValue]/100;
+                self.promotionDetail1.text = [NSString stringWithFormat:@"满%ld元减%ld",full,discount];
+                
+            }
+            if (i == 1) {
+                
+                self.promotionStyle2.text = subModel.title;
+                NSInteger discount = [subModel.discount_price integerValue]/100;
+                NSInteger full = [subModel.full_price integerValue]/100;
+                self.promotionDetail2.text = [NSString stringWithFormat:@"满%ld元减%ld",full,discount];
+                
+            }
+        }
+
+    }
+
+}
+
+
+
+
+@end

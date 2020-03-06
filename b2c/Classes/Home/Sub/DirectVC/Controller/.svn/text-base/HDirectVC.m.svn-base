@@ -1,0 +1,542 @@
+//
+//  DirectVC.m
+//  b2c
+//
+//  Created by wangyuanfei on 16/4/18.
+//  Copyright © 2016年 www.16lao.com. All rights reserved.
+//
+/**hotbrand的布局属性*/
+#define brandleft 10
+#define brandright 10
+#define brandline 5
+#define brandinter 5
+#define brandTop 4
+#define brandBottom 4
+#define brandWidth (screenW - brandleft - brandright - 3 * brandinter)/4.0f
+#define brandheight 46 *SCALE
+/**优质厂家推荐布局*/
+#define heightSellLeft 0
+#define heightSeellRight 0
+#define heightSellInter 1
+#define heightSellTop 2
+#define HeightSellBottom 2
+#define heightSellWidth (screenW - heightSeellRight - heightSellLeft - 2 * heightSellInter)/3.0f
+#define heightSellHeight (screenW - heightSeellRight - heightSellLeft - 2 * heightSellInter)/3.0f
+#import "HDirectVC.h"
+/**优惠券布局*/
+#define couponLeft 0
+#define couponright 0
+#define couponInter 1
+#define couponLine 1
+#define couponTop 4
+#define couponBottom 4
+#define couponwidth (screenW - couponLeft - couponright -  couponInter)/2.0f
+#define couponHeight 75.5 * SCALE
+/**猜你喜欢*/
+#define guessLeft 10
+#define guessright 10
+#define guessinter 10
+#define guessline 10
+#define guesswidth (screenW - guessLeft - guessright - guessinter)/2.0f
+#define guessheght 234 * SCALE
+#define overTop 4
+#define overBottom 4
+#define overLeft 0
+#define overRight 0
+#import "HFactoryBaseCell.h"
+/**baner*/
+#import "HDirectBannerCell.h"
+/**组头*/
+#import "HSuperHeader.h"
+/**热门品牌*/
+#import "HFSHotBrandCell.h"
+/**超值特卖*/
+#import "HFSOverflowSellCell.h"
+/**优质厂家推荐*/
+#import "HFSHighSellerCommentCell.h"
+/**优惠券*/
+#import "HFSCouponCell.h"
+#import "HFactoryBaseModel.h"
+
+#import "CustomCollectionModel.h"
+#import "CustomFRefresh.h"
+#import "HDirectActiveVC.h"
+
+/**商品*/
+#import "HDirectGuessYouLikeCell.h"
+@interface HDirectVC ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,HFSOverflowSellCellDelegate,HDirectBannerCellDelegate>
+/**数据源数组*/
+@property (nonatomic, strong) NSMutableArray *dataArray;
+/**临时数组存放cell*/
+@property (nonatomic, strong) NSMutableArray *cellArray;
+/**强引用，引用cell*/
+@property (nonatomic, weak) HDirectBannerCell *directBannerCell;
+@end
+
+@implementation HDirectVC
+/**懒加载*/
+- (NSMutableArray *)dataArray{
+    if (_dataArray == nil) {
+        _dataArray = [NSMutableArray array];
+    }
+    return _dataArray;
+}
+- (NSMutableArray *)cellArray{
+    if (_cellArray == nil) {
+        _cellArray = [[NSMutableArray alloc] init];
+        
+    }
+    return _cellArray;
+}
+#pragma mark -- 加载更多
+- (void)upRefresh{
+    [[UserInfo shareUserInfo] gotGuessLikeDataWithChannel_id:@"98" PageNum:self.pageNumber success:^(ResponseObject *responseObject) {
+        
+        [self dealGuessYoulikeDataUnusualWith:responseObject];
+        self.pageNumber++;
+    } failure:^(NSError *error) {
+        [self.col.mj_footer endRefreshing];
+    }];
+}
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter ] addObserver:self selector:@selector(messageCountChanged) name:MESSAGECOUNTCHANGED object:nil];
+}
+
+
+- (void)downRefresh{
+
+    [[UserInfo shareUserInfo] gotFactorySellsuccess:^(ResponseObject *response) {
+        [self.dataArray removeAllObjects];
+        [self.cellArray removeAllObjects];
+        [self dealDataUnusualWith:response];
+        self.col.mj_footer.state = MJRefreshStateIdle;
+    } failure:^(NSError *error) {
+        [self showTheViewWhenDisconnectWithFrame:CGRectMake(0, self.startY, screenW, screenH - self.startY)];
+    }];
+}
+- (void)reconnectClick:(UIButton *)sender{
+    self.pageNumber = 1;
+    
+    [[UserInfo shareUserInfo] gotFactorySellsuccess:^(ResponseObject *response) {
+        [self.dataArray removeAllObjects];
+        [self.cellArray removeAllObjects];
+        [self dealDataUnusualWith:response];
+        [self removeTheViewWhenConnect];
+    } failure:^(NSError *error) {
+        
+    }];
+}
+/**排除数据异常*/
+- (void)dealDataUnusualWith:(ResponseObject *)response{
+    //判断是否返回数据
+    if (response.data) {
+        self.col.mj_footer = self.refreshFooter;
+        //返回值是数组的形式
+        if ([response.data isKindOfClass:[NSArray class]]) {
+            for (NSDictionary *dic in response.data) {
+                HFactoryBaseModel *baseModel = [HFactoryBaseModel mj_objectWithKeyValues:dic];
+                //筛选自己想要的数据
+                if ([self selectWantDataAddDataArrayWithKey:baseModel.key]) {
+                    if (baseModel.items && (baseModel.items.count >0)) {
+                        [self selectCellByKey:baseModel.key];
+                        [self.dataArray addObject:baseModel];
+                    }
+                }
+                
+                
+            }
+            HFactoryBaseModel *guessLike = [[HFactoryBaseModel alloc] init];
+            [self selectCellByKey:@"guesslike"];
+            guessLike.items =  [NSMutableArray array];
+            [self.dataArray addObject:guessLike];
+            [self.col.mj_header endRefreshing];
+        }
+    }else{
+        [self.col.mj_header endRefreshing];
+    }
+    [self.col reloadData];
+    
+}
+/**有选择的挑选数据加入数据源中*/
+- (BOOL)selectWantDataAddDataArrayWithKey:(NSString *)key{
+    if ([key isEqualToString:@"banner"]) {
+        return YES;
+    }else if ([key isEqualToString:@"brand"]) {
+        return YES;
+    }else if ([key isEqualToString:@"sale"]) {
+        return YES;
+    } if ([key isEqualToString:@"highgrade"]) {
+        return YES;
+    }
+    if ([key isEqualToString:@"coupons"]) {
+        return YES;
+    } if ([key isEqualToString:@"guesslike"]) {
+        return YES;
+    }
+    return NO;
+}
+#pragma --mark根据key值确定需要的cell
+- (void)selectCellByKey:(NSString *)key{
+    if ([key isEqualToString:@"banner"]) {
+        [self.cellArray addObject:@"HDirectBannerCell"];
+    }
+    if ([key isEqualToString:@"brand"]) {
+        [self.cellArray addObject:@"HFSHotBrandCell"];
+    }
+    if ([key isEqualToString:@"sale"]) {
+        [self.cellArray addObject:@"HFSOverflowSellCell"];
+    }
+    if ([key isEqualToString:@"highgrade"]) {
+        [self.cellArray addObject:@"HFSHighSellerCommentCell"];
+    }
+    if ([key isEqualToString:@"coupons"]) {
+        [self.cellArray addObject:@"HFSCouponCell"];
+    }
+    if ([key isEqualToString:@"guesslike"]) {
+        [self.cellArray addObject:@"HDirectGuessYouLikeCell"];
+    }
+}
+
+/**处理猜你喜欢数据的异常*/
+- (void)dealGuessYoulikeDataUnusualWith:(ResponseObject *)responseObject{
+    self.col.mj_footer = self.refreshFooter;
+    if (responseObject.status > 0) {
+        if (!responseObject.data) {
+            [self.col.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            HFactoryBaseModel *guessLike = [HFactoryBaseModel mj_objectWithKeyValues:responseObject.data];
+            if (!guessLike.items) {
+                
+            }else{
+                HFactoryBaseModel *baseModel = [self.dataArray lastObject];
+                [baseModel.items addObjectsFromArray:guessLike.items];
+            }
+            
+            
+            //如果数组的值不再改变那么就是没有数据了
+            
+            [self.col.mj_footer endRefreshing];
+            
+            
+            
+            
+        }
+    }else{
+        [self.col.mj_footer endRefreshingWithNoMoreData];
+    }
+    
+    
+    
+    [self.col reloadData];
+}
+
+
+
+
+
+
+
+
+#pragma mark -- 设置title
+- (void)configmentMidleView{
+    self.naviTitle = @"厂家直销";
+}
+#pragma mark --
+- (void)actionToSearch:(ActionBaseView *)searchView{
+    LOG(@"%@,%d,%@",[self class], __LINE__,searchView)
+}
+#pragma mark --  底层主视图
+- (void)configmentUI{
+    self.col.delegate = self;
+    self.col.dataSource = self;
+    self.col.backgroundColor = BackgroundGray;
+    //+1
+    [self.col registerClass:[HDirectBannerCell class] forCellWithReuseIdentifier:@"HDirectBannerCell"];
+    [self.col registerClass:[HFSHotBrandCell class] forCellWithReuseIdentifier:@"HFSHotBrandCell"];
+    [self.col registerClass:[HFSOverflowSellCell class] forCellWithReuseIdentifier:@"HFSOverflowSellCell"];
+    [self.col registerClass:[HFSHighSellerCommentCell class] forCellWithReuseIdentifier:@"HFSHighSellerCommentCell"];
+    [self.col registerClass:[HFSCouponCell class] forCellWithReuseIdentifier:@"HFSCouponCell"];
+    [self.col registerClass:[HDirectGuessYouLikeCell class] forCellWithReuseIdentifier:@"HDirectGuessYouLikeCell"];
+    [self.col registerClass:[HSuperHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HSuperHeader"];
+    [self.col registerClass:[GuessYouLikeHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"GuessYouLikeHeader"];
+    
+    
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    LOG(@"_%@_%d_%@",[self class] , __LINE__,@"fuck , 内存警告");
+    // Dispose of any resources that can be recreated.
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return self.dataArray.count;
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    if ([self.cellArray[section] isEqualToString:@"HFSHotBrandCell"]){
+        HFactoryBaseModel *model = self.dataArray[section];
+        return model.items.count;
+    }
+    if ([self.cellArray[section] isEqualToString:@"HFSHighSellerCommentCell"]){
+        HFactoryBaseModel *model = self.dataArray[section];
+        return model.items.count;
+    }
+    if ([self.cellArray[section] isEqualToString:@"HFSCouponCell"]){
+        HFactoryBaseModel *model = self.dataArray[section];
+        return model.items.count;
+    }
+    if ([self.cellArray[section] isEqualToString:@"HDirectGuessYouLikeCell"]){
+        HFactoryBaseModel *model = self.dataArray[section];
+        return model.items.count;
+    }
+    return 1;
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    if ([self.cellArray[indexPath.section] isEqualToString:@"HDirectBannerCell"]) {
+        HDirectBannerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HDirectBannerCell" forIndexPath:indexPath];
+        cell.delegate = self;
+        if (self.directBannerCell != cell) {
+            [self.directBannerCell removeTiemr];
+            self.directBannerCell = nil;
+            self.directBannerCell = cell;
+        }
+
+        
+        cell.baseModel = self.dataArray[indexPath.section];
+        return cell;
+    }
+    if ([self.cellArray[indexPath.section] isEqualToString:@"HFSHotBrandCell"]) {
+        HFSHotBrandCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HFSHotBrandCell" forIndexPath:indexPath];
+        HFactoryBaseModel *baseModel = self.dataArray[indexPath.section];
+        
+        cell.customModel = baseModel.items[indexPath.row];
+        return cell;
+    }
+    if ([self.cellArray[indexPath.section] isEqualToString:@"HFSOverflowSellCell"]) {
+        HFSOverflowSellCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HFSOverflowSellCell" forIndexPath:indexPath];
+        cell.delegate = self;
+        cell.baseModel = self.dataArray[indexPath.section];
+        return cell;
+    }
+    if ([self.cellArray[indexPath.section] isEqualToString:@"HFSHighSellerCommentCell"]) {
+        HFSHighSellerCommentCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HFSHighSellerCommentCell" forIndexPath:indexPath];
+        HFactoryBaseModel *baseModel = self.dataArray[indexPath.section];
+        cell.customModel = baseModel.items[indexPath.row];
+        return cell;
+    }
+    if ([self.cellArray[indexPath.section] isEqualToString:@"HFSCouponCell"]) {
+        HFSCouponCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HFSCouponCell" forIndexPath:indexPath];
+        HFactoryBaseModel *baseModel = self.dataArray[indexPath.section];
+        cell.customModel = baseModel.items[indexPath.row];
+        return cell;
+        
+    }
+    if ([self.cellArray[indexPath.section] isEqualToString:@"HDirectGuessYouLikeCell"]) {
+        HDirectGuessYouLikeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HDirectGuessYouLikeCell" forIndexPath:indexPath];
+        HFactoryBaseModel *baseModel = self.dataArray[indexPath.section];
+        cell.customModel = baseModel.items[indexPath.row];
+        return cell;
+    }
+
+    return nil;
+}
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+    if ([self.cellArray[section] isEqualToString:@"HFSHotBrandCell"]){
+       
+        return brandinter;
+    }
+    if ([self.cellArray[section] isEqualToString:@"HFSHighSellerCommentCell"]){
+        return heightSellInter;
+    }
+    if ([self.cellArray[section] isEqualToString:@"HFSCouponCell"]){
+        return couponInter;
+    }
+    if ([self.cellArray[section] isEqualToString:@"HDirectGuessYouLikeCell"]){
+        return guessinter;
+    }
+    return 0;
+}
+//
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+    
+    if ([self.cellArray[section] isEqualToString:@"HFSHotBrandCell"]){
+        return brandline;
+    }
+    if ([self.cellArray[section] isEqualToString:@"HFSHighSellerCommentCell"]){
+        HFactoryBaseModel *model = self.dataArray[section];
+        return model.items.count;
+    }
+    if ([self.cellArray[section] isEqualToString:@"HFSCouponCell"]){
+        return couponLine;
+    }
+    if ([self.cellArray[section] isEqualToString:@"HDirectGuessYouLikeCell"]){
+        return guessline;
+    }
+    return 0;
+}
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    if ([self.cellArray[section] isEqualToString:@"HFSHotBrandCell"]){
+        return UIEdgeInsetsMake(brandTop, brandleft, brandBottom, brandright);
+    }
+    if ([self.cellArray[section] isEqualToString:@"HFSHighSellerCommentCell"]){
+        return UIEdgeInsetsMake(heightSellTop, heightSellLeft, heightSeellRight, heightSeellRight);
+    }
+    if ([self.cellArray[section] isEqualToString:@"HFSCouponCell"]){
+        return UIEdgeInsetsMake(couponTop, couponLeft, couponBottom, couponright);
+    }
+    if ([self.cellArray[section] isEqualToString:@"HDirectGuessYouLikeCell"]){
+        return UIEdgeInsetsMake(0, guessLeft, 0, guessright);
+    }
+    if ([self.cellArray[section] isEqualToString:@"HFSOverflowSellCell"]) {
+        return UIEdgeInsetsMake(overTop, overLeft, overBottom, overRight);
+    }
+    return UIEdgeInsetsMake(0, 0, 0, 0);
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    if ([self.cellArray[indexPath.section] isEqualToString:@"HDirectBannerCell"]) {
+        return CGSizeMake(screenW, 150 * SCALE);
+    }
+    if ([self.cellArray[indexPath.section] isEqualToString:@"HFSHotBrandCell"]) {
+        return CGSizeMake(brandWidth, brandheight);
+    }
+   if ([self.cellArray[indexPath.section] isEqualToString:@"HFSOverflowSellCell"]){
+       return CGSizeMake(screenW , 151);
+    }
+    if ([self.cellArray[indexPath.section] isEqualToString:@"HFSHighSellerCommentCell"]) {
+        return CGSizeMake(heightSellWidth,heightSellHeight);
+    }
+   if ([self.cellArray[indexPath.section] isEqualToString:@"HFSCouponCell"]){
+       return CGSizeMake(couponwidth, couponHeight);
+    }
+    if ([self.cellArray[indexPath.section] isEqualToString:@"HDirectGuessYouLikeCell"]) {
+        return CGSizeMake(guesswidth, guessheght);
+    }
+    
+    return CGSizeMake(0, 0);
+    
+}
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{    
+    
+    if ([self.cellArray[indexPath.section] isEqualToString:@"HFSHotBrandCell"]) {
+        HSuperHeader *header = [self collectionview:collectionView indexPath:indexPath];
+        
+        return header;
+    }else if ([self.cellArray[indexPath.section] isEqualToString:@"HFSOverflowSellCell"]) {
+        HSuperHeader *header = [self collectionview:collectionView indexPath:indexPath];
+        
+        return header;
+    }else if ([self.cellArray[indexPath.section] isEqualToString:@"HFSHighSellerCommentCell"]) {
+        HSuperHeader *header = [self collectionview:collectionView indexPath:indexPath];
+        
+        return header;
+    }else if ([self.cellArray[indexPath.section] isEqualToString:@"HFSCouponCell"]) {
+        HSuperHeader *header = [self collectionview:collectionView indexPath:indexPath];
+        
+        return header;
+    }else if ([self.cellArray[indexPath.section] isEqualToString:@"HDirectGuessYouLikeCell"]) {
+        GuessYouLikeHeader *guessHeader = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"GuessYouLikeHeader" forIndexPath:indexPath];
+        return guessHeader;
+    }
+    return nil;
+}
+- (HSuperHeader *)collectionview:(UICollectionView *)collectionview indexPath:(NSIndexPath *)indexPath{
+    HSuperHeader *header =[collectionview dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HSuperHeader" forIndexPath:indexPath];
+    header.leftView.backgroundColor = [UIColor colorWithHexString:@"1da2dd"];
+    HFactoryBaseModel *baseModel = self.dataArray[indexPath.section];
+    header.channelLabel.textColor = [UIColor colorWithHexString:@"1da2dd"];
+    header.channelLabel.text = baseModel.channel;
+    return header;
+}
+
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    CGSize size = CGSizeMake(0, 0);
+    if ([self.cellArray[section] isEqualToString:@"HFSHotBrandCell"]) {
+        size = CGSizeMake(screenW, 36 * SCALE);
+    }
+    if ([self.cellArray[section] isEqualToString:@"HFSOverflowSellCell"]) {
+        size = CGSizeMake(screenW, 36 * SCALE);
+    }
+    if ([self.cellArray[section] isEqualToString:@"HFSHighSellerCommentCell"]) {
+        size = CGSizeMake(screenW, 36 * SCALE);
+    }
+    if ([self.cellArray[section] isEqualToString:@"HFSCouponCell"]) {
+        
+        size = CGSizeMake(screenW, 36 * SCALE);
+    }
+    if ([self.cellArray[section] isEqualToString:@"HDirectGuessYouLikeCell"]) {
+        
+        size = CGSizeMake(screenW, 44 * SCALE);
+    }
+    return size;
+}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    HFactoryBaseModel *baseModel = self.dataArray[indexPath.section];
+    if ([self.cellArray[indexPath.section] isEqualToString:@"HFSHotBrandCell"]) {
+
+        CustomCollectionModel *subModel = baseModel.items[indexPath.item];
+        subModel.actionKey = @"HShopVC";
+        subModel.keyParamete = @{@"paramete":subModel.shop_id};
+        [[SkipManager shareSkipManager] skipByVC:self withActionModel:subModel];
+    }
+    if ([self.cellArray[indexPath.section] isEqualToString:@"HFSOverflowSellCell"]) {
+        
+    }
+    if ([self.cellArray[indexPath.section] isEqualToString:@"HFSHighSellerCommentCell"]) {
+        CustomCollectionModel *subModel = baseModel.items[indexPath.item];
+        
+        subModel.keyParamete = @{@"paramete":subModel.ID};
+        subModel.actionKey = @"HShopVC";
+        [[SkipManager shareSkipManager] skipByVC:self withActionModel:subModel];
+    }
+    if ([self.cellArray[indexPath.section] isEqualToString:@"HFSCouponCell"]) {
+        CustomCollectionModel *subModel = baseModel.items[indexPath.item];
+        subModel.actionKey = @"CouponsDetailVC";
+        subModel.keyParamete = @{@"paramete":subModel.ID};
+        [[SkipManager shareSkipManager] skipByVC:self withActionModel:subModel];
+        
+    }
+    if ([self.cellArray[indexPath.section] isEqualToString:@"HDirectGuessYouLikeCell"]) {
+        CustomCollectionModel *subModel = baseModel.items[indexPath.item];
+        
+        subModel.keyParamete = @{@"paramete":subModel.ID};
+        [[SkipManager shareSkipManager] skipByVC:self withActionModel:subModel];
+    }
+}
+#pragma mark -- 超值特卖跳转到商品详情页面
+- (void)HFSOverflowSellCellActionToGoodsDetailWithSubModel:(CustomCollectionModel *)subModel{
+    subModel.actionKey = @"HGoodsVC";
+    subModel.keyParamete = @{@"paramete":subModel.ID};
+    [[SkipManager shareSkipManager] skipByVC:self withActionModel:subModel];
+}
+#pragma mark -- 轮播图跳转到活动页面
+- (void)HDirectBannerCellActionToActiveWithSubModel:(CustomCollectionModel *)subModel{
+    if ([subModel.actionKey isEqualToString:@"HGoodsVC"]) {
+        subModel.actionKey = @"HGoodsVC";
+    }
+    if ([subModel.actionKey isEqualToString:@"HShopVC"]) {
+        subModel.actionKey = @"HShopVC";
+    }
+    if ([subModel.actionKey isEqualToString:@"webpage"]) {
+        subModel.actionKey = @"HDirectActiveVC";
+        
+    }
+    if (subModel.link) {
+        if (subModel.link.length > 0) {
+            subModel.keyParamete = @{@"paramete":subModel.link};
+            
+            [[SkipManager shareSkipManager] skipByVC:self withActionModel:subModel];
+        }
+    }
+}
+-(void)dealloc{
+    if (self.directBannerCell) {
+       [self.directBannerCell removeTiemr];  
+    }
+    self.directBannerCell = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+}
+@end

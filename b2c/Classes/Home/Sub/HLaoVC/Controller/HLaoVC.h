@@ -1,0 +1,16 @@
+//
+//  LaoVC.h
+//  b2c
+//
+//  Created by wangyuanfei on 3/23/16.
+//  Copyright © 2016 www.16lao.com. All rights reserved.
+/**
+    优惠券控制器
+ */
+
+#import "BaseVC.h"
+#import "LaoBaseVC.h"
+#import "TabBarLaoVC.h"
+@interface HLaoVC : TabBarLaoVC
+
+@end

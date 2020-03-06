@@ -1,0 +1,229 @@
+//
+//  HGoodsTopCell.m
+//  b2c
+//
+//  Created by 0 on 16/4/25.
+//  Copyright © 2016年 www.16lao.com. All rights reserved.
+//
+
+#import "HGoodsTopCell.h"
+#import "HGTopSubGoodsCell.h"
+//#import "HGTopSubDetailCell.h"
+#import "HGTopSubEvaluateCell.h"
+#import "HGoodsBaseCell.h"
+#import "HGoodsBottomCell.h"
+@interface HGoodsTopCell()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,HGTopSubGoodsCellDelegate,HGoodsBottomCellDelegate>
+/***/
+
+@property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
+@property (nonatomic, strong) NSMutableArray *cellIDArr;
+
+@property (nonatomic, copy) NSString *goodsID;
+
+@property (nonatomic, strong) NSMutableArray *dataArr;
+@end
+@implementation HGoodsTopCell
+- (UICollectionViewFlowLayout *)flowLayout{
+    if (_flowLayout == nil) {
+        UICollectionViewFlowLayout *flow = [[UICollectionViewFlowLayout alloc] init];
+        _flowLayout = flow;
+    }
+    return _flowLayout;
+}
+- (GoodsTopCollection *)col{
+    if (_col == nil) {
+        _col = [[GoodsTopCollection alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width , self.frame.size.height) collectionViewLayout:self.flowLayout];
+        [self.contentView addSubview:_col];
+        
+        [_col registerClass:[HGTopSubGoodsCell class] forCellWithReuseIdentifier:@"HGTopSubGoodsCell"];
+        [_col registerClass:[HGoodsBottomCell class] forCellWithReuseIdentifier:@"HGoodsBottomCell"];
+        [_col registerClass:[HGTopSubEvaluateCell class] forCellWithReuseIdentifier:@"HGTopSubEvaluateCell"];
+        [_col setShowsVerticalScrollIndicator:NO];
+        [_col setShowsHorizontalScrollIndicator:NO];
+        [self.flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+        _col.delegate = self;
+        _col.dataSource = self;
+        _col.pagingEnabled = YES;
+        _col.bounces = NO;
+        _col.showsHorizontalScrollIndicator = NO;
+        
+        
+    }
+    return _col;
+}
+- (NSMutableArray *)cellIDArr{
+    if (_cellIDArr == nil) {
+        _cellIDArr = [[NSMutableArray alloc] initWithArray:@[@"HGTopSubGoodsCell",@"HGoodsBottomCell",@"HGTopSubEvaluateCell"]];
+    }
+    return _cellIDArr;
+}
+
+
+
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self addCol];
+    }
+    return self;
+}
+
+
+
+- (void)addCol{
+    self.col.backgroundColor = BackgroundGray;
+}
+
+
+
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return 3;
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    HGoodsBaseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:self.cellIDArr[indexPath.row] forIndexPath:indexPath];
+    if (indexPath.row == 0) {
+        HGTopSubGoodsCell * goodsCell = (HGTopSubGoodsCell *)cell;
+        goodsCell.delegate = self;
+    }
+    if (indexPath.row == 1) {
+        HGoodsBottomCell *deatilCell = (HGoodsBottomCell*)cell;
+        deatilCell.delegate = self;
+    }
+    
+    
+    cell.backgroundColor = BackgroundGray;
+    cell.goods_id = self.goodsID;
+//    cell.data = self.dataArr[indexPath.item];
+    
+    return cell;
+    
+}
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+    return 0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+    return 0;
+}
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    return UIEdgeInsetsMake(0, 0, 0, 0);
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return CGSizeMake(collectionView.frame.size.width, collectionView.frame.size.height);
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [super touchesBegan:touches withEvent:event];
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+//    if (scrollView.contentOffset.x == 0) {
+//        HGTopSubGoodsCell *cell = (HGTopSubGoodsCell *)[self.col cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+//        cell.table.contentOffset = CGPointMake(0, cell.table.contentSize.height - cell.table.frame.size.height);
+//    }
+}
+#pragma --mark滑动结束之后改变对应的按钮
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    [self.backArr removeAllObjects];
+    NSInteger index = self.col.contentOffset.x / screenW;
+    [self.backArr addObject:[NSIndexPath indexPathForItem:index inSection:0]];
+    if ([self.delegate respondsToSelector:@selector(endScrollSelectIndex:)]) {
+        [self.delegate performSelector:@selector(endScrollSelectIndex:) withObject:@(index)];
+    }
+}
+
+- (void)scrollviewToFirstItem{
+    [self.backArr removeAllObjects];
+    
+    [self.backArr addObject:[NSIndexPath indexPathForItem:0 inSection:0]];
+    
+    if ([self.delegate respondsToSelector:@selector(endScrollSelectIndex:)]) {
+        [self.delegate performSelector:@selector(endScrollSelectIndex:) withObject:@(0)];
+    }
+    [self.col scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
+}
+- (void)scrollviewToTargetIndexPath:(NSIndexPath *)indexPath{
+    [self.backArr removeAllObjects];
+    
+    [self.backArr addObject:indexPath];
+    
+    [self.col scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
+}
+- (void)setData:(NSMutableArray *)data{
+    self.dataArr = data;
+    [self.col reloadData];
+}
+
+- (void)setGoods_id:(NSString *)goods_id{
+    self.goodsID = goods_id;
+    [self.col reloadData];
+    
+}
+
+#pragma mark -- HGTopSubDetailCellDelegate
+- (void)clickGoodsActionToTheGoodsDetailVCWith:(HGoodsBottomSubModel *)goodModel{
+    if ([self.delegate respondsToSelector:@selector(clickGoodsActionToTheGoodsDetailVCWith:)]) {
+        [self.delegate performSelector:@selector(clickGoodsActionToTheGoodsDetailVCWith:) withObject:goodModel];
+    }
+}
+
+
+#pragma mark -- 查看全部评价
+- (void)checkAllEvluate{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:2 inSection:0];
+    [self.col scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:YES];
+    [self.backArr removeAllObjects];
+    
+    [self.backArr addObject:[NSIndexPath indexPathForItem:2 inSection:0]];
+    
+    if ([self.delegate respondsToSelector:@selector(endScrollSelectIndex:)]) {
+        [self.delegate performSelector:@selector(endScrollSelectIndex:) withObject:@(indexPath.item)];
+    }
+}
+#pragma mark -- 跳转到店铺详情页面
+- (void)topSubGoodsactionToShopDetailWith:(HGTopSubGoodsShopModel *)shopModel{
+    if ([self.delegate respondsToSelector:@selector(ClickActionToShopDetailWith:)]) {
+        [self.delegate performSelector:@selector(ClickActionToShopDetailWith:) withObject:shopModel];
+    }
+}
+#pragma mark -- 跳转到店铺的全部商品页面
+- (void)HGTopSubGoodsCellActionToShopAllGoodsVCWith:(HGTopSubGoodsShopSubModel *)allGoodsModel{
+    if ([self.delegate respondsToSelector:@selector(HGoodsTopCellActionToShopAllGoodsVCWith:)]) {
+        [self.delegate performSelector:@selector(HGoodsTopCellActionToShopAllGoodsVCWith:) withObject:allGoodsModel];
+    }
+}
+#pragma mark -- 弹出选择窗口
+- (void)HGTopSubGoodsCellSelectGoodsSpecificationWith:(id)object{
+    if ([self.delegate respondsToSelector:@selector(HGoodsTopCellSelectGoodsSpecificationWith:)]) {
+        [self.delegate performSelector:@selector(HGoodsTopCellSelectGoodsSpecificationWith:) withObject:object];
+    }
+}
+
+
+
+#pragma mark -- 上新
+-(void)HGTopSubGoodsCellactionToshangxin:(HGTopSubGoodsShopModel *)shopModel{
+    if ([self.delegate respondsToSelector:@selector(HGoodsTopCellactionToshangxin:)]) {
+        [self.delegate performSelector:@selector(HGoodsTopCellactionToshangxin:) withObject:shopModel];
+    }
+}
+- (void)dealloc{
+    LOG(@"%@,%d,%@",[self class], __LINE__,@"销毁")
+}
+
+@end
+
+
+
+
+
+
+
+
+

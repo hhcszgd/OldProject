@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/ShopCar/Sub/ConfirmOrderVC/Sub/CreateOrderVC/Model
+END
+COrderUserInfo.h
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/ShopCar/Sub/ConfirmOrderVC/Sub/CreateOrderVC/Model/COrderUserInfo.h
+END
+COrderGooditemModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/ShopCar/Sub/ConfirmOrderVC/Sub/CreateOrderVC/Model/COrderGooditemModel.m
+END
+APOrder.h
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/ShopCar/Sub/ConfirmOrderVC/Sub/CreateOrderVC/Model/APOrder.h
+END
+SpecSubItemsModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/ShopCar/Sub/ConfirmOrderVC/Sub/CreateOrderVC/Model/SpecSubItemsModel.m
+END
+COrderUserInfo.m
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/ShopCar/Sub/ConfirmOrderVC/Sub/CreateOrderVC/Model/COrderUserInfo.m
+END
+APOrder.m
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/ShopCar/Sub/ConfirmOrderVC/Sub/CreateOrderVC/Model/APOrder.m
+END
+COrderNumberModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/ShopCar/Sub/ConfirmOrderVC/Sub/CreateOrderVC/Model/COrderNumberModel.h
+END
+COrderNormalModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/ShopCar/Sub/ConfirmOrderVC/Sub/CreateOrderVC/Model/COrderNormalModel.h
+END
+COrderPayModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/ShopCar/Sub/ConfirmOrderVC/Sub/CreateOrderVC/Model/COrderPayModel.h
+END
+COrderNumberModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/ShopCar/Sub/ConfirmOrderVC/Sub/CreateOrderVC/Model/COrderNumberModel.m
+END
+COrderNormalModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/ShopCar/Sub/ConfirmOrderVC/Sub/CreateOrderVC/Model/COrderNormalModel.m
+END
+COrderDetailBaseModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/ShopCar/Sub/ConfirmOrderVC/Sub/CreateOrderVC/Model/COrderDetailBaseModel.h
+END
+COrderPayModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/ShopCar/Sub/ConfirmOrderVC/Sub/CreateOrderVC/Model/COrderPayModel.m
+END
+COrderGoodSubModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/ShopCar/Sub/ConfirmOrderVC/Sub/CreateOrderVC/Model/COrderGoodSubModel.h
+END
+COrderDetailBaseModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/ShopCar/Sub/ConfirmOrderVC/Sub/CreateOrderVC/Model/COrderDetailBaseModel.m
+END
+COrderGooditemModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/ShopCar/Sub/ConfirmOrderVC/Sub/CreateOrderVC/Model/COrderGooditemModel.h
+END
+COrderGoodSubModel.m
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/ShopCar/Sub/ConfirmOrderVC/Sub/CreateOrderVC/Model/COrderGoodSubModel.m
+END
+SpecSubItemsModel.h
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/ShopCar/Sub/ConfirmOrderVC/Sub/CreateOrderVC/Model/SpecSubItemsModel.h
+END

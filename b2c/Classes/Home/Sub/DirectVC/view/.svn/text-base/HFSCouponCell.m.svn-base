@@ -1,0 +1,37 @@
+//
+//  HFSCouponCell.m
+//  b2c
+//
+//  Created by 0 on 16/4/6.
+//  Copyright © 2016年 www.16lao.com. All rights reserved.
+//
+
+#import "HFSCouponCell.h"
+@interface HFSCouponCell()
+
+
+
+
+@end
+@implementation HFSCouponCell
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+        
+        
+    }
+    return self;
+}
+
+
+
+- (void)setCustomModel:(CustomCollectionModel *)customModel{
+    
+    [super setCustomModel:customModel];
+
+}
+-(void)dealloc{
+//    LOG(@"%@,%d,%@",[self class], __LINE__,@"销毁")
+}
+@end

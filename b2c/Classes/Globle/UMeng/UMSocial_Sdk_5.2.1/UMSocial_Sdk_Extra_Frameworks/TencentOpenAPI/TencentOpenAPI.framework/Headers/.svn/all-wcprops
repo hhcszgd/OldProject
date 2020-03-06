@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI/TencentOpenAPI.framework/Headers
+END
+TencentApiInterface.h
+K 25
+svn:wc:ra_dav:version-url
+V 183
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI/TencentOpenAPI.framework/Headers/TencentApiInterface.h
+END
+QQApiInterface.h
+K 25
+svn:wc:ra_dav:version-url
+V 178
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI/TencentOpenAPI.framework/Headers/QQApiInterface.h
+END
+TencentMessageObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 184
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI/TencentOpenAPI.framework/Headers/TencentMessageObject.h
+END
+WeiBoAPI.h
+K 25
+svn:wc:ra_dav:version-url
+V 172
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI/TencentOpenAPI.framework/Headers/WeiBoAPI.h
+END
+sdkdef.h
+K 25
+svn:wc:ra_dav:version-url
+V 170
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI/TencentOpenAPI.framework/Headers/sdkdef.h
+END
+TencentOAuth.h
+K 25
+svn:wc:ra_dav:version-url
+V 176
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI/TencentOpenAPI.framework/Headers/TencentOAuth.h
+END
+QQApiInterfaceObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 184
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI/TencentOpenAPI.framework/Headers/QQApiInterfaceObject.h
+END
+TencentOAuthObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 182
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI/TencentOpenAPI.framework/Headers/TencentOAuthObject.h
+END

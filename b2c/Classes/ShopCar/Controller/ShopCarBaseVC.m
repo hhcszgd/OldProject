@@ -1,0 +1,83 @@
+//
+//  ShopCarBaseVC.m
+//  b2c
+//
+//  Created by wangyuanfei on 3/23/16.
+//  Copyright © 2016 www.16lao.com. All rights reserved.
+//
+
+#import "ShopCarBaseVC.h"
+
+#import "HNaviCompose.h"
+
+#import "HCellComposeModel.h"
+
+@interface ShopCarBaseVC ()
+
+@property(nonatomic,weak)  HNaviCompose * messageButton ;
+@end
+
+@implementation ShopCarBaseVC
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setupNavigationBarSubview];
+    [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(messageHasChanged) name:MESSAGECOUNTCHANGED object:nil];
+    // Do any additional setup after loading the view.
+}
+-(void)setupNavigationBarSubview
+{
+    HNaviCompose * messageButton = [[HNaviCompose alloc]init];
+    
+    self.messageButton = messageButton;
+    HCellComposeModel * messageModel = [[HCellComposeModel alloc]init ];
+    messageModel.imgForLocal = [UIImage imageNamed:@"icon_news_gray"];
+//    messageModel.title  = @"消息";
+//    messageModel.messageCountInCompose=0;
+    messageButton.composeModel  = messageModel;
+//    messageButton.img =  [UIImage imageNamed:@"icon_news_gray"];
+    messageButton.bottomTitleColor = [UIColor colorWithHexString:@"7f7f7f"];
+    [messageButton addTarget:self action:@selector(messageClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+
+    self.navigationBarRightActionViews = @[messageButton];
+    
+}
+-(void)messageHasChanged{ [self.messageButton changeMessageCount];}
+-(void)messageClick:(ActionBaseView*)sender
+{
+    LOG(@"_%@_%d_%@",[self class] , __LINE__,@"跳转消息控制器")
+    HBaseModel*messageModel = [[HBaseModel alloc]init];
+    
+    
+    //测试webView
+    //            messageModel.actionKey=@"BaseWebVC";
+    //            messageModel.keyParamete = @{
+    //                                                @"paramete":@"https://m.baidu.com/?from=844b&vit=fps"
+    //                                                };
+    
+    //正式的消息控制器
+    messageModel.actionKey=@"FriendListVC";
+    messageModel.judge = YES;
+    
+    [[SkipManager shareSkipManager] skipByVC:self withActionModel:messageModel ];
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    LOG(@"_%@_%d_%@",[self class] , __LINE__,@"fuck , 内存警告");
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

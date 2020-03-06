@@ -1,0 +1,580 @@
+//
+//  FindPsdWithMblVC.m
+//  b2c
+//
+//  Created by wangyuanfei on 16/6/13.
+//  Copyright © 2016年 www.16lao.com. All rights reserved.
+//
+
+#import "FindPsdWithMblVC.h"
+#import "CustomInputView.h"
+//#import "UserInfo.h"
+//typedef enum : NSUInteger {
+//    FindPasswordWithMobileType,
+//    findPasswordWithEmailType
+//} FindPasswordType;
+
+@interface FindPsdWithMblVC ()<CustomInputViewDelegate>
+@property(nonatomic,copy)NSString * mobileOrEmail ;
+@property(nonatomic,assign)FindPasswordType  findPasswordType ;
+@property(nonatomic,weak)UILabel * topLabel ;
+/** 底部居中按钮 */
+@property(nonatomic,weak)UIButton * bottomButton ;
+/** 底部居左按钮 */
+@property(nonatomic,weak)UIButton * leftButton ;
+/** 底部居右按钮 */
+@property(nonatomic,weak)UIButton * rightButton ;
+@property(nonatomic,weak)  CustomInputView * authcodeInput ;
+
+/** 获取验证码按钮 */
+@property(nonatomic,weak)UIButton * gotAuthcodeButton ;
+
+/** 定时器 */
+@property(nonatomic,strong)NSTimer * timer ;
+/** 重新发送倒计时时间 */
+@property(nonatomic,assign)NSInteger  time ;
+@property(nonatomic,copy)NSString * inputMobileType ;//通过直接输入的手机号还是通过用户名间接获取的手机号directMobile/indirectMobile
+
+@end
+
+@implementation FindPsdWithMblVC
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    NSString * mobileOrEmail = self.keyParamete[@"paramete"];
+    NSString * inputMobileType = self.keyParamete[@"inputMobileType"];
+    self.inputMobileType = inputMobileType;
+    if ([self.inputMobileType isEqualToString:@"directMobile"]) {//通过输入手机号直接发送短信
+        
+    }else if ([self.inputMobileType isEqualToString:@"indirectMobile"]){//通过用户名间接发送短信
+    
+    }
+    LOG(@"_%@_%d_%@",[self class] , __LINE__,self.keyParamete);
+    self.mobileOrEmail = mobileOrEmail;
+    if ([self mobileLawful:self.mobileOrEmail]) {
+        self.findPasswordType = FindPasswordWithMobileType;
+        //加载手机找回界面
+    }else if ([self emailLawful:self.mobileOrEmail]){
+         //加载邮箱找回界面
+        self.findPasswordType = findPasswordWithEmailType;
+    }
+    [self setupUI];
+    // Do any additional setup after loading the view.
+}
+-(void)setupUI
+{
+    UILabel * topLabel  = [[UILabel alloc] init];
+    self.topLabel = topLabel;
+    topLabel.numberOfLines = 0 ;
+    topLabel.textColor = MainTextColor;
+    [self.view addSubview:topLabel];
+    
+    
+    CGFloat margin = 20 ;
+    CGFloat bottomButtonH = 40 ;
+    CGFloat toBottomMargin = bottomButtonH;
+    CGFloat bottomButtonX = margin ;
+    CGFloat bottomButtonY = self.view.bounds.size.height  - bottomButtonH  - toBottomMargin ;
+    CGFloat bottomButtonW = self.view.bounds.size.width - margin * 2 ;
+    UIButton * bottomButton = [[UIButton alloc]initWithFrame:CGRectMake(bottomButtonX, bottomButtonY, bottomButtonW, bottomButtonH)];
+    self.bottomButton = bottomButton;
+    [bottomButton addTarget:self action:@selector(bottomButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [bottomButton setBackgroundColor:THEMECOLOR];
+    [self.view addSubview:self.bottomButton];
+    
+
+    
+    
+    NSString * tempStr = nil ;
+    if (self.findPasswordType==FindPasswordWithMobileType) {
+        CGFloat leftBtnX = 0 ;
+        CGFloat leftBtnY = 0 ;
+        CGFloat leftBtnW = 0 ;
+        CGFloat leftBtnH = 0 ;
+        
+        CGFloat rightBtnX = 0 ;
+        CGFloat rightBtnY = 0 ;
+        CGFloat rightBtnW = 0 ;
+        CGFloat rightBtnH = 0 ;
+        
+        UIButton * rightButton = [[UIButton  alloc]init];
+        
+        if ([self.inputMobileType isEqualToString:@"directMobile"]) {//通过输入手机号直接发送短信
+            [rightButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+            leftBtnX = 0 ;
+            leftBtnY = 0 ;
+            leftBtnW = 0 ;
+            leftBtnH = 0 ;
+            
+            rightBtnX = margin ;
+            rightBtnY = CGRectGetMaxY(self.bottomButton.frame) ;
+            rightBtnW = self.bottomButton.bounds.size.width/2 ;
+            rightBtnH = self.bottomButton.bounds.size.height ;
+        }else if ([self.inputMobileType isEqualToString:@"indirectMobile"]){//通过用户名间接发送短信
+            rightButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+             leftBtnX = margin ;
+             leftBtnY = CGRectGetMaxY(self.bottomButton.frame) ;
+             leftBtnW = self.bottomButton.bounds.size.width/2 ;
+             leftBtnH = self.bottomButton.bounds.size.height ;
+            
+             rightBtnX = leftBtnX + leftBtnW ;
+             rightBtnY = CGRectGetMaxY(self.bottomButton.frame) ;
+             rightBtnW = self.bottomButton.bounds.size.width/2 ;
+             rightBtnH = self.bottomButton.bounds.size.height ;
+        }
+        
+
+//        UIButton * leftButton = [[UIButton  alloc]initWithFrame:CGRectMake(margin, CGRectGetMaxY(self.bottomButton.frame), self.bottomButton.bounds.size.width/2, self.bottomButton.bounds.size.height)];
+        UIButton * leftButton = [[UIButton  alloc]initWithFrame:CGRectMake(leftBtnX,leftBtnY,leftBtnW,leftBtnH)];
+        leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        self.leftButton  =  leftButton ;
+        [leftButton addTarget:self action:@selector(leftButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [leftButton setTitleColor:MainTextColor forState:UIControlStateNormal];
+        [self.view addSubview:leftButton];
+        leftButton.titleLabel.font = [UIFont systemFontOfSize:12];
+
+
+//        UIButton * rightButton = [[UIButton  alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.leftButton.frame), CGRectGetMaxY(self.bottomButton.frame), self.bottomButton.bounds.size.width/2, self.bottomButton.bounds.size.height)];
+         rightButton.frame = CGRectMake(rightBtnX,rightBtnY,rightBtnW,rightBtnH);
+        
+        
+        self.rightButton  =  rightButton ;
+        [rightButton addTarget:self action:@selector(rightButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:rightButton];
+        [rightButton setTitleColor:MainTextColor forState:UIControlStateNormal];
+        rightButton.titleLabel.font = [UIFont systemFontOfSize:12];
+
+
+
+
+
+
+
+
+
+
+        [bottomButton setTitle:@"下一步" forState:UIControlStateNormal];
+        tempStr = self.mobileOrEmail;
+        tempStr = [tempStr stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+        tempStr = [NSString stringWithFormat:@"验证码已发送到%@的手机上",tempStr];
+        [self.rightButton setTitle:@"联系客服" forState:UIControlStateNormal];
+         [self.leftButton setTitle:@"通过邮箱找回" forState:UIControlStateNormal];
+        self.topLabel.text = tempStr;
+        CGSize textSize = [self.topLabel.text sizeWithFont:self.topLabel.font MaxSize:CGSizeMake(self.view.bounds.size.width - margin, CGFLOAT_MAX)];
+        self.topLabel.frame = CGRectMake(margin/2, self.startY+margin, self.view.bounds.size.width - margin, textSize.height);
+        
+        
+        [self findPasswordWithMobileUI];
+
+
+        
+//        UIButton * leftButton = [[UIButton  alloc]initWithFrame:CGRectMake(margin, CGRectGetMaxY(self.bottomButton.frame), self.bottomButton.bounds.size.width/2, self.bottomButton.bounds.size.height)];
+//        leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//        self.leftButton  =  leftButton ;
+//        [leftButton addTarget:self action:@selector(leftButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+//        [leftButton setTitleColor:MainTextColor forState:UIControlStateNormal];
+//        [self.view addSubview:leftButton];
+//        leftButton.titleLabel.font = [UIFont systemFontOfSize:12];
+//        
+//        
+//        UIButton * rightButton = [[UIButton  alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.leftButton.frame), CGRectGetMaxY(self.bottomButton.frame), self.bottomButton.bounds.size.width/2, self.bottomButton.bounds.size.height)];
+//        rightButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+//        self.rightButton  =  rightButton ;
+//        [rightButton addTarget:self action:@selector(rightButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+//        [self.view addSubview:rightButton];
+//        [rightButton setTitleColor:MainTextColor forState:UIControlStateNormal];
+//        rightButton.titleLabel.font = [UIFont systemFontOfSize:12];
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        [bottomButton setTitle:@"下一步" forState:UIControlStateNormal];
+//        tempStr = self.mobileOrEmail;
+//        tempStr = [tempStr stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+//        tempStr = [NSString stringWithFormat:@"验证码已发送到%@的手机上",tempStr];
+//        [self.rightButton setTitle:@"联系客服" forState:UIControlStateNormal];
+//         [self.leftButton setTitle:@"通过邮箱找回" forState:UIControlStateNormal];
+//        self.topLabel.text = tempStr;
+//        CGSize textSize = [self.topLabel.text sizeWithFont:self.topLabel.font MaxSize:CGSizeMake(self.view.bounds.size.width - margin, CGFLOAT_MAX)];
+//        self.topLabel.frame = CGRectMake(margin/2, self.startY+margin, self.view.bounds.size.width - margin, textSize.height);
+//        
+//        
+//        [self findPasswordWithMobileUI];
+    }else if (self.findPasswordType == findPasswordWithEmailType){
+        [bottomButton setTitle:@"返回登录首页" forState:UIControlStateNormal];
+        NSString * targetShowString = nil ;
+        NSString * tag = @"@";
+        if ([self.mobileOrEmail containsString:tag]) {
+            NSRange tagRange = [self.mobileOrEmail rangeOfString:tag];
+            if (tagRange.location>1 ) {
+                //要替换为*的部分的区间
+                NSRange hiddenStrRange = NSMakeRange(1, tagRange.location-2);
+                NSString * tagStr = [self.mobileOrEmail.copy substringWithRange:hiddenStrRange];
+                NSString * hiddenStr = [[NSString alloc]init];
+                for (int k = 0 ; k<tagStr.length; k++) {
+                   hiddenStr = [hiddenStr  stringByAppendingString:@"*"];
+                }
+               targetShowString= [self.mobileOrEmail.copy stringByReplacingCharactersInRange:hiddenStrRange withString:hiddenStr].copy;
+            }
+        }
+        tempStr = [NSString stringWithFormat:@"验证链接已发送到%@的邮箱里 , 请前往验证",targetShowString];
+        self.topLabel.text = tempStr;
+        CGSize textSize = [self.topLabel.text sizeWithFont:self.topLabel.font MaxSize:CGSizeMake(self.view.bounds.size.width - margin, CGFLOAT_MAX)];
+        self.topLabel.frame = CGRectMake(margin/2, self.startY+margin, self.view.bounds.size.width - margin, textSize.height);
+        
+        [self findPasswordWithEmailUI];
+    }
+
+    
+
+}
+
+
+
+-(void)leftButtonClick:(UIButton*)sender
+{
+    LOG(@"_%@_%d_%@",[self class] , __LINE__,@"点击左下角按钮");
+    [[UserInfo shareUserInfo] gotEmaileByUsernameOrMobile:self.mobileOrEmail success:^(ResponseObject *responseObject) {
+        LOG(@"_%@_%d_原路返回的获取邮箱信息的数据是%@",[self class] , __LINE__,responseObject.data);
+        if (responseObject.status>0) {
+                BaseModel * model = [[BaseModel alloc]init];
+                model.actionKey = @"FindPsdWithMblVC";
+                model.keyParamete = @{
+                                      @"paramete":responseObject.data[@"email"]
+                                      //根据手机号或者用户名获取邮箱,再把邮箱赋值给paramete属性
+                                      };
+                [[SkipManager shareSkipManager] skipByVC:self withActionModel:model];
+        }else{
+            AlertInVC(responseObject.msg)
+        }
+    } failure:^(NSError *error) {
+        AlertInVC(@"网络错误")
+    }];
+    
+
+}
+-(void)rightButtonClick:(UIButton*)sender
+{
+    LOG(@"_%@_%d_%@",[self class] , __LINE__,@"点击右下角按钮");
+    if (self.findPasswordType == FindPasswordWithMobileType) {
+        
+        [self connectService];
+    }
+}
+-(void)connectService
+{
+    NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",@"4009696123"];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+}
+-(void)findPasswordWithMobileUI
+{
+    CGFloat margin = 10 ;
+    
+    CGFloat gotAuthButtonW = 100 ;
+    /** 验证方式输入框 */
+    CustomInputView * authcodeInput  = [[CustomInputView alloc]initWithFrame:CGRectMake(margin, CGRectGetMaxY(self.topLabel.frame)+margin, self.view.bounds.size.width - gotAuthButtonW - margin * 3, 44)];
+    authcodeInput.CustomInputDelegate = self;
+    authcodeInput.customKeyboardType = UIKeyboardTypeNumbersAndPunctuation;
+    authcodeInput.customReturenType  = UIReturnKeyNext ;
+    authcodeInput.textFont = [UIFont systemFontOfSize:12];
+    authcodeInput.leftWidth = 0 ;
+//    authcodeInput.tipsTitle = @"新密码";
+    authcodeInput.inputPlaceholder = @"请输入验证码";
+    self.authcodeInput = authcodeInput;
+    [self.view addSubview:authcodeInput];
+    
+    
+    
+    
+    /** 获取验证码按钮 */
+    UIButton * gotAuthcodeButton =[[UIButton alloc]init];
+    
+    NSString * timeStr = [NSString stringWithFormat:@"%d",60] ;
+    NSString * txtStr  = @"s后重新获取";
+    NSString * totalStr = [NSString stringWithFormat:@"%@%@",timeStr,txtStr];
+    NSRange timeRange = [totalStr rangeOfString:timeStr];
+    NSRange txtRange = [totalStr rangeOfString:txtStr];
+    NSMutableAttributedString * attriStr = [[NSMutableAttributedString alloc]initWithString:totalStr];
+    [attriStr addAttribute:NSForegroundColorAttributeName value:THEMECOLOR range:timeRange];
+    [attriStr addAttribute:NSForegroundColorAttributeName value:SubTextColor range:txtRange];
+    [gotAuthcodeButton setAttributedTitle:attriStr forState:UIControlStateNormal];
+    
+    gotAuthcodeButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    gotAuthcodeButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    gotAuthcodeButton.titleLabel.font = [UIFont systemFontOfSize:14 ];
+    [gotAuthcodeButton addTarget:self action:@selector(gotAuthcodeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [gotAuthcodeButton setTitleColor:SubTextColor forState:UIControlStateNormal];
+    //    gotAuthcodeButton.backgroundColor = randomColor;
+    gotAuthcodeButton.layer.borderWidth = 1 ;
+    gotAuthcodeButton.layer.borderColor = THEMECOLOR.CGColor;
+    gotAuthcodeButton.layer.cornerRadius = 5;
+    gotAuthcodeButton.layer.masksToBounds = YES;
+//    [gotAuthcodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
+    self.gotAuthcodeButton = gotAuthcodeButton;
+    gotAuthcodeButton.frame = CGRectMake(CGRectGetMaxX(authcodeInput.frame)+margin, CGRectGetMinY(authcodeInput.frame), gotAuthButtonW, authcodeInput.bounds.size.height);
+    [self.view addSubview:gotAuthcodeButton];
+    
+}
+-(void)gotAuthcodeButtonClick:(UIButton*)sender
+{
+    LOG(@"_%@_%d_%@",[self class] , __LINE__,@"点击获取验证码");
+    [self resentAuthcode:self.gotAuthcodeButton];
+    [self.view endEditing:YES];
+}
+-(void)findPasswordWithEmailUI
+{
+    //TODO  实现发送邮件接口 (记得先实现验证邮箱是否存在)
+    [[UserInfo shareUserInfo] findPasswordBackByEmailWithEmail:self.mobileOrEmail success:^(ResponseObject *responseObject) {
+        if (responseObject.status>0) {
+            MBProgressHUD * hub = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hub.mode=MBProgressHUDModeText;
+            hub.detailsLabelText=[NSString stringWithFormat:@"%@",@"即将返回登录页"/*responseObject.msg*/];
+            [hub hide:YES afterDelay:5];
+            hub.completionBlock = ^(){
+                [self bottomButtonClick:self.bottomButton];
+                
+            };
+        }else{
+            AlertInVC(responseObject.msg)
+        }
+    } failure:^(NSError *error) {
+       AlertInVC(@"网络错误")
+    }];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (self.findPasswordType==FindPasswordWithMobileType) {
+        [self gotAuthcodeButtonClick:self.gotAuthcodeButton];
+    }else if (self.findPasswordType == findPasswordWithEmailType){
+        LOG(@"_%@_%d_%@",[self class] , __LINE__,@"执行发送邮件操作");
+    }
+
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self deleteTimer];
+    [self removeFromParentViewController];
+}
+
+-(void)customInputTextFieldShouldReturn:(CustomInputView*)customInputView{
+    [self bottomButtonClick:self.bottomButton];
+
+}
+-(void)bottomButtonClick:(UIButton*)sender
+{
+    if ([self mobileLawful:self.mobileOrEmail]) {
+        //判断验证码的正确与否 , 适当的执行下一步
+        [self checkAuthcodeByInternet:^(BOOL lawful) {
+            if (lawful) {
+                LOG(@"_%@_%d_%@",[self class] , __LINE__,@"验证成功");
+                BaseModel * model = [[BaseModel alloc]init];
+                model.actionKey = @"ResetPsdVC";
+                model.keyParamete = @{@"paramete":self.mobileOrEmail,@"subparamete":@(self.findPasswordType)};
+                
+                [[SkipManager shareSkipManager] skipByVC:self withActionModel:model];
+                
+            }
+        }];
+
+    }else if ([self emailLawful:self.mobileOrEmail]){
+        //返回登录页
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    LOG(@"_%@_%d_%@",[self class] , __LINE__,@"fuck , 内存警告");
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+- (BOOL) emailLawful:(NSString *)email
+{
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:email];
+}
+
+
+/** 判断手机号的合法性 */
+
+- (BOOL) mobileLawful:(NSString *)mobileNumbel{
+    /**
+     * 手机号码
+     * 移动：134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
+     * 联通：130,131,132,152,155,156,185,186
+     * 电信：133,1349,153,180,189,181(增加)
+     */
+    NSString * MOBIL = @"^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$";
+    /**
+     * 中国移动：China Mobile
+     * 134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
+     */
+    NSString * CM = @"^13[0-9]{9}$|14[0-9]{9}|15[0-9]{9}$|18[0-9]{9}|17[0-9]{9}$";
+    /**
+     * 中国联通：China Unicom
+     * 130,131,132,152,155,156,185,186
+     */
+    NSString * CU = @"^1(3[0-2]|5[256]|8[56])\\d{8}$";
+    /**
+     * 中国电信：China Telecom
+     * 133,1349,153,180,189,181(增加)
+     */
+    NSString * CT = @"^1((33|53|8[019])[0-9]|349)\\d{7}$";
+    
+    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBIL];
+    NSPredicate *regextestcm = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];
+    NSPredicate *regextestcu = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU];
+    NSPredicate *regextestct = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT];
+    
+    if (([regextestmobile evaluateWithObject:mobileNumbel]
+         || [regextestcm evaluateWithObject:mobileNumbel]
+         || [regextestct evaluateWithObject:mobileNumbel]
+         || [regextestcu evaluateWithObject:mobileNumbel])) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+/////////验证码按钮相关////////////
+-(void)navigationBack{
+    [self deleteTimer];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+-(void)deleteTimer
+{
+    
+    self.gotAuthcodeButton.enabled=YES;
+//    [self.gotAuthcodeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    self.gotAuthcodeButton.backgroundColor = [UIColor orangeColor];
+//    [self.gotAuthcodeButton setTitle:@"重新发送" forState:UIControlStateNormal];
+
+    [self.gotAuthcodeButton setAttributedTitle:[[NSAttributedString alloc] initWithString:@"重新获取"] forState:UIControlStateNormal];
+    [self.timer invalidate];
+    self.timer=nil;
+}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+-(void)creatTimer
+{
+    self.gotAuthcodeButton.enabled=NO;
+//    self.gotAuthcodeButton.backgroundColor  = [UIColor whiteColor];
+//    [self.gotAuthcodeButton setTitleColor:SubTextColor forState:UIControlStateDisabled];
+    NSTimer * timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(daojishi) userInfo:nil repeats:YES];
+    self.timer= timer;
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    
+    self.time=60;
+}
+
+-(void)daojishi
+{
+    
+    self.time-=1;
+    
+    NSString * timeStr = [NSString stringWithFormat:@"%ld",self.time] ;
+    NSString * txtStr  = @"s后重新获取";
+    NSString * totalStr = [NSString stringWithFormat:@"%@%@",timeStr,txtStr];
+    NSRange timeRange = [totalStr rangeOfString:timeStr];
+    NSRange txtRange = [totalStr rangeOfString:txtStr];
+    NSMutableAttributedString * attriStr = [[NSMutableAttributedString alloc]initWithString:totalStr];
+    [attriStr addAttribute:NSForegroundColorAttributeName value:THEMECOLOR range:timeRange];
+    [attriStr addAttribute:NSForegroundColorAttributeName value:SubTextColor range:txtRange];
+    [self.gotAuthcodeButton setAttributedTitle:attriStr forState:UIControlStateNormal];
+    
+    
+//    [self.gotAuthcodeButton setTitle:[NSString stringWithFormat:@"%ld秒以后重发",self.time] forState:UIControlStateNormal];
+    if (self.time==0||self.time<0) {
+        
+        [self.gotAuthcodeButton setAttributedTitle:[[NSAttributedString alloc] initWithString:@"重新获取"] forState:UIControlStateNormal];
+        [self.gotAuthcodeButton setTitleColor:SubTextColor forState:UIControlStateNormal];
+        [self deleteTimer];
+    }
+}
+-(void)resentAuthcode:(UIButton*)sender
+{
+
+    [UserInfo shareUserInfo].mobile = self.mobileOrEmail;
+//            [self.gotAuthcodeButton setTitle:[NSString stringWithFormat:@"60秒以后重发"] forState:UIControlStateNormal];
+            [self creatTimer];
+            [[UserInfo shareUserInfo] gotMobileCodeWithType:FindPassword Success:^(ResponseStatus response) {
+                
+//                MBProgressHUD * hub = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//                hub.mode=MBProgressHUDModeText;
+//                [hub hide:YES afterDelay:1.5];
+                if (response==SHORTMESSAGE_SUCESS) {
+//                    hub.labelText=@"验证码发送成功";
+//                    hub.completionBlock = ^{
+////                        [self creatTimer];
+//                        self.gotAuthcodeButton.enabled = NO ;
+//                    };
+                }else if (response== SHORTMESSAGE_FAIL){
+//                    hub.labelText=@"验证码发送失败";
+//                    hub.detailsLabelText=@"请重试";
+//                    [self deleteTimer];
+//                    [self.gotAuthcodeButton setTitle:[NSString stringWithFormat:@"重新发送"] forState:UIControlStateNormal];
+//                    self.gotAuthcodeButton.enabled = YES;
+                }
+            } failure:^(NSError *error) {
+                
+            }];
+            
+    
+    LOG(@"_%@_%d_%@",[self class] , __LINE__,@"重新发送验证码操作")
+}
+-(void)checkAuthcodeByInternet:(void(^)(BOOL lawful))result {//检查验证码的有效性
+    if ([self authcodeLawful:self.authcodeInput.currentText]) {
+        [[UserInfo shareUserInfo] checkUserNameOrMobileWithUserName:nil mobile:self.mobileOrEmail email:nil mobilecode:self.authcodeInput.currentText success:^(ResponseObject *responseObject) {
+            LOG(@"_%@_%d_%@",[self class] , __LINE__,responseObject.data);
+            if ([responseObject.data isEqualToString:@"verify_sucess"]) {//待整改
+                //可以注册 , 进行下一条验证
+                result(YES);
+            }else if ([responseObject.data isEqualToString:@"verify_wrong"]){
+                //已被占用 , 请更改
+                AlertInVC(@"验证码不正确");
+                result(NO);
+            }else if ([responseObject.data isEqualToString:@"verify_overtime"]){
+                AlertInVC(@"验证码已过期");
+                result(NO);
+            }else{
+                AlertInVC(@"验证码出现未知错误")
+                result(NO);
+            }
+        } failure:^(NSError *error) {
+            LOG(@"_%@_%d_%@",[self class] , __LINE__,error);
+            AlertInVC(@"网络错误");
+            //            result(2);//网络错误
+        }];
+    }else{
+        AlertInVC(@"请输入手机短信中六位数字的验证码");
+        //        return;
+    }
+    
+}
+
+/** 判断验证码的合法性 */
+
+- (BOOL)authcodeLawful:(NSString *) textString
+{
+    NSString* number=@"^\\d{6}$";
+    NSPredicate *numberPre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",number];
+    return [numberPre evaluateWithObject:textString];
+}
+@end

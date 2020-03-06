@@ -1,0 +1,166 @@
+//
+//  RecentContactsVC.m
+//  b2c
+//
+//  Created by wangyuanfei on 7/2/16.
+//  Copyright © 2016 www.16lao.com. All rights reserved.
+//
+
+#import "RecentContactsVC.h"
+//#import "XMPP.h"
+#import "GDXmppStreamManager.h"
+@interface RecentContactsVC ()< UITableViewDelegate,UITableViewDataSource,NSFetchedResultsControllerDelegate,XMPPRosterDelegate>
+//最近联系人的数组
+@property (nonatomic , strong)NSArray *RecentlyArrs;
+
+@property (nonatomic , strong)NSFetchedResultsController *fetchedresultsController;
+
+@end
+
+@implementation RecentContactsVC
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setupTableView];
+    [NSFetchedResultsController deleteCacheWithName:@"Contacts"];
+    //执行查询请求
+    [self.fetchedresultsController performFetch:nil];
+    self.RecentlyArrs = self.fetchedresultsController.fetchedObjects;
+//    //注意,一但拿到数据 tableview需要做什么事情
+//    [self.tableView reloadData];
+//    
+//    //设置好友代理
+    [[GDXmppStreamManager ShareXMPPManager].XmppRoster addDelegate:self delegateQueue:dispatch_get_main_queue() ];
+    
+    
+}
+-(void)setupTableView
+{
+    //    CGRect frame  = CGRectMake(0, 0, self.view.bounds.size.width,self.view.bounds.size.height - self.tabBarController.tabBar.bounds.size.height);
+    CGRect frame = CGRectMake(0, self.startY, self.view.bounds.size.width, self.view.bounds.size.height-self.startY);
+    UITableView     * tableView =[[UITableView alloc]initWithFrame:frame style:UITableViewStyleGrouped];
+    self.tableView =tableView;
+    tableView.separatorStyle=0;
+    tableView.showsVerticalScrollIndicator = NO;
+    tableView.backgroundColor = BackgroundGray;
+//    tableView.delegate=self;
+//    tableView.dataSource = self;
+    //    tableView.rowHeight = UITableViewAutomaticDimension;
+    tableView.sectionHeaderHeight=0.00001;
+    tableView.sectionFooterHeight = 0.00001;
+    tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 1, 0.000001)];
+    tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 1, 0.000001)];
+    //    tableView.estimatedRowHeight=200;
+    tableView.rowHeight = 44 ;
+    
+    
+}
+//懒加载
+-(NSArray *)RecentlyArrs
+{
+    if (_RecentlyArrs == nil) {
+        _RecentlyArrs = [NSArray array];
+    }
+    return _RecentlyArrs;
+}
+
+-(NSFetchedResultsController *)fetchedresultsController
+{
+    if (_fetchedresultsController == nil) {
+        NSFetchRequest *fetchrequest = [[NSFetchRequest alloc]init];
+        //拿出实体对象
+//        NSEntityDescription *entitydes = [NSEntityDescription entityForName:@"XMPPUserCoreDataStorageObject" inManagedObjectContext:[XMPPRosterCoreDataStorage sharedInstance].mainThreadManagedObjectContext];
+        NSEntityDescription *entitydes = [NSEntityDescription entityForName:@"XMPPResourceCoreDataStorageObject" inManagedObjectContext:[XMPPRosterCoreDataStorage sharedInstance].mainThreadManagedObjectContext];
+
+        
+        
+        //设置实体对象
+        fetchrequest.entity = entitydes;
+        
+        NSPredicate *pre = [NSPredicate predicateWithFormat:@"subscription = %@",@"both"];
+        fetchrequest.predicate = pre;
+#pragma mark 缺陷,必须需要一个排序
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"jidStr" ascending:YES];
+        fetchrequest.sortDescriptors = @[sort];
+        //创建查询控制器
+        _fetchedresultsController = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchrequest managedObjectContext:[XMPPRosterCoreDataStorage sharedInstance].mainThreadManagedObjectContext sectionNameKeyPath:nil cacheName:@"Contacts"];
+        
+        //注意  代理
+        _fetchedresultsController.delegate = self;
+        
+    }
+    return _fetchedresultsController;
+    
+}
+
+-(void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    //数据有更新通过代理方法刷新数据
+    self.RecentlyArrs = self.fetchedresultsController.fetchedObjects;
+    [self.tableView reloadData];
+    //    NSLog(@"self.RecentlyArrs.count %lu",(unsigned long)self.RecentlyArrs.count);
+    
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+#pragma mark Incomplete implementation, return the number of rows
+    return self.RecentlyArrs.count;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //取数据
+    XMPPUserCoreDataStorageObject *user = self.RecentlyArrs[indexPath.row];
+    
+    // 创建cell
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecentlyCell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"RecentlyCell"];
+    }
+    //cell 赋值
+//    UILabel *name = [cell viewWithTag:1001];
+//    name.text = user.jidStr;
+    cell.textLabel.text = user.jidStr;
+    //返回cell
+    return cell;
+}
+
+#pragma mark Roster的代理
+-(void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence
+{
+    [[GDXmppStreamManager ShareXMPPManager].XmppRoster  acceptPresenceSubscriptionRequestFrom:presence.from andAddToRoster:YES];
+    
+
+    
+}
+
+//删除好友
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    XMPPUserCoreDataStorageObject *user = self.RecentlyArrs[indexPath.row];
+    [[GDXmppStreamManager ShareXMPPManager].XmppRoster removeUser:user.jid];
+}
+
+
+- (IBAction)AddFrend:(UIBarButtonItem *)sender {
+//    [[GDXmppStreamManager ShareXMPPManager].XmppRoster addUser:<#(XMPPJID *)#> withNickname:<#(NSString *)#> groups:<#(NSArray *)#> subscribeToPresence:<#(BOOL)#>]
+//    [[GDXmppStreamManager ShareXMPPManager].XmppRoster addUser:<#(XMPPJID *)#> withNickname:<#(NSString *)#> groups:<#(NSArray *)#>]
+    [[GDXmppStreamManager ShareXMPPManager].XmppRoster  addUser:[XMPPJID jidWithUser:@"wangyuanfei" domain:JabberDomain resource:@"iOS"] withNickname:@"发送添加好友请求"];
+    
+    
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+     XMPPUserCoreDataStorageObject *user = self.RecentlyArrs[indexPath.row];
+    BaseModel * model = [[BaseModel alloc]init];
+    model.actionKey = ChatVCName;
+    model.keyParamete = @{@"paramete":user.jid };
+    [[SkipManager shareSkipManager] skipByVC:self withActionModel:model];
+
+}
+
+
+
+@end

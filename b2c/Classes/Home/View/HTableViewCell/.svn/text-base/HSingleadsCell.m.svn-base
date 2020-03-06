@@ -1,0 +1,293 @@
+//
+//  HSingleadsCell.m
+//  b2c
+//
+//  Created by wangyuanfei on 4/11/16.
+//  Copyright © 2016 www.16lao.com. All rights reserved.
+//
+
+#import "HSingleadsCell.h"
+
+#import "HCellBaseComposeView.h"
+
+@interface HSingleadsCell()
+
+@property(nonatomic,weak) HCellBaseComposeView *  container;
+@end
+
+@implementation HSingleadsCell
+
+/*
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
+
+-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    if (self=[super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        
+        
+        
+        HCellBaseComposeView * container = [[HCellBaseComposeView alloc]init];
+        self.container = container;
+        [container addTarget:self action:@selector(composeClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:container];
+        //        container.backgroundColor = randomColor;
+        //        self.bottomContainer.backgroundColor= randomColor;
+        
+        
+        //        CGFloat topImageViewH = 93*SCALE ;
+        //        CGFloat totalTopMargin = 11*SCALE ;
+        
+        //        [self.container mas_makeConstraints:^(MASConstraintMaker *make) {
+        //            make.top.equalTo(self.contentView).offset(totalTopMargin);
+        //            make.left.right.equalTo(self.contentView);
+        //            make.height.equalTo(@(topImageViewH));
+        //        }];
+        //
+        //
+        //        [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        //            make.left.right.equalTo(self);
+        //            make.bottom.equalTo(self.container);//(totalTopMargin);
+        //        }];
+        
+    }
+    return self;
+}
+
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    
+    CGFloat itemH = 93*SCALE ;
+    CGFloat totalTopMargin = 11*SCALE ;
+    
+    self.container.frame = CGRectMake(0, totalTopMargin, self.bounds.size.width, itemH);
+    
+}
+
+-(void)composeClick:(HCellBaseComposeView*)sender
+{
+    if (sender.composeModel) {
+        if (sender.composeModel) {
+            //        sender.composeModel.actionKey=@"BaseWebVC";
+            if ([sender.composeModel.actionKey isEqualToString:@"BaseWebVC"]) {
+                sender.composeModel.keyParamete=@{@"paramete":sender.composeModel.link};
+                
+                LOG(@"_%@_%d_%@",[self class] , __LINE__,@"调网页");
+            }else if ([sender.composeModel.actionKey isEqualToString:@"HShopVC"]){
+                /**   model.keyParamete=@{@"paramete":model.shop_id}; */
+                sender.composeModel.keyParamete=@{@"paramete":sender.composeModel.link};
+                LOG(@"_%@_%d_%@",[self class] , __LINE__,@"调店铺");
+            }else if ([sender.composeModel.actionKey isEqualToString:@"HGoodsVC"]){
+                sender.composeModel.keyParamete=@{@"paramete":sender.composeModel.link};
+                LOG(@"_%@_%d_%@",[self class] , __LINE__,@"调详情");
+            }
+            
+            LOG(@"_%@_%d_首页轮播图的actionKey是 --> %@",[self class] , __LINE__,sender.composeModel.actionKey);
+            
+            NSDictionary * pragma = @{
+                                      @"HCellComposeViewModel":sender.composeModel
+                                      };
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"HCellComposeViewClick" object:nil userInfo:pragma];
+        }
+        
+        
+        
+        
+        //
+        //        LOG(@"_%@_%d_首页 单张广告图的actionKey 是 -->%@",[self class] , __LINE__,sender.composeModel.actionKey);
+        //        sender.composeModel.actionKey=@"BaseWebVC";
+        //
+        //
+        //
+        //
+        //
+        //
+        //        if (sender.composeModel.link.length>0) {
+        //            sender.composeModel.keyParamete=@{@"paramete":sender.composeModel.link};
+        //        }else{
+        //            sender.composeModel.keyParamete = @{
+        //                                                @"paramete":@"https://m.baidu.com/?from=844b&vit=fps"
+        //                                                };
+        //        }
+        
+        
+    }
+    //    LOG(@"_%@_%d_%@",[self class] , __LINE__,self.composeModel.actionKey)
+}
+-(void)setCellModel:(HCellModel *)cellModel{
+    [super setCellModel:cellModel];
+    self.container.composeModel = cellModel.items.firstObject;
+    
+    self.container.backImageURLStr = self.container.composeModel.imgStr;
+    
+    
+    
+    
+}
+@end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////
+////  HSingleadsCell.m
+////  b2c
+////
+////  Created by wangyuanfei on 4/11/16.
+////  Copyright © 2016 www.16lao.com. All rights reserved.
+////
+//
+//#import "HSingleadsCell.h"
+//
+//#import "HCellBaseComposeView.h"
+//
+//@interface HSingleadsCell()
+//
+//@property(nonatomic,weak) HCellBaseComposeView *  container;
+//@end
+//
+//@implementation HSingleadsCell
+//
+///*
+//// Only override drawRect: if you perform custom drawing.
+//// An empty implementation adversely affects performance during animation.
+//- (void)drawRect:(CGRect)rect {
+//    // Drawing code
+//}
+//*/
+//
+//-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+//    if (self=[super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+//        
+//        
+//        
+//        HCellBaseComposeView * container = [[HCellBaseComposeView alloc]init];
+//        self.container = container;
+//        [container addTarget:self action:@selector(composeClick:) forControlEvents:UIControlEventTouchUpInside];
+//        [self.contentView addSubview:container];
+////        container.backgroundColor = randomColor;
+//        //        self.bottomContainer.backgroundColor= randomColor;
+//        
+//        
+//        CGFloat topImageViewH = 93*SCALE ;
+//        CGFloat totalTopMargin = 11*SCALE ;
+//        
+//        [self.container mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.contentView).offset(totalTopMargin);
+//            make.left.right.equalTo(self.contentView);
+//            make.height.equalTo(@(topImageViewH));
+//        }];
+//        
+//        
+//        [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.right.equalTo(self);
+//            make.bottom.equalTo(self.container);//(totalTopMargin);
+//        }];
+//
+//    }
+//    return self;
+//}
+//
+//-(void)composeClick:(HCellBaseComposeView*)sender
+//{
+//    if (sender.composeModel) {
+//        if (sender.composeModel) {
+//            //        sender.composeModel.actionKey=@"BaseWebVC";
+//            if ([sender.composeModel.actionKey isEqualToString:@"BaseWebVC"]) {
+//                sender.composeModel.keyParamete=@{@"paramete":sender.composeModel.link};
+//                
+//                LOG(@"_%@_%d_%@",[self class] , __LINE__,@"调网页");
+//            }else if ([sender.composeModel.actionKey isEqualToString:@"HShopVC"]){
+//                /**   model.keyParamete=@{@"paramete":model.shop_id}; */
+//                sender.composeModel.keyParamete=@{@"paramete":sender.composeModel.link};
+//                LOG(@"_%@_%d_%@",[self class] , __LINE__,@"调店铺");
+//            }else if ([sender.composeModel.actionKey isEqualToString:@"HGoodsVC"]){
+//                sender.composeModel.keyParamete=@{@"paramete":sender.composeModel.link};
+//                LOG(@"_%@_%d_%@",[self class] , __LINE__,@"调详情");
+//            }
+//            
+//            LOG(@"_%@_%d_首页轮播图的actionKey是 --> %@",[self class] , __LINE__,sender.composeModel.actionKey);
+//            
+//            NSDictionary * pragma = @{
+//                                      @"HCellComposeViewModel":sender.composeModel
+//                                      };
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"HCellComposeViewClick" object:nil userInfo:pragma];
+//        }
+//        
+//        
+//        
+//        
+////        
+////        LOG(@"_%@_%d_首页 单张广告图的actionKey 是 -->%@",[self class] , __LINE__,sender.composeModel.actionKey);
+////        sender.composeModel.actionKey=@"BaseWebVC";
+////        
+////        
+////        
+////        
+////        
+////        
+////        if (sender.composeModel.link.length>0) {
+////            sender.composeModel.keyParamete=@{@"paramete":sender.composeModel.link};
+////        }else{
+////            sender.composeModel.keyParamete = @{
+////                                                @"paramete":@"https://m.baidu.com/?from=844b&vit=fps"
+////                                                };
+////        }
+//  
+//        
+//    }
+//    //    LOG(@"_%@_%d_%@",[self class] , __LINE__,self.composeModel.actionKey)
+//}
+//-(void)setCellModel:(HCellModel *)cellModel{
+//    [super setCellModel:cellModel];
+//    self.container.composeModel = cellModel.items.firstObject;
+//
+//    self.container.backImageURLStr = self.container.composeModel.imgStr;
+//
+//
+//
+//    
+//}
+//@end

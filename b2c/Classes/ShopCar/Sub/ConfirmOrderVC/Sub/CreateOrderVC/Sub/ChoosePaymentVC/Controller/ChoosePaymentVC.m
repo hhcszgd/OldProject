@@ -1,0 +1,423 @@
+//
+//  ChoosePaymentVC.m
+//  b2c
+//
+//  Created by wangyuanfei on 16/5/24.
+//  Copyright © 2016年 www.16lao.com. All rights reserved.
+//
+
+#import "ChoosePaymentVC.h"
+#import "CPCell.h"
+#import "CPTableHeader.h"
+#import "CPCellModel.h"
+#import "PayResultVC.h"
+//#import "COrderGooditemModel.h"
+#import "COrderGoodSubModel.h"
+#import "PayMentManager.h"
+#import "PayResultVC.h"
+#import "b2c-Swift.h"
+@interface ChoosePaymentVC ()<PayMentManagerDelegate>
+@property(nonatomic,strong)NSMutableArray * dataS ;
+@property(nonatomic,weak)CPTableHeader * header ;
+/** 所买商品的数组 */
+@property(nonatomic,strong)NSArray<COrderGoodSubModel*>* goodses ;
+/** 所买商品的价格 */
+@property(nonatomic,copy)NSString * price ;
+/** 所买商品的订单id */
+@property(nonatomic,copy)NSString * orderID ;
+/** 支付对象 */
+@property(nonatomic,strong)PayMentManager * payManager ;
+/**不能重复点击的判断条件*/
+@property (nonatomic, assign) BOOL bl;
+@end
+
+@implementation ChoosePaymentVC
+-(NSMutableArray * )dataS{
+    if(_dataS==nil){
+        _dataS = [[NSMutableArray alloc]init];
+//        for (int i = 0 ; i< 4  ;i++) {//不要银联了
+#pragma mark  暂时不要微信支付了
+        for (int i = 0 ; i< 3  ;i++) {//暂时不要微信了//又要了//添加银联支付
+//        for (int i = 0 ; i< 2  ;i++) {
+            CPCellModel * model = [[CPCellModel alloc]init];
+            if (i==0){
+                model.imgName = @"icon_balancepay";
+                model.payMentName = @"余额";
+                model.payMentDescrip = @"使用余额进行付款";
+            }else if (i==1) {
+                model.imgName = @"icon_alipaypay";
+                model.payMentName = @"支付宝";
+                model.payMentDescrip = @"使用支付宝进行付款";
+            }else if (i==2){
+                model.imgName = @"icon_wechatpay";
+                model.payMentName = @"微信";
+                model.payMentDescrip = @"使用微信进行付款";
+            }
+//            else if (i==3){
+//                model.imgName = @"icon_wechatpay";
+//                model.payMentName = @"银联";
+//                model.payMentDescrip = @"使用银联进行付款";
+//            }
+            [_dataS addObject:model];
+        }
+    }
+    return _dataS;
+}
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.naviTitle = @"收银台";
+    self.bl = YES;
+//    UIButton * rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 64, 4)];
+//    //    rightButton.backgroundColor = [UIColor greenColor];
+//    [rightButton setTitle:@"订单中心" forState:UIControlStateNormal];
+//    [rightButton addTarget:self action:@selector(orderCenter) forControlEvents:UIControlEventTouchUpInside];
+//    [rightButton setTitleColor:MainTextColor forState:UIControlStateNormal];
+//    rightButton.titleLabel.font = [UIFont systemFontOfSize:14];
+//    self.navigationBarRightActionViews=@[rightButton];
+
+    NSDictionary * parametes = self.keyParamete[@"paramete"];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paysuccessCallBack) name:PAYSUCCESS object:nil];
+//    @{
+//      @"patamete":@{
+//                @"orderID":@"1212121212121",
+//                @"price":@"10000",
+//                @"goodses":@[@"goods1",@"goods2",@"goods3",@"goods4"]
+//              }
+//      };
+    LOG(@"_%@_%d_%@",[self class] , __LINE__,parametes);
+    self.orderID = parametes[@"orderID"];
+    [[UserInfo shareUserInfo] gotOrderDetailWithOrderID:self.orderID success:^(ResponseObject *responseObject) {
+        if (responseObject.status>0) {
+            if ([responseObject.data isKindOfClass:[NSArray class]]) {
+                for (id sub in responseObject.data) {
+                    if ([sub isKindOfClass:[NSDictionary class]]) {
+                        if ([sub[@"channel"] isKindOfClass:[NSString class]] && [sub[@"channel"] isEqualToString:@"true_price"]) {
+                            self.price = [sub[@"subtitle"] copy];
+                            self.header.money = self.price;
+                            LOG(@"_%@_%d_%@",[self class] , __LINE__,self.price);
+                        }
+                        
+                        
+                        if ([sub[@"channel"] isKindOfClass:[NSString class]] && [sub[@"channel"] isEqualToString:@"gooditem"]) {
+                            NSMutableArray * goodses = [NSMutableArray array];
+                            if ([sub[@"items"] isKindOfClass:[NSArray class]]) {
+                                for (id goodsDict in sub[@"items"]) {
+                                    if ([goodsDict isKindOfClass:[NSDictionary class]]) {
+                                        COrderGoodSubModel * goodsModel = [[COrderGoodSubModel alloc]initWithDict:goodsDict];
+                                        [goodses addObject:goodsModel];
+                                    }
+                                }
+                            }
+                            self.goodses = goodses.copy;
+                        }
+                        
+                        
+                    }
+                    
+                    
+                    
+                    
+                }
+            }
+        }else{
+                    MBProgressHUD * hub = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                    hub.mode=MBProgressHUDModeText;
+                    [hub hide:YES afterDelay:1.5];
+                    hub.labelText=responseObject.msg;
+                    hub.completionBlock = ^{
+                        [self.navigationController popViewControllerAnimated:YES];
+                    };
+            LOG(@"_%@_%d_%@",[self class] , __LINE__,@"订单过期");
+        }
+        LOG(@"_%@_%d_%@",[self class] , __LINE__,responseObject.data);
+    } failure:^(NSError *error) {
+       LOG(@"_%@_%d_%@",[self class] , __LINE__,error);
+    }];
+//    self.price = parametes[@"price"];
+//    self.goodses = parametes[@"goodses"];
+        [self setuptableview];
+        [self.tableView reloadData];
+}
+//订单中心
+-(void)orderCenter
+{
+     [[GDKeyVC share] selectChildViewControllerIndexWithIndex:4 ];
+//    [[KeyVC shareKeyVC] skipToTabbarItemWithIndex:4];
+//    [self.navigationController popToRootViewControllerAnimated:NO];
+}
+-(void)setuptableview;
+{
+    self.automaticallyAdjustsScrollViewInsets = NO ;
+    CGRect frame = CGRectMake(0, self.startY, self.view.bounds.size.width, self.view.bounds.size.height-self.startY);
+    UITableView * tableView = [[UITableView alloc]initWithFrame:frame style:UITableViewStyleGrouped];
+    CPTableHeader * tableHeader =  [[CPTableHeader alloc]initWithFrame:CGRectMake(0, 0, 300, 64)];
+    self.header = tableHeader;
+    self.header.money = self.price;
+    LOG(@"_%@_%d_%@",[self class] , __LINE__,self.price);
+    UIView * tableFooter =  [[UIView alloc]initWithFrame:CGRectMake(0, 0, 300, 0.000000000001)];
+    tableView.tableHeaderView=tableHeader;
+    tableView.tableFooterView = tableFooter;
+    tableView.separatorStyle=0;
+    self.tableView = tableView ;
+    tableView.rowHeight=64;
+    tableView.showsVerticalScrollIndicator = NO;
+    
+}
+
+#pragma UITableViewDelegate
+
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.dataS.count ;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    CPCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (!cell) {
+        cell=[[CPCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
+    }
+    CPCellModel * model = self.dataS[indexPath.row];
+    cell.cellModel =model;
+    return cell;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return 0.000000100001;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.0000010001;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (!self.payManager) {
+        PayMentManager * payManager = [[PayMentManager alloc]init];
+        self.payManager = payManager;
+
+        
+    }
+    if (indexPath.row==0) {
+        
+        [self payMentByBanlance];
+        LOG(@"_%@_%d_%@",[self class] , __LINE__,@"余额");
+    }else if (indexPath.row==1){
+        [self payMentByAliypay];
+        LOG(@"_%@_%d_%@",[self class] , __LINE__,@"支付宝");
+    }else if (indexPath.row==2){
+        if (self.bl) {
+            
+        }else{
+            return;
+        }
+        [self payMentByWeichat];
+        LOG(@"_%@_%d_%@",[self class] , __LINE__,@"微信");
+    }else if (indexPath.row==3){
+        [self payMentByUnionPay];
+        LOG(@"_%@_%d_%@",[self class] , __LINE__,@"银联");
+    }else{
+        LOG(@"_%@_%d_%@",[self class] , __LINE__,@"其他支付方式0000");
+    }
+    
+}
+/** 余额 */
+-(void)payMentByBanlance
+{
+    
+    BaseModel * model = [[BaseModel alloc]init];
+    model.actionKey = @"BanlancePayDetailVC";
+    NSDictionary * targetParamete  = @{@"orderID":self.orderID , @"price":self.price};
+    model.keyParamete = @{@"paramete":targetParamete}; //self.keyParamete;
+                 
+    [[SkipManager shareSkipManager] skipByVC:self withActionModel:model];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //////////////////////////
+//    [[UserInfo shareUserInfo] payByBalanceWithOrderID:self.orderID success:^(ResponseObject *responseObject) {
+//        LOG(@"_%@_%d_%@",[self class] , __LINE__,responseObject.data);
+//        if (responseObject.status>0) {
+//            
+//            [self theViewWithPayResult:PaySuccess];
+//        }else{
+//            NSString  * result =responseObject.msg;
+//            AlertInVC(result);
+//        }
+//    } failure:^(NSError *error) {
+//        LOG(@"_%@_%d_%@",[self class] , __LINE__,error);
+//         [self theViewWithPayResult:PayFailure];
+//    }];
+}
+/** 支付宝 */
+-(void)payMentByAliypay
+{
+    __weak typeof(self) weakSelf = self;
+    if (!self.payManager.myCallBack) {
+        weakSelf.payManager.myCallBack=^(id result){
+            NSDictionary * resultDict = (NSDictionary *) result;
+            [self dealWithTheResultOfAlipy:resultDict];
+        };
+    }
+    [self.payManager payWithParemete:self.keyParamete payMentType:AliPay ];
+}
+
+-(void)dealWithTheResultOfAlipy:(NSDictionary *)resultDic
+{
+    //                NSLog(@"_%@_%d_支付结果\n%@",[self class] , __LINE__,resultDic);
+    LOG(@"_%@_%d_处理返回结果%@",[self class] , __LINE__,resultDic);
+    NSDictionary * resultDict = (NSDictionary *) resultDic;
+    if ([resultDict[@"resultStatus"] isEqualToString:@"9000"]) {
+        [self theViewWithPayResult:PaySuccess];
+        /** 暂时不做二次验证 */
+//        [[UserInfo shareUserInfo] dealTheResultAfterAlipayWithPayType:@"1" payResult:[resultDict mj_JSONString] success:^(ResponseObject *responseObject) {
+//            LOG(@"_%@_%d_%@",[self class] , __LINE__,responseObject.data);
+//            LOG(@"_%@_%d_%d",[self class] , __LINE__,responseObject.status);
+//            LOG(@"_%@_%d_%@",[self class] , __LINE__,responseObject.msg);
+//            
+//            if (responseObject.status>0) {
+//                //验证成功
+//                [self theViewWithPayResult:PaySuccess];
+//            }
+//        } failure:^(NSError *error) {
+//            LOG(@"_%@_%d_%@",[self class] , __LINE__,error);
+//            //                        AlertInVC(@"支付成功")
+//        }];
+    }else{
+        /** 
+         9000 : 订单支付成功
+         8000 : 正在处理中
+         6002 : 网络连接出错
+         6001 : 用户中途取消
+         4000 : 订单支付失败
+         
+         */
+        [self theViewWithPayResult:PayFailure];
+        //                    AlertInVC(@"支付失败,请重试");
+    }
+}
+
+-(void)theViewWithPayResult:(PayResult)payResult
+{
+    BaseModel * payResultModel = [[BaseModel alloc]init];
+    payResultModel.actionKey = @"PayResultVC";
+    payResultModel.keyParamete = @{@"paramete":@(payResult)};
+    [[SkipManager shareSkipManager] skipByVC:self withActionModel:payResultModel];
+}
+/** 微信 */
+-(void)payMentByWeichat
+{
+    NSLog(@"%@, %d ,%@",[self class],__LINE__,self.keyParamete[@"paramete"]);
+    [PayMentManager sharManager].delegate = self;
+    [[PayMentManager sharManager] payWithParemete:self.keyParamete[@"paramete"] payMentType:WeiChatPay];
+}
+/**微信支付的回调结果*/
+- (void)payEndWithPayStatus:(BaseResp *)resp{
+    switch (resp.errCode) {
+        case WXSuccess:
+        {
+            BaseModel * payResultModel = [[BaseModel alloc]init];
+            payResultModel.actionKey = @"PayResultVC";
+            payResultModel.keyParamete = @{@"paramete":@(PaySuccess)};
+            [[SkipManager shareSkipManager] skipByVC:self withActionModel:payResultModel];
+        }
+            break;
+        case WXErrCodeCommon:
+        {
+            NSLog(@"%@, %d ,%@",[self class],__LINE__,@"错误	可能的原因：签名错误、未注册APPID、项目设置APPID不正确、注册的APPID与设置的不匹配、其他异常等。");
+            BaseModel * payResultModel = [[BaseModel alloc]init];
+            payResultModel.actionKey = @"PayResultVC";
+            payResultModel.keyParamete = @{@"paramete":@(PayFailure)};
+            [[SkipManager shareSkipManager] skipByVC:self withActionModel:payResultModel];
+        }
+            break;
+        case WXErrCodeUserCancel:
+        {
+            NSLog(@"%@, %d ,%@",[self class],__LINE__,@"用户取消	无需处理。发生场景：用户不支付了，点击取消，返回APP");
+            BaseModel * payResultModel = [[BaseModel alloc]init];
+            payResultModel.actionKey = @"PayResultVC";
+            payResultModel.keyParamete = @{@"paramete":@(PayFailure)};
+            [[SkipManager shareSkipManager] skipByVC:self withActionModel:payResultModel];
+            
+        }
+            break;
+        case WXErrCodeSentFail:
+        {
+            AlertInVC(@"发送失败")
+            BaseModel * payResultModel = [[BaseModel alloc]init];
+            payResultModel.actionKey = @"PayResultVC";
+            payResultModel.keyParamete = @{@"paramete":@(PayFailure)};
+            [[SkipManager shareSkipManager] skipByVC:self withActionModel:payResultModel];
+        }
+            break;
+            
+        case WXErrCodeAuthDeny:
+        {
+            AlertInVC(@"授权失败")
+            BaseModel * payResultModel = [[BaseModel alloc]init];
+            payResultModel.actionKey = @"PayResultVC";
+            payResultModel.keyParamete = @{@"paramete":@(PayFailure)};
+            [[SkipManager shareSkipManager] skipByVC:self withActionModel:payResultModel];
+            
+        }
+            break;
+        case WXErrCodeUnsupport:
+        {
+            AlertInVC(@"微信不支持")
+            BaseModel * payResultModel = [[BaseModel alloc]init];
+            payResultModel.actionKey = @"PayResultVC";
+            payResultModel.keyParamete = @{@"paramete":@(PayFailure)};
+            [[SkipManager shareSkipManager] skipByVC:self withActionModel:payResultModel];
+        }
+            break;
+            
+        default:
+        {
+            NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
+            BaseModel * payResultModel = [[BaseModel alloc]init];
+            payResultModel.actionKey = @"PayResultVC";
+            payResultModel.keyParamete = @{@"paramete":@(PayFailure)};
+            [[SkipManager shareSkipManager] skipByVC:self withActionModel:payResultModel];
+        }
+            break;
+    }
+
+}
+
+
+/** 银联支付 */
+-(void)payMentByUnionPay
+{
+    
+    //1.调用服务器接口.
+    NSLog(@"%@, %d ,%@",[self class],__LINE__,self.orderID);
+
+    [[UserInfo shareUserInfo] gotUnionTnWithOrderInfo:self.orderID success:^(ResponseObject *responseObject) {
+       
+        
+
+    } failure:^(NSError *error) {
+        
+    }];
+    
+}
+- (void)notWantUserClickBtnFrequency:(BOOL)bl{
+    self.bl = bl;
+}
+-(void)paysuccessCallBack
+{
+    [self removeFromParentViewController];
+}
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+@end

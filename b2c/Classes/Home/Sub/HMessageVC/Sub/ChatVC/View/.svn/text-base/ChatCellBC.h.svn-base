@@ -1,0 +1,99 @@
+//
+//  ChatCell.h
+//  TTmall
+//
+//  Created by wangyuanfei on 16/1/21.
+//  Copyright © 2016年 Footway tech. All rights reserved.
+/**
+ 聊天内容的cell
+ 
+ */
+
+#import <UIKit/UIKit.h>
+@interface ChatCellBC : UITableViewCell
+
+/** 解析属性字符串 */
+-(NSAttributedString*)dealTheStr:(NSString*)str labelFont:(UIFont*)font;
+
+@end
+
+
+
+
+
+
+//#import <UIKit/UIKit.h>
+//@class ChatModel;
+//@class XMPPMessageArchiving_Message_CoreDataObject;
+//@interface ChatCellBC : UITableViewCell
+////@property(nonatomic,strong)ChatModel * chatModel ;
+//@property(nonatomic,strong)XMPPMessageArchiving_Message_CoreDataObject * chatMessageModel ;
+//@property(nonatomic,strong)UIImage * leftImg ;
+//@property(nonatomic,strong)UIImage * rightImg ;
+////@property(nonatomic,copy)NSString * txtContent ;
+////@property(nonatomic,strong)UIImage * icon ;
+////@property(nonatomic,assign)BOOL  isMe ;
+////@property(nonatomic,strong)UIImage * imgContent ;
+//@end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////
+////  ChatCell.h
+////  TTmall
+////
+////  Created by wangyuanfei on 16/1/21.
+////  Copyright © 2016年 Footway tech. All rights reserved.
+///**
+// 聊天内容的cell
+// 
+// */
+//
+//#import <UIKit/UIKit.h>
+//@class ChatModel;
+//@class XMPPMessageArchiving_Message_CoreDataObject;
+//@interface ChatCellBC : UITableViewCell
+////@property(nonatomic,strong)ChatModel * chatModel ;
+//@property(nonatomic,strong)XMPPMessageArchiving_Message_CoreDataObject * chatMessageModel ;
+//@property(nonatomic,strong)UIImage * leftImg ;
+//@property(nonatomic,strong)UIImage * rightImg ;
+////@property(nonatomic,copy)NSString * txtContent ;
+////@property(nonatomic,strong)UIImage * icon ;
+////@property(nonatomic,assign)BOOL  isMe ;
+////@property(nonatomic,strong)UIImage * imgContent ;
+//@end

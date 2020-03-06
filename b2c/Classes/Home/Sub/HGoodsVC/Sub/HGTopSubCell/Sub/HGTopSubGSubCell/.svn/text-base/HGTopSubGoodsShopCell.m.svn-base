@@ -1,0 +1,372 @@
+//
+//  HGTopSubGoodsShopCell.m
+//  b2c
+//
+//  Created by 0 on 16/5/9.
+//  Copyright © 2016年 www.16lao.com. All rights reserved.
+//
+
+
+#import "HGTopSubGoodsShopCell.h"
+#import "HGTopSubGoodsShopSubView.h"
+#import "LoginNavVC.h"
+#import "HGTopSubGoodsShopSubModel.h"
+@interface HGTopSubGoodsShopCell()
+@property (nonatomic, strong) UIImageView *shopLogo;
+@property (nonatomic, strong) UILabel *shopName;
+@property (nonatomic, strong) UIButton *collectionBtn;
+@property (nonatomic, strong) UIButton *colsultBtn;
+@property (nonatomic, strong) UIButton *sharBtn;
+@property (nonatomic, strong) HGTopSubGoodsShopSubView *allGood;
+@property (nonatomic, strong) HGTopSubGoodsShopSubView *shangxin;
+@property (nonatomic, strong) HGTopSubGoodsShopSubView *attention;
+@property (nonatomic, strong) HGTopSubGoodsShopModel *saveModel;
+@property (nonatomic, assign) NSInteger shop_id;
+
+
+
+@end
+@implementation HGTopSubGoodsShopCell
+- (UIImageView *)shopLogo{
+    if (_shopLogo == nil) {
+        _shopLogo = [[UIImageView alloc] init];
+        [self.contentView addSubview:_shopLogo];
+        _shopLogo.layer.masksToBounds = YES;
+        _shopLogo.layer.cornerRadius = 6 * zkqScale;
+    }
+    return _shopLogo;
+}
+- (UILabel *)shopName{
+    if (_shopName == nil) {
+        _shopName = [[UILabel alloc] init];
+        [self.contentView addSubview:_shopName];
+        [_shopName configmentfont:[UIFont systemFontOfSize:14 * SCALE] textColor:[UIColor colorWithHexString:@"333333"] backColor:[UIColor whiteColor] textAligement:0 cornerRadius:0 text:@""];
+        _shopName.numberOfLines = 2;
+        [_shopName sizeToFit];
+    }
+    return _shopName;
+}
+- (UIButton *)collectionBtn{
+    if (_collectionBtn == nil) {
+        _collectionBtn = [[UIButton alloc] init];
+        [self.contentView addSubview:_collectionBtn];
+        [_collectionBtn setImage:[UIImage imageNamed:@"icon_collect-1"] forState:UIControlStateNormal];
+        [_collectionBtn setImage:[UIImage imageNamed:@"icon_collect_sel"] forState:UIControlStateSelected];
+
+        [_collectionBtn addTarget:self action:@selector(collection:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _collectionBtn;
+}
+
+- (UIButton *)colsultBtn{
+    if (_colsultBtn == nil) {
+        _colsultBtn = [[UIButton alloc] init];
+        [self.contentView addSubview:_colsultBtn];
+//        [_colsultBtn setBackgroundImage:[UIImage imageNamed:@"icon_consult-1"] forState:UIControlStateNormal];
+        [_colsultBtn setImage:[UIImage imageNamed:@"icon_consult-1"] forState:UIControlStateNormal];
+        [_colsultBtn addTarget:self action:@selector(consult) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _colsultBtn;
+}
+- (UIButton *)sharBtn{
+    if (_sharBtn == nil) {
+        _sharBtn = [[UIButton alloc] init];
+        [self.contentView addSubview:_sharBtn];
+//        [_sharBtn setBackgroundImage:[UIImage imageNamed:@"icon_share2-1"] forState:UIControlStateNormal];
+        [_sharBtn setImage:[UIImage imageNamed:@"icon_share2-1"] forState:UIControlStateNormal];
+        [_sharBtn addTarget:self action:@selector(shar) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _sharBtn;
+}
+
+- (HGTopSubGoodsShopSubView *)allGood{
+    if (_allGood == nil) {
+        _allGood = [[HGTopSubGoodsShopSubView alloc] init];
+        [self.contentView addSubview:_allGood];
+        [_allGood addTarget:self action:@selector(actionToAllGood) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _allGood;
+}
+
+- (HGTopSubGoodsShopSubView *)shangxin{
+    if (_shangxin == nil) {
+        _shangxin = [[HGTopSubGoodsShopSubView alloc] init];
+        [self.contentView addSubview:_shangxin];
+        [_shangxin addTarget:self action:@selector(actionToshangxin) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _shangxin;
+}
+- (HGTopSubGoodsShopSubView *)attention{
+    if (_attention == nil) {
+        _attention = [[HGTopSubGoodsShopSubView alloc] init];
+        [self.contentView addSubview:_attention];
+        
+    }
+    return _attention;
+}
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.contentView.backgroundColor =[UIColor whiteColor];
+        //注册登陆完成之后的通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(judgeShopIsCollection:) name:LOGINSUCCESS object:nil];
+        [self.shopLogo mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.contentView.mas_left).offset(10);
+            make.top.equalTo(self.contentView.mas_top).offset(10);
+            make.width.equalTo(@(80 * zkqScale ));
+            make.height.equalTo(@(40 * zkqScale));
+        }];
+        CGFloat shopNameLeftWidth = screenW - 80 * zkqScale - 10 -10 -10-5 * 3 * SCALE - 44 * zkqScale * 3;
+        
+        [self.shopName mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.shopLogo.mas_right).offset(10);
+            make.centerY.equalTo(self.shopLogo);
+            make.height.equalTo(@(35 * zkqScale));
+             make.width.equalTo(@(shopNameLeftWidth));
+        }];
+        self.shopLogo.userInteractionEnabled = YES;
+        self.shopName.userInteractionEnabled = YES;
+        //点击跳转到店铺详情页面
+  
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionToShopDeatil)];
+        UITapGestureRecognizer *logoTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionToShopDeatil)];
+        [self.shopLogo addGestureRecognizer:logoTap];
+        [self.shopName addGestureRecognizer:tap];
+        
+        
+        
+        
+        [self.sharBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.shopLogo.mas_top).offset(5);
+            make.right.equalTo(self.contentView.mas_right).offset(-10);
+             make.width.equalTo(@(44 * zkqScale));
+            make.height.equalTo(@(44 * zkqScale));
+        }];
+        [self.colsultBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.sharBtn);
+            make.right.equalTo(self.sharBtn.mas_left).offset(-5 * SCALE);
+             make.width.equalTo(@(44 * zkqScale));
+            make.height.equalTo(@(44 * zkqScale));
+        }];
+        
+        [self.collectionBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.sharBtn);
+            make.right.equalTo(self.colsultBtn.mas_left).offset(-5 *SCALE);
+            make.width.equalTo(@(44 * zkqScale));
+            make.height.equalTo(@(44 * zkqScale));
+        }];
+        
+        [self.allGood mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.contentView.mas_left).offset(38* SCALE);
+            make.top.equalTo(self.shopLogo.mas_bottom).offset(20);
+             make.width.equalTo(@(52 * zkqScale));
+            make.height.equalTo(@(30 *zkqScale));
+            make.bottom.equalTo(self.contentView.mas_bottom).offset(-14);
+            
+        }];
+        
+        
+        
+
+        [self.shangxin mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.allGood);
+            make.centerX.equalTo(self.contentView);
+             make.width.equalTo(@(52 * zkqScale));
+            make.height.equalTo(@(30 * zkqScale));
+        }];
+        [self.attention mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.allGood);
+            make.right.equalTo(self.contentView.mas_right).offset(-38* SCALE);
+             make.width.equalTo(@(52 * zkqScale));
+            make.height.equalTo(@(30 * zkqScale));
+        }];
+
+        
+    }
+    return self;
+}
+
+- (void)setShopModel:(HGTopSubGoodsShopModel *)shopModel{
+    self.saveModel = shopModel;
+    self.shop_id = [shopModel.shop_id integerValue];
+    [self.shopLogo sd_setImageWithURL:ImageUrlWithString(shopModel.img) placeholderImage:[UIImage imageNamed:@"accountBiiMap"] options:SDWebImageCacheMemoryOnly];
+    self.shopName.text = shopModel.shop_name;
+    for (HGTopSubGoodsShopSubModel *subModel in shopModel.items) {
+        if ([subModel.name isEqualToString:@"全部商品"]) {
+            self.allGood.subModel = subModel;
+        }
+        if ([subModel.name isEqualToString:@"上新"]) {
+            self.shangxin.subModel = subModel;
+        }
+        if ([subModel.name isEqualToString:@"关注人数"]) {
+            self.attention.subModel = subModel;
+        }
+    }
+    [self changCollectionBtnStatus];
+    
+   
+}
+/**根据数据改变collection的状态*/
+- (void)changCollectionBtnStatus{
+    if ([UserInfo shareUserInfo].isLogin) {
+        //判断店铺是否被收藏
+        [[UserInfo shareUserInfo] judgeShopIsCollectionWithShopID:self.saveModel.shop_id success:^(ResponseObject *response) {
+            //status < 0店铺已经存在。大于0店铺没有存在
+            if (response.status < 0) {
+                //店铺被收藏
+                self.collectionBtn.selected = YES;
+            }else{
+                self.collectionBtn.selected = NO;
+            }
+        } failure:^(NSError *error) {
+            
+        }];
+    }else{
+        self.collectionBtn.selected = NO;
+    }
+}
+- (void)judgeShopIsCollection:(NSNotification *)notification{
+    [self changCollectionBtnStatus];
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    // Initialization code
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
+#pragma mark -- 店铺收藏
+- (void)collection:(UIButton *)button{
+    if ([[UserInfo shareUserInfo] isLogin]) {
+        //判断店铺是否被收藏
+        [[UserInfo shareUserInfo] judgeShopIsCollectionWithShopID:self.saveModel.shop_id success:^(ResponseObject *response) {
+            //status < 0店铺已经被收藏。大于0店铺没有收藏
+            if (response.status < 0) {
+                //店铺被收藏
+                [self deleteCollectShopID:^{
+                } failure:^{
+                    button.selected = YES;
+                }];
+                
+            }else{
+                [self addShopCollectinSuccess:^{
+                } failure:^{
+                    button.selected = NO;
+                }];
+            }
+        } failure:^(NSError *error) {
+            if ([self.delegate respondsToSelector:@selector(HGTopSubGoodsShopCellCollectionShop:)]) {
+                [self.delegate performSelector:@selector(HGTopSubGoodsShopCellCollectionShop:) withObject:@"网络不稳定，请重新操作"];
+            }
+        }];
+        
+       
+        
+    }else{
+        LoginNavVC *login = [[LoginNavVC alloc] initLoginNavVC];
+        [[KeyVC shareKeyVC] presentViewController:login animated:YES completion:^{
+            
+        }];
+    }
+    
+}
+/**取消收藏店铺*/
+- (void)deleteCollectShopID:(void(^)())success failure:(void(^)())failure{
+    [[UserInfo shareUserInfo] deleteShopFavoriteWithShop_id:[@[self.saveModel.shop_id] mj_JSONString] success:^(ResponseStatus response) {
+        success();
+        if (response > 0) {
+            //没有收藏
+            self.collectionBtn.selected = NO;
+            if ([self.delegate respondsToSelector:@selector(HGTopSubGoodsShopCellCollectionShop:)]) {
+                [self.delegate performSelector:@selector(HGTopSubGoodsShopCellCollectionShop:) withObject:@"取消收藏"];
+            }
+        }else{
+            self.collectionBtn.selected = YES;
+            if ([self.delegate respondsToSelector:@selector(HGTopSubGoodsShopCellCollectionShop:)]) {
+                [self.delegate performSelector:@selector(HGTopSubGoodsShopCellCollectionShop:) withObject:@"取消收藏失败，请重试"];
+            }
+        }
+    } failure:^(NSError *error) {
+        failure();
+        if ([self.delegate respondsToSelector:@selector(HGTopSubGoodsShopCellCollectionShop:)]) {
+            [self.delegate performSelector:@selector(HGTopSubGoodsShopCellCollectionShop:) withObject:@"取消收藏失败，请重试"];
+        }
+    }];
+}
+
+/**添加商品收藏*/
+- (void)addShopCollectinSuccess:(void(^)())success failure:(void(^)())failure{
+   
+    [[UserInfo shareUserInfo] addShopFavoriteWithShop_id:self.saveModel.shop_id Success:^(ResponseObject *response) {
+        success();
+        if (response.status > 0) {
+            self.collectionBtn.selected = YES;
+            //收藏成功
+            if ([self.delegate respondsToSelector:@selector(HGTopSubGoodsShopCellCollectionShop:)]) {
+                [self.delegate performSelector:@selector(HGTopSubGoodsShopCellCollectionShop:) withObject:@"收藏成功"];
+            }
+        }else{
+            self.collectionBtn.selected = NO;
+            if ([self.delegate respondsToSelector:@selector(HGTopSubGoodsShopCellCollectionShop:)]) {
+                [self.delegate performSelector:@selector(HGTopSubGoodsShopCellCollectionShop:) withObject:response.msg];
+            }
+            
+        
+        }
+    } failure:^(NSError *error) {
+        
+        //收藏失败
+        failure();
+        
+        if ([self.delegate respondsToSelector:@selector(HGTopSubGoodsShopCellCollectionShop:)]) {
+            [self.delegate performSelector:@selector(HGTopSubGoodsShopCellCollectionShop:) withObject:@"   收藏失败,请继续收藏   "];
+        }
+    }];
+}
+
+
+#pragma mark -- 咨询
+- (void)consult{
+    if ([self.delegate respondsToSelector:@selector(HGTopSubGoodsShopCellConsultWithSeller:)]) {
+        [self.delegate performSelector:@selector(HGTopSubGoodsShopCellConsultWithSeller:) withObject:self.saveModel];
+    }
+}
+#pragma mark -- 分享
+- (void)shar{
+    if ([self.delegate respondsToSelector:@selector(HGTopSubGoodsShopCellSHopSharWithShop:)]) {
+        [self.delegate performSelector:@selector(HGTopSubGoodsShopCellSHopSharWithShop:) withObject:self.saveModel];
+    }
+}
+#pragma mark -- 跳转到全部商品页面
+- (void)actionToAllGood{
+    HGTopSubGoodsShopSubModel *allGoodsModel = [[HGTopSubGoodsShopSubModel alloc]init];
+    
+    allGoodsModel.keyParamete = @{@"paramete":self.saveModel.shop_id};
+    allGoodsModel.actionKey = @"HAllGoodsVC";
+    if ([self.delegate respondsToSelector:@selector(HGTopSubGoodsShopCellActionToShopAllGoodsVCWith:)]) {
+        [self.delegate performSelector:@selector(HGTopSubGoodsShopCellActionToShopAllGoodsVCWith:) withObject:allGoodsModel];
+    }
+}
+#pragma mark -- 跳转到到上新
+- (void)actionToshangxin{
+    if ([self.delegate respondsToSelector:@selector(HGTopSubGoodsShopCellactionToshangxin:)]) {
+        [self.delegate performSelector:@selector(HGTopSubGoodsShopCellactionToshangxin:) withObject:self.saveModel];
+    }
+}
+#pragma mark -- 跳转到店铺详情页面
+- (void)actionToShopDeatil{
+    LOG(@"%@,%d,%@",[self class], __LINE__,@"店铺详情")
+    if ([self.delegate respondsToSelector:@selector(actionToShopDetailVCWith:)]) {
+        LOG(@"%@,%d,%@",[self class], __LINE__,self.saveModel.actionKey)
+        self.saveModel.keyParamete = @{@"paramete":@(self.shop_id)};
+        [self.delegate performSelector:@selector(actionToShopDetailVCWith:) withObject:self.saveModel];
+    }
+}
+
+
+
+@end

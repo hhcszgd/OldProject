@@ -1,0 +1,505 @@
+//
+//  HGTopGoodInfoCell.m
+//  b2c
+//
+//  Created by 0 on 16/4/29.
+//  Copyright © 2016年 www.16lao.com. All rights reserved.
+//
+
+
+#import "HGTopGoodInfoCell.h"
+#import "HGoodsSecurityModel.h"
+@interface HGTopGoodInfoCell()
+/**商品介绍*/
+@property (nonatomic, strong) UILabel *titleLabel;
+/**分享按钮*/
+@property (nonatomic, strong) ActionBaseView *shareView;
+/**价格*/
+@property (nonatomic, strong) UILabel *priceStr;
+/**催销标题1*/
+@property (nonatomic, strong) UILabel *promotion;
+/**催销标题2*/
+@property (nonatomic, strong) UILabel *Promotion2;
+/**促销标题*/
+@property (nonatomic, strong) UILabel *promotion3;
+@property (nonatomic, strong) UILabel *promotion4;
+/**对号图片*/
+@property (nonatomic, strong) UIImageView *rightImage;
+@property (nonatomic, strong) UIImageView *rightImage2;
+@property (nonatomic, strong) UIImageView *rightImage3;
+@property (nonatomic, strong) UIImageView *rightImage4;
+
+
+/**之前的价格*/
+@property (nonatomic, strong) UILabel *beforePrice;
+//优惠活动
+@property (nonatomic, strong) UILabel *discountlabel;
+/**快递费*/
+@property (nonatomic, strong) UILabel *expressCharge;
+/**月销量*/
+@property (nonatomic, strong) UILabel *saleVolume;
+/**发货地点*/
+@property (nonatomic, strong) UILabel *deliveryPlace;
+
+
+@property (nonatomic, strong) MASConstraint *constrainttop;
+@property (nonatomic, strong) MASConstraint *constraintHeight;
+@property (nonatomic, strong) MASConstraint *constraninWidth;
+@property (nonatomic, weak) UIView *lineView;
+
+
+
+@end
+@implementation HGTopGoodInfoCell
+- (UILabel *)titleLabel{
+    if (_titleLabel== nil) {
+        _titleLabel = [[UILabel alloc] init];
+        [self.contentView addSubview:_titleLabel];
+        [_titleLabel configmentfont:[UIFont systemFontOfSize:15 * zkqScale] textColor:[UIColor colorWithHexString:@"333333"] backColor:[UIColor clearColor] textAligement:0 cornerRadius:0 text:@""];
+        _titleLabel.numberOfLines = 2;
+    }
+    return _titleLabel;
+}
+- (ActionBaseView *)shareView{
+    if (_shareView == nil) {
+        _shareView = [[ActionBaseView alloc] init];
+        [self.contentView addSubview:_shareView];
+        [_shareView addTarget:self action:@selector(shar) forControlEvents:UIControlEventTouchUpInside];
+        UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_share3"]];
+        [_shareView addSubview:image];
+        [image mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(_shareView.mas_right).offset(-10);
+            make.centerY.equalTo(_shareView);
+            make.width.equalTo(@(image.image.size.width));
+            make.height.equalTo(@(image.image.size.height));
+        }];
+    }
+    return _shareView;
+}
+- (UILabel *)priceStr{
+    if (_priceStr == nil) {
+        _priceStr = [[UILabel alloc] init];
+        [self.contentView addSubview:_priceStr];
+        [_priceStr sizeToFit];
+        [_priceStr configmentfont:[UIFont systemFontOfSize:20* zkqScale] textColor:THEMECOLOR backColor:[UIColor clearColor] textAligement:0 cornerRadius:0 text:@"￥29"];
+    
+    }
+    return _priceStr;
+}
+- (UILabel *)promotion{
+    if (_promotion == nil) {
+        _promotion = [[UILabel alloc] init];
+        [self.contentView addSubview:_promotion];
+        [_promotion configmentfont:[UIFont systemFontOfSize:11 * zkqScale] textColor:[UIColor colorWithHexString:@"999999"] backColor:[UIColor clearColor] textAligement:0 cornerRadius:0 text:@""];
+        [_promotion sizeToFit];
+    }
+    return _promotion;
+}
+- (UILabel *)Promotion2{
+    if (_Promotion2 == nil) {
+        _Promotion2 = [[UILabel alloc] init];
+        [self.contentView addSubview:_Promotion2];
+        [_Promotion2 configmentfont:[UIFont systemFontOfSize:11 *zkqScale] textColor:[UIColor colorWithHexString:@"999999"] backColor:[UIColor clearColor] textAligement:0 cornerRadius:0 text:@""];
+        [_Promotion2 sizeToFit];
+    }
+    return _Promotion2;
+}
+- (UILabel *)promotion3{
+    if (_promotion3 == nil) {
+        _promotion3 = [[UILabel alloc] init];
+        [self.contentView addSubview:_promotion3];
+        [_promotion3 configmentfont:[UIFont systemFontOfSize:11 * zkqScale] textColor:[UIColor colorWithHexString:@"999999"] backColor:[UIColor clearColor] textAligement:0 cornerRadius:0 text:@""];
+        [_promotion3 sizeToFit];
+    }
+    return _promotion3;
+}
+- (UILabel *)promotion4{
+    if (_promotion4 == nil) {
+        _promotion4 =[[UILabel alloc]init];
+        [_promotion4 configmentfont:[UIFont systemFontOfSize:11 * zkqScale] textColor:[UIColor colorWithHexString:@"999999"] backColor:[UIColor clearColor] textAligement:0 cornerRadius:0 text:@"gjhjkkjgjkjkgjhghjgjhgjhgjh"];
+        
+        [self.contentView addSubview:_promotion4];
+        [_promotion4 sizeToFit];
+    }
+    return _promotion4;
+}
+- (UIImageView *)rightImage4{
+    if (_rightImage4 == nil) {
+        _rightImage4 = [[UIImageView alloc] init];
+        [self.contentView addSubview:_rightImage4];
+    }
+    return _rightImage4;
+}
+- (UIImageView *)rightImage{
+    if (_rightImage == nil) {
+        _rightImage = [[UIImageView alloc] init];
+        [self.contentView addSubview:_rightImage];
+        _rightImage.image = [UIImage imageNamed:@"icon_right"];
+    }
+    return _rightImage;
+}
+- (UIImageView *)rightImage2{
+    if (_rightImage2 == nil) {
+        _rightImage2 = [[UIImageView alloc] init];
+        [self.contentView addSubview:_rightImage2];
+        [_rightImage2 setImage:[UIImage imageNamed:@"icon_right"]];
+    }
+    return _rightImage2;
+}
+- (UIImageView *)rightImage3{
+    if (_rightImage3 == nil) {
+        _rightImage3 = [[UIImageView alloc] init];
+        [self.contentView addSubview:_rightImage3];
+        [_rightImage3 setImage:[UIImage imageNamed:@"icon_right"]];
+    }
+    return _rightImage3;
+}
+
+
+
+
+- (UILabel *)beforePrice{
+    if (_beforePrice == nil) {
+        _beforePrice = [[UILabel alloc] init];
+        [self.contentView addSubview:_beforePrice];
+    }
+    return _beforePrice;
+}
+- (UILabel *)discountlabel{
+    if (_discountlabel == nil) {
+        _discountlabel = [[UILabel alloc] init];
+        [self.contentView addSubview:_discountlabel];
+    }
+    return _discountlabel;
+}
+- (UILabel *)expressCharge{
+    if (_expressCharge == nil) {
+        _expressCharge = [[UILabel alloc] init];
+        [self.contentView addSubview:_expressCharge];
+        [_expressCharge configmentfont:[UIFont systemFontOfSize:11 * zkqScale] textColor:[UIColor colorWithHexString:@"999999"] backColor:[UIColor clearColor] textAligement:0 cornerRadius:0 text:@""];
+        [_expressCharge sizeToFit];
+    }
+    return _expressCharge;
+}
+- (UILabel *)saleVolume{
+    if (_saleVolume == nil) {
+        _saleVolume = [[UILabel alloc] init];
+        [self.contentView addSubview:_saleVolume];
+        [_saleVolume configmentfont:[UIFont systemFontOfSize:11 * zkqScale] textColor:[UIColor colorWithHexString:@"999999"] backColor:[UIColor clearColor] textAligement:0 cornerRadius:0 text:@""];
+        [_saleVolume sizeToFit];
+    }
+    return _saleVolume;
+}
+- (UILabel *)deliveryPlace{
+    if (_deliveryPlace == nil) {
+        _deliveryPlace = [[UILabel alloc] init];
+        [self.contentView addSubview:_deliveryPlace];
+        [_deliveryPlace configmentfont:[UIFont systemFontOfSize:11 * zkqScale] textColor:[UIColor colorWithHexString:@"999999"] backColor:[UIColor clearColor] textAligement:0 cornerRadius:0 text:@""];
+        [_deliveryPlace sizeToFit];
+    }
+    return _deliveryPlace;
+}
+#pragma mark -- 分享
+- (void)shar{
+    LOG(@"%@,%d,%@",[self class], __LINE__,@"分享")
+    if ([self.delegate respondsToSelector:@selector(HGTopGoodInfoCellShar)]) {
+        [self.delegate performSelector:@selector(HGTopGoodInfoCellShar)];
+    }
+    
+    
+    
+}
+
+
+
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        [self laysub];
+    }
+    return self;
+}
+
+- (void)laysub{
+    self.contentView.backgroundColor = [UIColor colorWithHexString:@"ffffff"];
+    //布局分享按钮
+    [self.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView).offset(0);
+        make.right.equalTo(self.contentView.mas_right).offset(0);
+         make.width.equalTo(@(44));
+        make.height.equalTo(@(44));
+    }];
+    //布局产品介绍
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView.mas_top).offset(10);
+        make.left.equalTo(self.contentView).offset(10);
+        make.right.equalTo(self.shareView.mas_left).offset(-10);
+    }];
+    //布局价格
+    [self.priceStr mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView.mas_left).offset(10);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
+        make.right.equalTo(self.contentView.mas_right).offset(-100);
+    }];
+    //布局快递
+    [self.expressCharge mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView).offset(10);
+        make.top.equalTo(self.priceStr.mas_bottom).offset(10);
+        
+    }];
+    //布局月销量
+    [self.saleVolume mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.expressCharge);
+        make.centerX.equalTo(self.contentView);
+    }];
+    //布局发货地点
+    [self.deliveryPlace mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.expressCharge);
+        make.right.equalTo(self.contentView.mas_right).offset(-10);
+    }];
+    
+    
+    
+    
+    //布局第一个对号
+    [self.rightImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(12 * zkqScale));
+        make.height.equalTo(@(12 * zkqScale));
+        make.left.equalTo(self.contentView.mas_left).offset(10);
+        make.top.equalTo(self.expressCharge.mas_bottom).offset(11);
+        
+    }];
+    
+    
+    //布局售后服务1
+    [self.promotion mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.rightImage);
+        make.left.equalTo(self.rightImage.mas_right).offset(4);
+    }];
+    //布局第二个对号
+    [self.rightImage2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.rightImage);
+        make.left.equalTo(self.promotion.mas_right).offset(20* SCALE);
+        make.width.equalTo(@(12 * zkqScale));
+        make.height.equalTo(@(12 * zkqScale));
+    }];
+    
+    
+    
+    //布局售后服务2
+    [self.Promotion2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.rightImage2);
+        make.left.equalTo(self.rightImage2.mas_right).offset(4);
+    }];
+    
+    //布局第三个对号
+    [self.rightImage3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.rightImage);
+        make.left.equalTo(self.Promotion2.mas_right).offset(20* SCALE);
+        make.width.equalTo(@(12 * zkqScale));
+        make.height.equalTo(@(12 * zkqScale));
+    }];
+    //布局售后服务3
+    [self.promotion3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.rightImage3);
+        make.left.equalTo(self.rightImage3.mas_right).offset(4);
+    }];
+    
+    
+    [self.rightImage4 mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.rightImage.mas_bottom).offset(5);
+        make.left.equalTo(self.rightImage.mas_left).offset(0);
+        make.width.equalTo(@(12* zkqScale));
+        make.height.equalTo(@(12 * zkqScale));
+    }];
+    [self.promotion4 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.rightImage4);
+        make.left.equalTo(self.rightImage4.mas_right).offset(5);
+    }];
+    UIView *lineView = [[UIView alloc] init];
+    [self.contentView addSubview:lineView];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+      self.constraninWidth =  make.left.bottom.right.equalTo(self.contentView);
+      self.constraintHeight =  make.height.equalTo(@(10));
+      self.constrainttop =  make.top.equalTo(self.rightImage4.mas_bottom).offset(10);
+    }];
+    lineView.backgroundColor = BackgroundGray;
+    self.lineView = lineView;
+    
+}
+
+- (void)setInfoModel:(HGoodsSubGinfoModel *)infoModel{
+
+    self.titleLabel.text = infoModel.short_name;
+    self.priceStr.text = [NSString stringWithFormat:@"￥%@",dealPrice(infoModel.price)];
+    CGFloat freight = [infoModel.freight floatValue];
+
+    if (infoModel.freight) {
+        
+        if ([infoModel.freight isEqualToString:@"0"]) {
+            self.expressCharge.text = @"包邮";
+        }else{
+           self.expressCharge.text = [NSString stringWithFormat:@"快递:%0.2f",freight/100];
+        }
+    }else{
+        
+        self.expressCharge.text = @"包邮";
+
+    }
+        self.saleVolume.text = [NSString stringWithFormat:@"月销量%@件",infoModel.sales_month];
+
+    self.deliveryPlace.text = infoModel.area;
+    
+    NSArray *after = infoModel.security_range;
+    
+    
+    
+    
+    switch (after.count) {
+        case 0:
+        {
+            self.rightImage.hidden = YES;
+            self.promotion.hidden = YES;
+            self.rightImage2.hidden = YES;
+            self.Promotion2.hidden = YES;
+            self.rightImage3.hidden = YES;
+            self.promotion3.hidden = YES;
+            self.rightImage4.hidden = YES;
+            self.promotion4.hidden = YES;
+            [self.constrainttop uninstall];
+            [self.constraintHeight uninstall];
+            [self.constraninWidth uninstall];
+            [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.bottom.equalTo(self.contentView);
+                make.height.equalTo(@(10));
+                make.top.equalTo(self.expressCharge.mas_bottom).offset(5);
+            }];
+            
+        }
+            break;
+        case 1:
+        {
+            self.rightImage.hidden = NO;
+            self.promotion.hidden = NO;
+            self.rightImage2.hidden = YES;
+            self.Promotion2.hidden = YES;
+            self.rightImage3.hidden = YES;
+            self.promotion3.hidden = YES;
+            self.rightImage4.hidden = YES;
+            self.promotion4.hidden = YES;
+            [self.constrainttop uninstall];
+            [self.constraintHeight uninstall];
+            [self.constraninWidth uninstall];
+            [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.bottom.equalTo(self.contentView);
+                make.height.equalTo(@(10));
+                make.top.equalTo(self.rightImage.mas_bottom).offset(5);
+            }];
+        }
+            break;
+        case 2:
+        {
+            self.rightImage.hidden = NO;
+            self.promotion.hidden = NO;
+            self.rightImage2.hidden = NO;
+            self.Promotion2.hidden = NO;
+            self.rightImage3.hidden = YES;
+            self.promotion3.hidden = YES;
+            self.rightImage4.hidden = YES;
+            self.promotion4.hidden = YES;
+            [self.constrainttop uninstall];
+            [self.constraintHeight uninstall];
+            [self.constraninWidth uninstall];
+            [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.bottom.equalTo(self.contentView);
+                make.height.equalTo(@(10));
+                make.top.equalTo(self.rightImage.mas_bottom).offset(5);
+            }];
+        }
+            break;
+        case 3:
+        {
+            self.rightImage.hidden = NO;
+            self.promotion.hidden = NO;
+            self.rightImage2.hidden = NO;
+            self.Promotion2.hidden = NO;
+            self.rightImage3.hidden = NO;
+            self.promotion3.hidden = NO;
+            self.rightImage4.hidden = YES;
+            self.promotion4.hidden = YES;
+            [self.constrainttop uninstall];
+            [self.constraintHeight uninstall];
+            [self.constraninWidth uninstall];
+            [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.bottom.equalTo(self.contentView);
+                make.height.equalTo(@(10));
+                make.top.equalTo(self.rightImage.mas_bottom).offset(5);
+            }];
+        }
+            break;
+        case 4:
+        {
+            self.rightImage.hidden = NO;
+            self.promotion.hidden = NO;
+            self.rightImage2.hidden = NO;
+            self.Promotion2.hidden = NO;
+            self.rightImage3.hidden = NO;
+            self.promotion3.hidden = NO;
+            self.rightImage4.hidden = NO;
+            self.promotion4.hidden = NO;
+            [self.constrainttop uninstall];
+            [self.constraintHeight uninstall];
+            [self.constraninWidth uninstall];
+            [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.bottom.equalTo(self.contentView);
+                make.height.equalTo(@(10));
+                make.top.equalTo(self.rightImage4.mas_bottom).offset(5);
+            }];
+        }
+        default:
+            break;
+    }
+    
+    
+    for (NSInteger i = 0; i < after.count; i++) {
+        HGoodsSecurityModel *model = infoModel.security_range[i];
+        NSURL *url =ImageUrlWithString(model.icon);
+        if (i == 0) {
+            self.promotion.text = model.title;
+            [self.rightImage sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"accountBiiMap"]options:SDWebImageCacheMemoryOnly];
+        }
+        if (i == 1) {
+            self.Promotion2.text = model.title;
+            [self.rightImage2 sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"accountBiiMap"]options:SDWebImageCacheMemoryOnly];
+        }
+        if (i == 2) {
+            self.promotion3.text = model.title;
+            [self.rightImage3 sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"accountBiiMap"] options:SDWebImageCacheMemoryOnly];
+        }
+        if (i == 3) {
+            [self.rightImage4 sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"accountBiiMap"] options:SDWebImageCacheMemoryOnly];
+            self.promotion4.text = model.title;
+        }
+    }
+    
+    
+    
+    
+    
+    
+}
+
+
+
+- (void)awakeFromNib {
+    // Initialization code
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+
+    // Configure the view for the selected state
+}
+
+@end

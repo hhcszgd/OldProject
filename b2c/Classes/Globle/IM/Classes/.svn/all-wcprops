@@ -1,0 +1,2681 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes
+END
+SaveSystemConfig.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SaveSystemConfig.h
+END
+ASINetworkQueue.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ASINetworkQueue.h
+END
+GroupAddMemberViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupAddMemberViewController.h
+END
+UserChatManage.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UserChatManage.m
+END
+HttpWebService.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/HttpWebService.h
+END
+SaveSystemConfig.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SaveSystemConfig.m
+END
+ASINetworkQueue.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ASINetworkQueue.m
+END
+GroupStruct.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupStruct.h
+END
+GroupAddMemberViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupAddMemberViewController.m
+END
+ParseFriend.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseFriend.h
+END
+HttpWebService.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/HttpWebService.m
+END
+TreeKindCell.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/TreeKindCell.h
+END
+GroupStruct.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupStruct.m
+END
+ParseFriend.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseFriend.m
+END
+ParseGetUser.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseGetUser.h
+END
+SystemConfig.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SystemConfig.h
+END
+TreeKindCell.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/TreeKindCell.m
+END
+ASIHTTPRequestConfig.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ASIHTTPRequestConfig.h
+END
+CIMShowImage.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMShowImage.h
+END
+ParseGetUser.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseGetUser.m
+END
+YYMHttp.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/YYMHttp.h
+END
+IOSCimAppDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/IOSCimAppDelegate.h
+END
+SystemConfig.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SystemConfig.m
+END
+CIMShowImage.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMShowImage.m
+END
+UIColor-SQLitePersistentObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UIColor-SQLitePersistentObject.h
+END
+YYMHttp.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/YYMHttp.m
+END
+IOSCimAppDelegate.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/IOSCimAppDelegate.m
+END
+GroupListController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupListController.xib
+END
+UIColor-SQLitePersistentObject.m
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UIColor-SQLitePersistentObject.m
+END
+RecvRemoveGroupUser.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/RecvRemoveGroupUser.h
+END
+CIMGuestUserTreeViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMGuestUserTreeViewController.h
+END
+RecvRemoveGroupUser.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/RecvRemoveGroupUser.m
+END
+FaceTableViewController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FaceTableViewController.xib
+END
+CIMGuestUserTreeViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMGuestUserTreeViewController.m
+END
+FriendListController.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FriendListController.h
+END
+YYMData.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/YYMData.h
+END
+HttpGetData.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/HttpGetData.h
+END
+FriendsTabBarController.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FriendsTabBarController.h
+END
+CIMGuestListDataStruct.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMGuestListDataStruct.h
+END
+FriendListController.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FriendListController.m
+END
+YYMData.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/YYMData.m
+END
+HttpGetData.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/HttpGetData.m
+END
+FriendsTabBarController.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FriendsTabBarController.m
+END
+GetUserWithLoginIdHttp.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GetUserWithLoginIdHttp.h
+END
+CIMGuestListDataStruct.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMGuestListDataStruct.m
+END
+GroupList.xib
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupList.xib
+END
+SystemChatRequestAddGroup.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SystemChatRequestAddGroup.h
+END
+SystemMessage.xib
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SystemMessage.xib
+END
+GetUserWithLoginIdHttp.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GetUserWithLoginIdHttp.m
+END
+YYMSocket.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/YYMSocket.h
+END
+SystemChatRequestAddGroup.m
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SystemChatRequestAddGroup.m
+END
+SystemMessage.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SystemMessage.h
+END
+YYMSocket.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/YYMSocket.m
+END
+SystemMessage.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SystemMessage.m
+END
+EditUserInfoViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/EditUserInfoViewController.h
+END
+YYMSqlite.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/YYMSqlite.h
+END
+GetPasswordHttp.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GetPasswordHttp.h
+END
+EditUserInfoViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/EditUserInfoViewController.m
+END
+CIMSearchTableViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMSearchTableViewController.h
+END
+YYMSqlite.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/YYMSqlite.m
+END
+GetPasswordHttp.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GetPasswordHttp.m
+END
+SQLitePersistentObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SQLitePersistentObject.h
+END
+CIMSearchTableViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMSearchTableViewController.m
+END
+CIMShopUserTreeViewController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMShopUserTreeViewController.xib
+END
+LoadingViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/LoadingViewController.h
+END
+UserChatViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UserChatViewController.h
+END
+InsetsTextField.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/InsetsTextField.h
+END
+SQLitePersistentObject.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SQLitePersistentObject.m
+END
+LoadingViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/LoadingViewController.m
+END
+UserChatViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UserChatViewController.m
+END
+InsetsTextField.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/InsetsTextField.m
+END
+MyObserver.xib
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/MyObserver.xib
+END
+UINavigationDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UINavigationDelegate.h
+END
+SuperWebViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SuperWebViewController.h
+END
+GetGroupHttp.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GetGroupHttp.h
+END
+ASIAuthenticationDialog.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ASIAuthenticationDialog.h
+END
+OnlineSound.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/OnlineSound.h
+END
+UINavigationDelegate.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UINavigationDelegate.m
+END
+SuperWebViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SuperWebViewController.m
+END
+GetGroupHttp.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GetGroupHttp.m
+END
+ASIAuthenticationDialog.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ASIAuthenticationDialog.m
+END
+OnlineSound.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/OnlineSound.m
+END
+FriendsTabBarController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FriendsTabBarController.xib
+END
+ShopManage.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ShopManage.h
+END
+FriendsTabBarCoontroller.xib
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FriendsTabBarCoontroller.xib
+END
+ASIHTTPRequest.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ASIHTTPRequest.h
+END
+YYMDebug.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/YYMDebug.h
+END
+AsyncSocket.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/AsyncSocket.h
+END
+ShopManage.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ShopManage.m
+END
+GroupList.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupList.h
+END
+FriendsTabBarCoontroller.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FriendsTabBarCoontroller.h
+END
+ASIHTTPRequest.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ASIHTTPRequest.m
+END
+YYMDebug.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/YYMDebug.m
+END
+AsyncSocket.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/AsyncSocket.m
+END
+YYMFilePath.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/YYMFilePath.h
+END
+GroupList.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupList.m
+END
+FriendsTabBarCoontroller.m
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FriendsTabBarCoontroller.m
+END
+YYMFilePath.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/YYMFilePath.m
+END
+ASIFormDataRequest.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ASIFormDataRequest.h
+END
+NearTreeViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/NearTreeViewController.h
+END
+GroupNavigation.xib
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupNavigation.xib
+END
+CIMChatFacePanel.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMChatFacePanel.h
+END
+SetGroupUserHttp.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SetGroupUserHttp.h
+END
+ASIFormDataRequest.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ASIFormDataRequest.m
+END
+NearTreeViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/NearTreeViewController.m
+END
+MyUIButton.xib
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/MyUIButton.xib
+END
+GroupTreeViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupTreeViewController.h
+END
+Director.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/Director.h
+END
+CIMChatFacePanel.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMChatFacePanel.m
+END
+SetGroupUserHttp.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SetGroupUserHttp.m
+END
+Tool.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/Tool.h
+END
+GroupTreeViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupTreeViewController.m
+END
+CIMShopUserTreeViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMShopUserTreeViewController.h
+END
+Director.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/Director.m
+END
+Friendslist.xib
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/Friendslist.xib
+END
+CIMSocket.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMSocket.h
+END
+ChatTreesViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChatTreesViewController.h
+END
+zh-en.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/zh-en.h
+END
+GroupUserList.xib
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupUserList.xib
+END
+FriendNavigation.xib
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FriendNavigation.xib
+END
+Tool.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/Tool.m
+END
+GroupMemberViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupMemberViewController.h
+END
+CIMShopUserTreeViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMShopUserTreeViewController.m
+END
+CIMSocket.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMSocket.m
+END
+ChatTreesViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChatTreesViewController.m
+END
+zh-en.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/zh-en.m
+END
+GroupMemberViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupMemberViewController.m
+END
+HttpError.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/HttpError.h
+END
+CIMShopListDataStruct.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMShopListDataStruct.h
+END
+HttpError.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/HttpError.m
+END
+SystemChatRequestAddFriend.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SystemChatRequestAddFriend.h
+END
+CIMShopListDataStruct.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMShopListDataStruct.m
+END
+SystemChatRequestAddFriend.m
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SystemChatRequestAddFriend.m
+END
+LoginController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/LoginController.xib
+END
+UserData.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UserData.h
+END
+GetUsersWithIdHttp.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GetUsersWithIdHttp.h
+END
+PrivacyViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/PrivacyViewController.h
+END
+WebViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/WebViewController.h
+END
+UserData.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UserData.m
+END
+SystemChatRequestAddGroup.xib
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SystemChatRequestAddGroup.xib
+END
+GetUsersWithIdHttp.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GetUsersWithIdHttp.m
+END
+ChooseLoginId.xib
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChooseLoginId.xib
+END
+PrivacyViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/PrivacyViewController.m
+END
+SettingController.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SettingController.h
+END
+WebViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/WebViewController.m
+END
+untitled.xib
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/untitled.xib
+END
+SettingController.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SettingController.m
+END
+SearchFriend.xib
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SearchFriend.xib
+END
+Sound.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/Sound.h
+END
+MessageStruct.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/MessageStruct.h
+END
+Sound.m
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/Sound.m
+END
+MessageStruct.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/MessageStruct.m
+END
+YYMAudio.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/YYMAudio.h
+END
+LoginIdDropListDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/LoginIdDropListDelegate.h
+END
+YYMAudio.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/YYMAudio.m
+END
+LoginIdDropListDelegate.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/LoginIdDropListDelegate.m
+END
+CIMShowImage.xib
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMShowImage.xib
+END
+ParseGenerationXML.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseGenerationXML.h
+END
+ASIInputStream.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ASIInputStream.h
+END
+SocketObType.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SocketObType.h
+END
+GroupTreeCell.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupTreeCell.h
+END
+ParseGenerationXML.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseGenerationXML.m
+END
+ASIInputStream.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ASIInputStream.m
+END
+SocketObType.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SocketObType.m
+END
+GroupTreeCell.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupTreeCell.m
+END
+NearListController.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/NearListController.h
+END
+ParseDeleteFriend.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseDeleteFriend.h
+END
+NearListController.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/NearListController.m
+END
+ParseDeleteFriend.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseDeleteFriend.m
+END
+SaveChatLogData.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SaveChatLogData.h
+END
+TreeViewCell.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/TreeViewCell.h
+END
+GroupHttp.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupHttp.h
+END
+RecvAddGroupRequest.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/RecvAddGroupRequest.h
+END
+SaveChatLogData.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SaveChatLogData.m
+END
+TreeViewCell.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/TreeViewCell.m
+END
+YYMGlobal.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/YYMGlobal.h
+END
+YYMXML.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/YYMXML.h
+END
+GroupHttp.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupHttp.m
+END
+CIMUserListDataStruct.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMUserListDataStruct.h
+END
+RecvAddGroupRequest.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/RecvAddGroupRequest.m
+END
+GroupManageViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupManageViewController.h
+END
+YYMGlobal.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/YYMGlobal.m
+END
+YYMXML.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/YYMXML.m
+END
+GuestTreeCell.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GuestTreeCell.h
+END
+CIMUserListDataStruct.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMUserListDataStruct.m
+END
+UserChatData.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UserChatData.h
+END
+GroupManageViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupManageViewController.m
+END
+CIMFriendUserTreeViewController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMFriendUserTreeViewController.xib
+END
+ChatListController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChatListController.xib
+END
+GuestTreeCell.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GuestTreeCell.m
+END
+UserChatData.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UserChatData.m
+END
+SVProgressHUD.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SVProgressHUD.h
+END
+ASIHTTPRequestDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ASIHTTPRequestDelegate.h
+END
+UserDataManage.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UserDataManage.h
+END
+MainViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/MainViewController.h
+END
+Language.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/Language.h
+END
+ChatUserStruct.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChatUserStruct.h
+END
+SVProgressHUD.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SVProgressHUD.m
+END
+UserDataManage.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UserDataManage.m
+END
+GetGuestHttp.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GetGuestHttp.h
+END
+MainViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/MainViewController.m
+END
+Language.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/Language.m
+END
+ChatUserStruct.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChatUserStruct.m
+END
+untitled.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/untitled.h
+END
+ShopTreeCell.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ShopTreeCell.h
+END
+SystemVariable.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SystemVariable.h
+END
+XMLElementParam.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/XMLElementParam.h
+END
+GetGuestHttp.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GetGuestHttp.m
+END
+MyNotificationCenter.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/MyNotificationCenter.h
+END
+untitled.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/untitled.m
+END
+ShopTreeCell.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ShopTreeCell.m
+END
+SocketObserver.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SocketObserver.h
+END
+XMLElementParam.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/XMLElementParam.m
+END
+MyNotificationCenter.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/MyNotificationCenter.m
+END
+SocketObserver.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SocketObserver.m
+END
+TreeNode.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/TreeNode.h
+END
+GroupTreeViewController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupTreeViewController.xib
+END
+TreeNode.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/TreeNode.m
+END
+MyUIButton.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/MyUIButton.h
+END
+ParseXMLString.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseXMLString.h
+END
+MyUIButton.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/MyUIButton.m
+END
+HttpUpFile.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/HttpUpFile.h
+END
+GlobalAttribute.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GlobalAttribute.h
+END
+SaveChatLogData.xib
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SaveChatLogData.xib
+END
+FillStrangerData.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FillStrangerData.h
+END
+GroupUserList.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupUserList.h
+END
+FriendNavigation.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FriendNavigation.h
+END
+ParseGroup.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseGroup.h
+END
+ParseXMLString.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseXMLString.m
+END
+HttpUpFile.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/HttpUpFile.m
+END
+GlobalAttribute.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GlobalAttribute.m
+END
+ASICacheDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ASICacheDelegate.h
+END
+FillStrangerData.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FillStrangerData.m
+END
+GroupUserList.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupUserList.m
+END
+FriendNavigation.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FriendNavigation.m
+END
+ParseGroup.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseGroup.m
+END
+SearchFriendViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SearchFriendViewController.h
+END
+MyUserInfoViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/MyUserInfoViewController.h
+END
+SearchFriendViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SearchFriendViewController.m
+END
+SocketManage.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SocketManage.h
+END
+MyUserInfoViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/MyUserInfoViewController.m
+END
+FaceTableViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FaceTableViewController.h
+END
+SocketManage.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SocketManage.m
+END
+RecvAddFriendRequest.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/RecvAddFriendRequest.h
+END
+FaceTableViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FaceTableViewController.m
+END
+TreeKindNode.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/TreeKindNode.h
+END
+GetGroupUsersHttp.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GetGroupUsersHttp.h
+END
+RecvAddFriendRequest.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/RecvAddFriendRequest.m
+END
+AddFriendHttp.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/AddFriendHttp.h
+END
+TreeKindNode.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/TreeKindNode.m
+END
+GetGroupUsersHttp.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GetGroupUsersHttp.m
+END
+ASIDataCompressor.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ASIDataCompressor.h
+END
+AddFriendRequest.xib
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/AddFriendRequest.xib
+END
+AddFriendHttp.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/AddFriendHttp.m
+END
+TreeEndCell.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/TreeEndCell.h
+END
+GetUserManage.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GetUserManage.h
+END
+ASIDataCompressor.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ASIDataCompressor.m
+END
+AddFriendRequest.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/AddFriendRequest.h
+END
+CommViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CommViewController.h
+END
+ShopDeptStruct.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ShopDeptStruct.h
+END
+TreeEndCell.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/TreeEndCell.m
+END
+GetUserManage.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GetUserManage.m
+END
+AddFriendRequest.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/AddFriendRequest.m
+END
+NearTreeViewController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/NearTreeViewController.xib
+END
+CommViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CommViewController.m
+END
+Reachability.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/Reachability.h
+END
+RegexKitLite.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/RegexKitLite.h
+END
+ShopDeptStruct.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ShopDeptStruct.m
+END
+GetLoginData.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GetLoginData.h
+END
+AddGroupViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/AddGroupViewController.h
+END
+Reachability.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/Reachability.m
+END
+RegexKitLite.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/RegexKitLite.m
+END
+GetLoginData.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GetLoginData.m
+END
+AddGroupViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/AddGroupViewController.m
+END
+ParseSocketData.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseSocketData.h
+END
+RecvSocketMessage.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/RecvSocketMessage.h
+END
+SendSystemGroupMessage.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SendSystemGroupMessage.h
+END
+UserChatLog.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UserChatLog.h
+END
+LoginManage.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/LoginManage.h
+END
+SQLiteInstanceManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SQLiteInstanceManager.h
+END
+ParseSocketData.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseSocketData.m
+END
+RecvSocketMessage.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/RecvSocketMessage.m
+END
+ShopUserNavigation.xib
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ShopUserNavigation.xib
+END
+YYMXMLCache.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/YYMXMLCache.h
+END
+SendSystemGroupMessage.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SendSystemGroupMessage.m
+END
+UserChatLog.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UserChatLog.m
+END
+LoginManage.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/LoginManage.m
+END
+Friendslist.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/Friendslist.h
+END
+ParseGeneration.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseGeneration.h
+END
+SQLiteInstanceManager.m
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SQLiteInstanceManager.m
+END
+ASIDownloadCache.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ASIDownloadCache.h
+END
+YYMXMLCache.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/YYMXMLCache.m
+END
+CIMGuestUserTreeViewController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMGuestUserTreeViewController.xib
+END
+ObserverType.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ObserverType.h
+END
+Friendslist.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/Friendslist.m
+END
+ParseGeneration.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseGeneration.m
+END
+GroupListController.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupListController.h
+END
+MyObserver.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/MyObserver.h
+END
+ASIDownloadCache.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ASIDownloadCache.m
+END
+FriendManange.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FriendManange.h
+END
+ObserverType.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ObserverType.m
+END
+ClearLoginerData.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ClearLoginerData.h
+END
+GroupListController.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupListController.m
+END
+FaceTableViewCell.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FaceTableViewCell.h
+END
+MyObserver.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/MyObserver.m
+END
+RecvTempGuestMessage.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/RecvTempGuestMessage.h
+END
+FriendManange.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FriendManange.m
+END
+CIMUIViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMUIViewController.h
+END
+ClearLoginerData.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ClearLoginerData.m
+END
+Config.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/Config.h
+END
+FaceTableViewCell.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FaceTableViewCell.m
+END
+RecvTempGuestMessage.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/RecvTempGuestMessage.m
+END
+AsynImageView.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/AsynImageView.h
+END
+CIMUIViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMUIViewController.m
+END
+ChatViewCell.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChatViewCell.h
+END
+Config.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/Config.m
+END
+AsynImageView.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/AsynImageView.m
+END
+ChatListController.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChatListController.h
+END
+ChatViewCell.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChatViewCell.m
+END
+CIMSocketLogicExt.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMSocketLogicExt.h
+END
+RecvGuestComeMessage.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/RecvGuestComeMessage.h
+END
+FriendKindStruct.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FriendKindStruct.h
+END
+ChatListController.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChatListController.m
+END
+CIMSocketLogicExt.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMSocketLogicExt.m
+END
+RecvGuestComeMessage.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/RecvGuestComeMessage.m
+END
+CIMUserTreeViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMUserTreeViewController.h
+END
+ChooseLoginId.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChooseLoginId.h
+END
+FriendKindStruct.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FriendKindStruct.m
+END
+CimGlobal.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CimGlobal.h
+END
+CIMUserTreeViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMUserTreeViewController.m
+END
+ChooseLoginId.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChooseLoginId.m
+END
+CimGlobal.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CimGlobal.m
+END
+NearTreeViewCell.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/NearTreeViewCell.h
+END
+NearTreeViewCell.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/NearTreeViewCell.m
+END
+GroupManage.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupManage.h
+END
+GroupManage.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupManage.m
+END
+ChatListDataStruct.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChatListDataStruct.h
+END
+SearchGroupViewController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SearchGroupViewController.xib
+END
+ChatListDataStruct.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChatListDataStruct.m
+END
+GuestData.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GuestData.h
+END
+SearchGroupViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SearchGroupViewController.h
+END
+DataManage.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/DataManage.h
+END
+UserStatus.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UserStatus.h
+END
+ExistFriendHttp.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ExistFriendHttp.h
+END
+UITabBarDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UITabBarDelegate.h
+END
+GuestData.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GuestData.m
+END
+SearchGroupViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SearchGroupViewController.m
+END
+DataManage.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/DataManage.m
+END
+UserStatus.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UserStatus.m
+END
+ShopUserNavigation.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ShopUserNavigation.h
+END
+CimExceptionLog.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CimExceptionLog.h
+END
+ExistFriendHttp.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ExistFriendHttp.m
+END
+UITabBarDelegate.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UITabBarDelegate.m
+END
+ChatTreeViewCell.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChatTreeViewCell.h
+END
+Generation.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/Generation.h
+END
+SystemAttributes.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SystemAttributes.h
+END
+ShopUserNavigation.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ShopUserNavigation.m
+END
+CimExceptionLog.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CimExceptionLog.m
+END
+MsgSound.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/MsgSound.h
+END
+ChatTreeViewCell.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChatTreeViewCell.m
+END
+Generation.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/Generation.m
+END
+SystemAttributes.m
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SystemAttributes.m
+END
+FriendListController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/FriendListController.xib
+END
+MsgSound.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/MsgSound.m
+END
+LoginViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/LoginViewController.h
+END
+LoginHttp.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/LoginHttp.h
+END
+OPChatLogData.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/OPChatLogData.h
+END
+LoginViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/LoginViewController.m
+END
+LoginHttp.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/LoginHttp.m
+END
+CIMFriendUserTreeViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMFriendUserTreeViewController.h
+END
+OPChatLogData.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/OPChatLogData.m
+END
+CIMFriendUserTreeViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMFriendUserTreeViewController.m
+END
+ParseCIMXML.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseCIMXML.h
+END
+UIImage-SQLitePersistence.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UIImage-SQLitePersistence.h
+END
+TranslucentToolbar.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/TranslucentToolbar.h
+END
+ParseGroupUser.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseGroupUser.h
+END
+ChooseOnlineStatus.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChooseOnlineStatus.h
+END
+ParseCIMXML.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseCIMXML.m
+END
+UIImage-SQLitePersistence.m
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UIImage-SQLitePersistence.m
+END
+TranslucentToolbar.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/TranslucentToolbar.m
+END
+CIMFriendListDataStruct.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMFriendListDataStruct.h
+END
+ParseGroupUser.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseGroupUser.m
+END
+ASIDataDecompressor.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ASIDataDecompressor.h
+END
+SearchFriend.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SearchFriend.h
+END
+ChooseOnlineStatus.m
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChooseOnlineStatus.m
+END
+GroupDataManage.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupDataManage.h
+END
+CIMSocketLogic.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMSocketLogic.h
+END
+CIMFriendListDataStruct.m
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMFriendListDataStruct.m
+END
+ASIDataDecompressor.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ASIDataDecompressor.m
+END
+SearchFriend.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SearchFriend.m
+END
+UserVerifyViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UserVerifyViewController.h
+END
+RecvInviteAddGroupUser.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/RecvInviteAddGroupUser.h
+END
+GroupDataManage.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupDataManage.m
+END
+CIMSocketLogic.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMSocketLogic.m
+END
+CallCIMHttp.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CallCIMHttp.h
+END
+RecvAddGroupResponse.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/RecvAddGroupResponse.h
+END
+UserVerifyViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UserVerifyViewController.m
+END
+RecvInviteAddGroupUser.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/RecvInviteAddGroupUser.m
+END
+CallCIMHttp.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CallCIMHttp.m
+END
+RecvAddGroupResponse.m
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/RecvAddGroupResponse.m
+END
+GroupNavigation.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupNavigation.h
+END
+CIMMessage.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMMessage.h
+END
+ChatTreesViewCell.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChatTreesViewCell.h
+END
+ShopUserStruct.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ShopUserStruct.h
+END
+ChatWebLog.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChatWebLog.h
+END
+UserListKindDataStruct.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UserListKindDataStruct.h
+END
+NearListController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/NearListController.xib
+END
+GroupNavigation.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupNavigation.m
+END
+CIMMessage.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CIMMessage.m
+END
+ChatTreesViewCell.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChatTreesViewCell.m
+END
+ShopUserStruct.m
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ShopUserStruct.m
+END
+ChatWebLog.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChatWebLog.m
+END
+UserListKindDataStruct.m
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UserListKindDataStruct.m
+END
+ChatTreeViewCell.xib
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChatTreeViewCell.xib
+END
+GetUserWithIdHttp.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GetUserWithIdHttp.h
+END
+WSCallerBlock.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/WSCallerBlock.h
+END
+SystemChatRequestAddFriend.xib
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SystemChatRequestAddFriend.xib
+END
+GetUserWithIdHttp.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GetUserWithIdHttp.m
+END
+ASIProgressDelegate.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ASIProgressDelegate.h
+END
+WSCallerBlock.m
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/WSCallerBlock.m
+END
+SendSocketContent.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SendSocketContent.h
+END
+SendSocketContent.m
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SendSocketContent.m
+END
+ParseLogin.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseLogin.h
+END
+GroupUserManage.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupUserManage.h
+END
+CimSqllite.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CimSqllite.h
+END
+ParseLogin.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ParseLogin.m
+END
+SetGroupHttp.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SetGroupHttp.h
+END
+GroupUserManage.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/GroupUserManage.m
+END
+SocketOb.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SocketOb.h
+END
+ErrorParam.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ErrorParam.h
+END
+RecvStrangerMessage.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/RecvStrangerMessage.h
+END
+CimSqllite.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/CimSqllite.m
+END
+LoginController.h
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/LoginController.h
+END
+Debuger.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/Debuger.h
+END
+SetGroupHttp.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SetGroupHttp.m
+END
+SocketOb.m
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/SocketOb.m
+END
+ErrorParam.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ErrorParam.m
+END
+RecvStrangerMessage.m
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/RecvStrangerMessage.m
+END
+UserChatLogViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UserChatLogViewController.h
+END
+LoginController.m
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/LoginController.m
+END
+ChatLogCell.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChatLogCell.h
+END
+Debuger.m
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/Debuger.m
+END
+UserChatLogViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UserChatLogViewController.m
+END
+ChatLogCell.m
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/ChatLogCell.m
+END
+UserChatManage.h
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/UserChatManage.h
+END
+MyNotificationCenter.xib
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/IM/Classes/MyNotificationCenter.xib
+END

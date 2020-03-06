@@ -1,0 +1,143 @@
+//
+//  HCellComposeModel.m
+//  b2c
+//
+//  Created by wangyuanfei on 4/12/16.
+//  Copyright © 2016 www.16lao.com. All rights reserved.
+//
+
+#import "HCellComposeModel.h"
+
+@implementation HCellComposeModel
+-(instancetype)initWithDict:(NSDictionary*)dict{
+    if (self = [super init]) {
+        [self setValuesForKeysWithDictionary:dict];
+    }
+    return self;
+}
+-(void)setValue:(id)value forKey:(NSString *)key{
+//    if ([key isEqualToString:@"shop_id"]) {   }
+    
+    if ([key isEqualToString:@"price"]) {
+//        LOG(@"_%@_%d_单位为分的价格 -->%@",[self class] , __LINE__,value);
+//       value =  [value convertToYuan];
+//        LOG(@"_%@_%d_单位为元的价格 -->%@",[self class] , __LINE__,value);
+        self.showPrice = dealPrice(value);
+        
+    }
+    
+    if ([key isEqualToString:@"shop_price"] && !self.showPrice) {
+        self.showPrice = dealPrice(value);
+    }//######
+    
+    if ([key isEqualToString:@"id"]) {
+        self.ID = value ;
+        
+        return;
+    }
+    if ([key isEqualToString:@"img"] || [key isEqualToString:@"brand_logo"]) {
+        self.imgStr = value;
+        return;
+    }
+    if ([key isEqualToString:@"value"]) {
+        self.link = value;
+    }
+    if ([key isEqualToString:@"actionkey"]) {
+        
+        NSString * temp =value;
+        if ([temp isEqualToString:@"HGoodsVC"]) {
+            self.actionKey = value;
+            return;
+        }
+        
+        if ([temp isEqualToString:@"HShopVC"]) {
+            self.actionKey=value;
+            return;
+        }
+        if ([value isEqualToString:@"HBrandVC"]) {
+            self.actionKey = value;
+            return;
+        }
+        if ([value isEqualToString:@"HSearchgoodsListVC"]) {
+            self.actionKey = @"HSearchgoodsListVC";
+            return;
+        }
+        if ([value isEqualToString:@"brand"]) {
+            self.actionKey = @"HShopVC";
+            return;
+        }
+        if ([value  isEqualToString:@"webpage"] || [value isEqualToString:@"wap_page"]) {
+            self.actionKey = @"BaseWebVC";
+            return;
+        }
+        if ([value isEqualToString:@"goods"]) {
+            self.actionKey = @"HGoodsVC";
+            return;
+        }
+        if ([value isEqualToString:@"shop"]) {
+            self.actionKey = @"HShopVC";
+            return;
+        }
+        if ([value isEqualToString:@"match"]) {
+            self.actionKey = @"gotoLao";
+            return;
+        }
+        if ([value isEqualToString:@"pastoral"]) {
+            self.actionKey = @"HCountrysideVC";
+            return;
+        }
+        if ([value isEqualToString:@"home"]) {
+            self.actionKey = @"HBabyVC";
+            return;
+        }
+        if ([value isEqualToString:@"version"]) {
+            temp = @"HMatchVC";
+            self.actionKey = @"HMatchVC";
+            return;
+        }
+//        if ([value isEqualToString:@"direct"]) {
+//            self.actionKey = @"ChannelWebVC";
+//            return;
+//
+//        }
+//        if ([value isEqualToString:@"franchise"]) {
+//            self.actionKey = @"ChannelWebVC";
+//            return;
+//            
+//        }
+        
+//        if ([value isEqualToString:@"individual"]) {
+//            self.actionKey = @"ChannelWebVC";
+//            return;
+//            
+//        }
+        
+        
+        if ([value isEqualToString:@"supermarket"]) {
+            self.actionKey = @"HSupermarketVC";
+            return;
+        }
+        
+        
+        
+
+        NSString * action = [temp customFirstCharUpper] ;
+        NSString * classActionStr = [NSString stringWithFormat:@"H%@VC",action];//直接把对应的actionKey转换成相应的控制器类名
+        self.actionKey = classActionStr;
+//        if ([classActionStr isEqualToString:@"HLaoVC"]) {
+//            self.actionKey = @"CouponsDetailVC";
+//        }
+        return;
+    }
+    
+    if ([key isEqualToString:@"description"]) {
+        self.title = value;//八个导航模块儿的标题 , 网络数据字段是description , 属于关键字
+        self.classify_name = value;
+        return;
+    }
+    [super setValue:value forKey:key];
+}
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key{
+
+}
+@end

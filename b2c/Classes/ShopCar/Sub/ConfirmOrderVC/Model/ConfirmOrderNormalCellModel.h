@@ -1,0 +1,35 @@
+//
+//  ConfirmOrderNormalCellModel.h
+//  b2c
+//
+//  Created by wangyuanfei on 16/4/28.
+//  Copyright © 2016年 www.16lao.com. All rights reserved.
+//
+
+#import "CustomDetailCellModel.h"
+
+@interface ConfirmOrderNormalCellModel : BaseModel
+@property(nonatomic,copy)NSString * channel ;
+@property(nonatomic,copy)NSString * subtitle ;
+@property(nonatomic,strong)UIColor * rightTitleColor ;
+@property(nonatomic,assign)BOOL showArrow ;
+@property(nonatomic,assign)BOOL is_display ;//为税费而生
+
+
+/** 奇葩数据 */
+/** 	subtwo = 第三方配送;
+	title = 支付配送;
+	channel = pay;
+	subone = 在线支付;
+ */
+/** 支付配送的子标题1 */
+@property(nonatomic,copy)NSString * subone ;
+/** 支付配送的子标题2 */
+@property(nonatomic,copy)NSString * subtwo ;
+/** 默认地址 */
+@property(nonatomic,copy)NSString * sufference ;
+@property(nonatomic,strong)NSMutableArray * items ;
+/** 只有所购商品的cell能用到 */
+@property(nonatomic,copy)NSString * total ;
+-(instancetype)initWithDict:(NSDictionary *)dict;
+@end

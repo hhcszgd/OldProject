@@ -1,0 +1,62 @@
+//
+//  AMCellModel.h
+//  TTmall
+//
+//  Created by wangyuanfei on 3/3/16.
+//  Copyright © 2016 Footway tech. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface AMCellModel : NSObject<NSCopying,NSMutableCopying>
+/** 地址id */
+@property(nonatomic,copy)NSString * ID ;
+/** 收货人姓名 */
+@property(nonatomic,copy)NSString * username ;
+/** 身份证号码 */
+@property(nonatomic,copy)NSString * id_number ;
+/** 收货人手机 */
+@property(nonatomic,copy)NSString * mobile ;
+/** 收货人电话 */
+@property(nonatomic,copy)NSString *  telephone;
+/** 全地址 */
+//@property(nonatomic,copy)NSString * totalAddress ;
+/** 国家 */
+@property(nonatomic,copy)NSString * country ;
+/** 省 */
+@property(nonatomic,copy)NSString * province ;
+/** 市 */
+@property(nonatomic,copy)NSString * city ;
+
+/** 区 */
+@property(nonatomic,copy)NSString * cantonal ;
+/** 区到国家总字段  当选择了地区以后自动加载邮编*/
+@property(nonatomic,copy)NSString * area ;
+
+/** 街道 (取消街道)*/
+//@property(nonatomic,copy)NSString * street ;
+/** 具体地址 */
+@property(nonatomic,copy)NSString * address ;
+/** 是否设置为默认 */
+@property(nonatomic,assign) BOOL isDefaultAddress  ;
+/** 是否被选中(仅用于生成订单之前选择地址用) */
+@property(nonatomic,assign)BOOL  isSelected ;
+
+/** 邮编 */
+@property(nonatomic,copy)NSString * postalCode ;
+
+//@property(nonatomic,copy)NSString * name ;
+//
+//@property(nonatomic,copy)NSString * name ;
+//
+//@property(nonatomic,copy)NSString * name ;
+//
+//@property(nonatomic,copy)NSString * name ;
+-(instancetype)initWithdictionary:(NSDictionary*)dict;
+/** 标识 , (代表:网络请求提交方式) */
+@property(nonatomic,copy)NSString * methodType ;
+-(instancetype)copy ;
+/** 区对应的id , 在新建和修改地址的时候不用传国家 , 省份 , 地区的字符串了 , 直接传一个地区id就可以了 */
+@property(nonatomic,copy)NSString * area_id ;
+
+@end

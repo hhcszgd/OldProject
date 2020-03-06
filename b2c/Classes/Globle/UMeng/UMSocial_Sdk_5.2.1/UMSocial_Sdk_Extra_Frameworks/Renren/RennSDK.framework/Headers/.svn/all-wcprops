@@ -1,0 +1,131 @@
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers
+END
+RennNotificationService.h
+K 25
+svn:wc:ra_dav:version-url
+V 172
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers/RennNotificationService.h
+END
+RennPhotoService.h
+K 25
+svn:wc:ra_dav:version-url
+V 165
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers/RennPhotoService.h
+END
+RennClient.h
+K 25
+svn:wc:ra_dav:version-url
+V 159
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers/RennClient.h
+END
+RennProfileService.h
+K 25
+svn:wc:ra_dav:version-url
+V 167
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers/RennProfileService.h
+END
+RennAlbumService.h
+K 25
+svn:wc:ra_dav:version-url
+V 165
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers/RennAlbumService.h
+END
+RennSDK.h
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers/RennSDK.h
+END
+RennCommentService.h
+K 25
+svn:wc:ra_dav:version-url
+V 167
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers/RennCommentService.h
+END
+RennShareService.h
+K 25
+svn:wc:ra_dav:version-url
+V 165
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers/RennShareService.h
+END
+RennFeedService.h
+K 25
+svn:wc:ra_dav:version-url
+V 164
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers/RennFeedService.h
+END
+RennHttpRequest.h
+K 25
+svn:wc:ra_dav:version-url
+V 164
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers/RennHttpRequest.h
+END
+RennFriendService.h
+K 25
+svn:wc:ra_dav:version-url
+V 166
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers/RennFriendService.h
+END
+RennLoginService.h
+K 25
+svn:wc:ra_dav:version-url
+V 165
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers/RennLoginService.h
+END
+RennUbbService.h
+K 25
+svn:wc:ra_dav:version-url
+V 163
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers/RennUbbService.h
+END
+RennUserService.h
+K 25
+svn:wc:ra_dav:version-url
+V 164
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers/RennUserService.h
+END
+RennParam.h
+K 25
+svn:wc:ra_dav:version-url
+V 158
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers/RennParam.h
+END
+RennService.h
+K 25
+svn:wc:ra_dav:version-url
+V 160
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers/RennService.h
+END
+RennAppService.h
+K 25
+svn:wc:ra_dav:version-url
+V 163
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers/RennAppService.h
+END
+RennAccessToken.h
+K 25
+svn:wc:ra_dav:version-url
+V 164
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers/RennAccessToken.h
+END
+RennBlogService.h
+K 25
+svn:wc:ra_dav:version-url
+V 164
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers/RennBlogService.h
+END
+RennStatusService.h
+K 25
+svn:wc:ra_dav:version-url
+V 166
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers/RennStatusService.h
+END
+RennLikeService.h
+K 25
+svn:wc:ra_dav:version-url
+V 164
+/jszx/!svn/ver/36643/b2c/ios/zjlao(2.0)/b2c/Classes/Globle/UMeng/UMSocial_Sdk_5.2.1/UMSocial_Sdk_Extra_Frameworks/Renren/RennSDK.framework/Headers/RennLikeService.h
+END

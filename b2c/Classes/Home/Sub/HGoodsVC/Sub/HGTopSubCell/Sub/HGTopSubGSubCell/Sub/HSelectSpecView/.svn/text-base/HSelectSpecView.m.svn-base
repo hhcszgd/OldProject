@@ -1,0 +1,1125 @@
+//
+//  selectcategaryView.m
+//  TTmall
+//
+//  Created by 0 on 16/1/27.
+//  Copyright © 2016年 Footway tech. All rights reserved.
+//
+
+#import "HSelectSpecView.h"
+#import "FlowLayout.h"
+#import "HSpecItem.h"
+#import "HSepcModel.h"
+#import "HSelectSpecHeader.h"
+#import "HSelectSpecFooter.h"
+#import "LoginNavVC.h"
+
+#import "HSepcSubModel.h"
+#import "HSepcSubTypeDetailModel.h"
+#import "HSpecSubGoodsDeatilModel.h"
+#import "HBuyNumberFooter.h"
+@interface HSelectSpecView()<UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIAlertViewDelegate,sizeAndColorDelegate,BuyNumDelegate,UIAlertViewDelegate>
+@property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UIButton *clearbutton;
+@property (nonatomic, strong) UICollectionView *collectionView;
+//view2中页面展示需要用到的全局变量
+
+@property(nonatomic,strong)UIButton * cancle ;
+@property(nonatomic,strong)UILabel * price ;
+@property(nonatomic,strong)UILabel * store ;
+@property(nonatomic,strong)UILabel * chooseSizeAndColor;
+@property (nonatomic, strong) UIButton *addCar;
+@property (nonatomic, strong) UIButton *buyBtn;
+@property (nonatomic, strong) UIButton *tureBtn;
+
+//@property (nonatomic, strong) NSDictionary *dic;//数据源字典
+//价格区间
+@property (nonatomic, copy) NSString *priceRoute;
+//总的库存
+@property (nonatomic, copy) NSString *countStore;
+
+//记录一个尺寸
+@property (nonatomic, copy) NSString *size;
+
+@property (nonatomic, copy) NSString *color;;
+//放置库存的商品的类型的数组
+@property (nonatomic, strong) NSMutableArray *kuCunArray;
+/**头部view*/
+@property (nonatomic, assign) typeofView typeOfView;
+
+/**显示图片*/
+@property (nonatomic, strong) UIImageView *goodsImage;
+@property (nonatomic, strong) FlowLayout *flowLayout;
+/**保存模型*/
+@property (nonatomic, strong) HSepcModel *sepcSaveModel;
+/**规格详情*/
+@property (nonatomic, strong) NSMutableArray *specDeatil;
+/**根据条件写sql语句*/
+@property (nonatomic, copy) NSString *selectSql;
+
+/**规格等级*/
+@property (nonatomic, copy) NSString *specRank;
+/**商品描述*/
+@property (nonatomic, strong) UILabel *goodsDescribe;
+@end
+@implementation HSelectSpecView
+
+
+- (instancetype)initWithFrame:(CGRect)frame typeofView:(typeofView)type{
+    self = [super initWithFrame:frame];
+    if (self) {
+        //默认是没有被选中的btn
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
+        self.userInteractionEnabled = YES;
+        [self addGestureRecognizer:pan];
+        self.typeOfView = type;
+        [self laysub];
+    }
+    return self;
+}
+- (void)pan:(UIPanGestureRecognizer *)pan{
+    
+}
+
+- (UILabel *)goodsDescribe{
+    if (_goodsDescribe == nil) {
+        _goodsDescribe = [[UILabel alloc] init];
+        [_goodsDescribe configmentfont:[UIFont systemFontOfSize:13 * zkqScale] textColor:[UIColor colorWithHexString:@"333333"] backColor:[UIColor clearColor] textAligement:0 cornerRadius:0 text:@""];
+        [_goodsDescribe setNumberOfLines:2];
+        [_goodsDescribe sizeToFit];
+        [self.bottomView addSubview:_goodsDescribe];
+    }
+    return _goodsDescribe;
+}
+
+
+////数据源数组
+- (NSMutableArray *)dataArray{
+    if (_dataArray == nil) {
+        _dataArray = [NSMutableArray array];
+    }
+    return _dataArray;
+}
+- (ActionBaseView *)topView{
+    if (_topView == nil) {
+        _topView = [[ActionBaseView alloc] init];
+        [self addSubview:_topView];
+    }
+    return _topView;
+}
+- (UIView *)bottomView{
+    if (_bottomView == nil) {
+        _bottomView = [[UIView alloc] init];
+        [self addSubview:_bottomView];
+    }
+    return _bottomView;
+}
+- (UIImageView *)goodsImage{
+    if (_goodsImage == nil) {
+        _goodsImage = [[UIImageView alloc] init];
+        [self addSubview:_goodsImage];
+    }
+    return _goodsImage;
+}
+- (UIButton *)cancle{
+    if (_cancle == nil) {
+        _cancle = [[UIButton alloc] init];
+        [self.bottomView addSubview:_cancle];
+        [_cancle setImage:[UIImage imageNamed:@"icon_close"] forState:UIControlStateNormal];
+        [_cancle addTarget:self action:@selector(cancleClick:) forControlEvents:UIControlEventTouchUpInside];
+        _cancle.adjustsImageWhenHighlighted = NO;
+    }
+    return _cancle;
+}
+
+
+- (void)configmentTopView{
+    //创建两个view，上面一个下面一个用来显示不同的内容,view1上面放一个透明的button，当视图向上弹出动画完成之后透明的button变成浅灰色
+    [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_top).offset(0);
+        make.left.equalTo(self.mas_left).offset(0);
+        make.height.equalTo(@(screenH * 0.35));
+        make.right.equalTo(self.mas_right).offset(0);
+    }];
+    self.topView.tag = 100;
+    UIButton *button1 = [UIButton new];
+    _clearbutton = button1;
+    [self.topView addSubview:button1];
+    [button1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.bottom.right.equalTo(self.topView);
+    }];
+    [button1 setBackgroundColor:[UIColor clearColor]];
+    [button1 addTarget:self action:@selector(clearButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [button1 setTitle:@"" forState:UIControlStateNormal];
+    button1.tag = 1000;
+    self.topView.backgroundColor = [UIColor clearColor];
+    
+    
+    //下面的view主要是用的布局
+    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.topView.mas_bottom).offset(0);
+        make.left.equalTo(self.mas_left).offset(0);
+        make.right.equalTo(self.mas_right).offset(0);
+        make.bottom.equalTo(self.mas_bottom).offset(0);
+    }];
+}
+
+- (void)laysub{
+    
+    [self configmentTopView];
+    
+    
+    [self configmentBottomView];
+    
+}
+- (UILabel *)price{
+    if (_price == nil) {
+        _price = [[UILabel alloc] init];
+        [self.bottomView addSubview:_price];
+        [_price configmentfont:[UIFont systemFontOfSize:14* zkqScale] textColor:THEMECOLOR backColor:[UIColor clearColor] textAligement:0 cornerRadius:0 text:@""];
+        [_price sizeToFit];
+    }
+    return _price;
+}
+- (UILabel *)store{
+    if (_store == nil) {
+        _store = [[UILabel alloc] init];
+        [self.bottomView addSubview:_store];
+        [_store configmentfont:[UIFont systemFontOfSize:15] textColor:[UIColor blackColor] backColor:[UIColor clearColor] textAligement:0 cornerRadius:0 text:[NSString stringWithFormat:@"库存%@件",self.sepcSaveModel.store]];
+        [_store sizeToFit];
+    }
+    return _store;
+}
+- (UILabel *)chooseSizeAndColor{
+    if (_chooseSizeAndColor == nil) {
+        _chooseSizeAndColor = [[UILabel alloc] init];
+        [self.bottomView addSubview:_chooseSizeAndColor];
+        
+        [_chooseSizeAndColor sizeToFit];
+        
+        [_chooseSizeAndColor configmentfont:[UIFont systemFontOfSize:15] textColor:[UIColor blackColor] backColor:[UIColor clearColor] textAligement:0 cornerRadius:0 text:@"选择 颜色分类，尺寸"];
+    }
+    return _chooseSizeAndColor;
+}
+- (FlowLayout *)flowLayout{
+    if (_flowLayout == nil) {
+        _flowLayout = [[FlowLayout alloc] init];
+        [_flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    }
+    return _flowLayout;
+}
+- (UICollectionView *)collectionView{
+    if (_collectionView == nil) {
+        
+        
+         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, screenW, 300) collectionViewLayout:self.flowLayout];
+        self.flowLayout.dataArr = self.dataArray;
+        [self.bottomView addSubview:_collectionView];
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.showsVerticalScrollIndicator = NO;
+        _collectionView.backgroundColor = [UIColor whiteColor];
+        _collectionView.bounces = YES;
+        
+        
+        [_collectionView registerClass:[HSpecItem class] forCellWithReuseIdentifier:@"HSpecItem"];
+        
+        [_collectionView registerClass:[HSelectSpecHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HSelectSpecHeader"];
+        [_collectionView registerClass:[HSelectSpecFooter class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HSelectSpecFooter"];
+        [_collectionView registerClass:[HBuyNumberFooter class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HBuyNumberFooter"];
+        _collectionView.backgroundColor = [UIColor whiteColor];
+        
+    }
+    return _collectionView;
+}
+- (UIButton *)addCar{
+    if (_addCar == nil) {
+        _addCar = [[UIButton alloc] init];
+        [self.bottomView addSubview:_addCar];
+        [_addCar setBackgroundColor:[UIColor colorWithHexString:@"f8bb18"]];
+        [_addCar addTarget:self action:@selector(addshopCar:) forControlEvents:UIControlEventTouchUpInside];
+        [_addCar setTitle:@"加入购物车" forState:UIControlStateNormal];
+        [_addCar.titleLabel setFont:[UIFont systemFontOfSize:15 * zkqScale]];
+        [_addCar setTitleColor:[UIColor colorWithHexString:@"ffffff"] forState:UIControlStateNormal];
+    }
+    return _addCar;
+}
+- (UIButton *)buyBtn{
+    if (_buyBtn == nil) {
+        _buyBtn = [[UIButton alloc] init];
+        [self.bottomView addSubview:_buyBtn];
+        [_buyBtn setBackgroundColor:[UIColor colorWithHexString:@"ff621c"]];
+        [_buyBtn addTarget:self action:@selector(buyButton:) forControlEvents:UIControlEventTouchUpInside];
+        [_buyBtn setTitle:@"立即购买" forState:UIControlStateNormal];
+        [_buyBtn setTitleColor:[UIColor colorWithHexString:@"ffffff"] forState:UIControlStateNormal];
+        [_buyBtn.titleLabel  setFont:[UIFont systemFontOfSize:15 *zkqScale]];
+    }
+    return _buyBtn;
+}
+- (UIButton *)tureBtn{
+    if (_tureBtn == nil) {
+        _tureBtn = [[UIButton alloc] init];
+        [self.bottomView addSubview:_tureBtn];
+        
+        [_tureBtn addTarget:self action:@selector(tureBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [_tureBtn setTitle:@"确定" forState:UIControlStateNormal];
+        
+        [_tureBtn.titleLabel setFont:[UIFont systemFontOfSize:15 * zkqScale]];
+        [_tureBtn setTitleColor:[UIColor colorWithHexString:@"ffffff"] forState:UIControlStateNormal];
+        [_tureBtn setBackgroundColor:[UIColor colorWithHexString:@"ff621c"]];
+    }
+    return _tureBtn;
+}
+- (void)configmentBottomView{
+    self.bottomView.backgroundColor = [UIColor colorWithHexString:@"f4f4f4"];
+
+    //设置colllectionView
+ 
+    //给img图片
+    [self.goodsImage sd_setImageWithURL:ImageUrlWithString(self.sepcSaveModel.image)];
+    
+    //右上角的取消按钮布局
+    //布局取消按钮
+    [self.cancle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.bottomView.mas_top).offset(0);
+        make.right.equalTo(self.bottomView.mas_right).offset(0);
+        make.width.equalTo(@(44));
+        make.height.equalTo(@(44));
+    }];
+    //布局图片
+    [self.goodsImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.bottomView.mas_top).offset(10);
+        make.left.equalTo(self.bottomView.mas_left).offset(10);
+        make.width.equalTo(@(60 * zkqScale));
+        make.height.equalTo(@(60 * zkqScale));
+    }];
+    //布局商品描述
+    [self.goodsDescribe mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.goodsImage.mas_top).offset(-5);
+        make.left.equalTo(self.goodsImage.mas_right).offset(10);
+        make.right.equalTo(self.cancle.mas_left).offset(-5);
+    }];
+    
+    //布局价格label
+    [self.price mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.goodsDescribe.mas_bottom).offset(21 * SCALE);
+        make.left.equalTo(self.goodsImage.mas_right).offset(10);
+    }];
+    
+//    //布局库存
+//    [self.store mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.price.mas_bottom).offset(3);
+//        make.left.equalTo(self.goodsImage.mas_right).offset(10);
+//    }];
+    
+//    //布局选择的种类
+//    [self.chooseSizeAndColor mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.store.mas_bottom).offset(3);
+//        make.left.equalTo(self.goodsImage.mas_right).offset(10);
+//    }];
+    
+  
+    
+    //布局collectionView
+    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.goodsImage.mas_bottom).offset(15);
+        make.left.equalTo(self.bottomView.mas_left).offset(0);
+        make.right.equalTo(self.bottomView.mas_right).offset(0);
+        make.bottom.equalTo(self.bottomView.mas_bottom).offset(-50);
+    }];
+    
+    
+    
+    //布局添加购物车按钮
+    [self.addCar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.collectionView.mas_bottom).offset(0);
+        make.left.equalTo(self.bottomView.mas_left).offset(0);
+        make.right.equalTo(self.buyBtn.mas_left).offset(0);
+        make.bottom.equalTo(self.bottomView.mas_bottom).offset(0);
+        make.width.equalTo(self.buyBtn);
+    }];
+  
+    //布局立即购买按钮
+    [self.buyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.collectionView.mas_bottom).offset(0);
+        make.right.equalTo(self.bottomView.mas_right).offset(0);
+        make.bottom.equalTo(self.bottomView.mas_bottom).offset(0);
+    }];
+    
+    [self.tureBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.collectionView.mas_bottom).offset(0);
+        make.right.equalTo(self.bottomView.mas_right).offset(0);
+        make.left.equalTo(self.bottomView.mas_left).offset(0);
+        make.bottom.equalTo(self.bottomView.mas_bottom).offset(0);
+        
+    }];
+    switch (_typeOfView) {
+        case addToShopCar:
+        {
+            self.addCar.hidden = YES;
+            self.buyBtn.hidden = YES;
+            self.tureBtn.hidden = NO;
+        }
+            break;
+        case ToPayControl:
+        {
+            self.addCar.hidden = YES;
+            self.buyBtn.hidden = YES;
+            self.tureBtn.hidden = NO;
+        }
+            break;
+        case haveTwobtn:
+        {
+            self.addCar.hidden = NO;
+            self.buyBtn.hidden = NO;
+            self.tureBtn.hidden = YES;
+        }
+            break;
+        default:
+            break;
+    }
+}
+//取消按钮的方法
+- (void)cancleClick:(UIButton *)button{
+    
+    //在这边应该会执行刷新方法，更新本地的数据库
+
+    [self hind:button];
+};
+
+//加入购物车的按钮方法
+- (void)addshopCar:(UIButton *)button{
+    if ([[UserInfo shareUserInfo] isLogin]) {
+        [self nextStep:button];
+        
+        
+    }else{
+        
+        LoginNavVC * loginVC  = [[LoginNavVC alloc]initLoginNavVC];
+        [[KeyVC shareKeyVC] presentViewController:loginVC animated:YES completion:nil];
+    }
+    
+    
+}
+/**要添加购物车或是立即购买的时候调用的方法*/
+- (void)nextStep:(UIButton *)button{
+    if ([self.addCar isEqual:button]) {
+        //走加入购物车的方法
+        [[UserInfo shareUserInfo] addShopingCarWithGoods_id:self.sepcSaveModel.goods_id goodsNum:[self.goodsDetailModel.reserced integerValue]sub_id:[self.goodsDetailModel.sub_id integerValue] now:@"0" Success:^(ResponseObject *response) {
+            if (response.status < 0) {
+                AlertInSubview(response.msg)
+                [self hind:button];
+            }else{
+                //添加购物车成功之后
+                AlertInSubview(@"添加购物车成功");
+                [self hind:button];
+            }
+            
+        } failure:^(NSError *error) {
+            
+        }];
+        
+    }
+    if ([self.buyBtn isEqual:button]) {
+        self.buyBtn.enabled = NO;
+        //走立即购买的接口
+        
+        [self gotAddressSuccess:^{
+            [[UserInfo shareUserInfo] addShopingCarWithGoods_id:self.sepcSaveModel.goods_id  goodsNum:[self.goodsDetailModel.reserced integerValue]sub_id:[self.goodsDetailModel.sub_id integerValue] now:@"1" Success:^(ResponseObject *response) {
+                if (response.status < 0) {
+                    
+                    AlertInSubview(response.msg)
+                    [self hind:button];
+                }else{
+                    
+                    //添加购物车成功之后
+                    SVCGoods *vcGoods = [[SVCGoods alloc] init];
+                    vcGoods.ID = response.data[@"cart_id"];
+                    
+                    vcGoods.number = [self.goodsDetailModel.reserced integerValue];
+                    vcGoods.price = [self.goodsDetailModel.price integerValue];
+                    vcGoods.shop_id = [self.sepcModel.shop_id integerValue];
+                    ConfirmOrderVC *confirmOrder = [[ConfirmOrderVC alloc] init];
+                    LOG(@"%@,%d,%@",[self class], __LINE__,self.sepcSaveModel.goods_id);
+                    NSMutableArray *arr = [NSMutableArray array];
+                    [arr addObject:vcGoods];
+                    confirmOrder.goodsIDs = arr;
+                    self.buyBtn.enabled = YES;
+                    [self.fatherVC.navigationController pushViewController:confirmOrder animated:YES];
+                    [self hind:button];
+                }
+                
+            } failure:^(NSError *error) {
+                
+            }];
+        } failure:^{
+            
+        }];
+        
+        
+        
+        
+    }
+    
+   
+    
+}
+/** 判断地址是否为空 */
+-(void)gotAddressSuccess:(void(^)())success failure:(void(^)())failure{
+    [[UserInfo shareUserInfo] gotAddressSuccess:^(ResponseObject *responseObject) {
+        LOG(@"_%@_%d_%@",[self class] , __LINE__,responseObject.data);
+        if (responseObject.data && [responseObject.data isKindOfClass:[NSArray class]]) {
+            if ([responseObject.data count]>0) {
+                //正常弹出确认订单
+                
+                success();
+            }else{
+                //弹出添加地址
+                self.buyBtn.enabled = YES;
+                if ([self.delegate respondsToSelector:@selector(noticeAddAddress)]) {
+                    [self.delegate performSelector:@selector(noticeAddAddress)];
+                }
+            }
+            
+        }else{
+            //弹出添加地址
+            self.buyBtn.enabled = YES;
+            if ([self.delegate respondsToSelector:@selector(noticeAddAddress)]) {
+                [self.delegate performSelector:@selector(noticeAddAddress)];
+            }
+        }
+        
+        
+    } failure:^(NSError *error) {
+        
+        LOG(@"_%@_%d_%@",[self class] , __LINE__,error);
+    }];
+    
+    
+}
+
+
+//立即购买的按钮方法
+- (void)buyButton:(UIButton *)button{
+    if ([[UserInfo shareUserInfo] isLogin]) {
+        [self nextStep:button];
+        
+        
+    }else{
+        
+        LoginNavVC * loginVC  = [[LoginNavVC alloc]initLoginNavVC];
+        [[KeyVC shareKeyVC] presentViewController:loginVC animated:YES completion:nil];
+    }
+}
+
+//透明按钮的点击消失的按钮方法
+- (void)clearButtonClick:(UIButton *)button{
+    
+    [self hind:button];
+    
+}
+#pragma mark -- 确定按钮点击方法
+- (void)tureBtn:(UIButton *)button{
+
+    
+    
+    
+    [self hind:button];
+}
+//页面消失
+- (void)hind:(UIButton *)button{
+    __weak typeof(self) Myself = self;
+    //执行代码在选规格页面消失的时候刷新选规格cell的数据
+    [_clearbutton setBackgroundColor:[UIColor clearColor]];
+    [UIView animateWithDuration:0.5 animations:^{
+        self.frame = CGRectMake(0, screenH, screenW, screenH);
+    } completion:^(BOOL finished) {
+        if (_block) {
+            _block();
+        }
+        //判断在视图消失的时候
+        if (button == _buyBtn) {
+            if ([self.delegate respondsToSelector:@selector(ToPayControl)]) {
+                [self.delegate performSelector:@selector(ToPayControl) withObject:nil];
+            }
+            //立即购买选好之后是跳转到商品选择页面
+        }
+        if (button == _addCar) {
+            if ([self.delegate respondsToSelector:@selector(addToShopCar)]) {
+                [self.delegate performSelector:@selector(addToShopCar) withObject:nil];
+            }
+        }
+        if (button == _tureBtn) {
+            switch (_typeOfView) {
+                case addToShopCar:
+                {
+                    if ([self.delegate respondsToSelector:@selector(addToShopCar)]) {
+                        [self.delegate performSelector:@selector(addToShopCar) withObject:nil];
+                    }
+                }
+                    break;
+                case ToPayControl:
+                {
+                    if ([self.delegate respondsToSelector:@selector(ToPayControl)]) {
+                        [self.delegate performSelector:@selector(ToPayControl) withObject:nil];
+                    }
+                }
+                    break;
+                
+                default:
+                    break;
+            }
+        }
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            //选规格页面消失的时候清空数据库
+            [[FMDBManager sharFMDBMabager] deleteAllData];
+
+        });
+        
+        [Myself removeFromSuperview];
+    }];
+}
+
+#pragma mark - tableviewDelegate
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return self.dataArray.count;
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    HSepcSubModel *sepcSubModel = self.dataArray[section];
+    
+    return sepcSubModel.typeDetail.count;
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    HSpecItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HSpecItem" forIndexPath:indexPath];
+    //给cell相应的值
+    HSepcSubModel *specSub = self.dataArray[indexPath.section];
+    NSArray *array = specSub.typeDetail;
+    //拼接查询字符串
+    self.selectSql = @"";
+    /**拼接查询字符串的第一步*/
+    for (NSInteger i = 0; i < self.selectIndexPaths.count; i++) {
+        if (indexPath.section != i) {
+            //排除当前组的规格
+            NSIndexPath *selectIndex = self.selectIndexPaths[i];
+            HSepcSubModel *specSub = self.dataArray[selectIndex.section];
+            HSepcSubTypeDetailModel *typeDetailModel = specSub.typeDetail[selectIndex.item];
+            
+            [self appendingSelectSqlWithSection:selectIndex.section andQuality:typeDetailModel.quality];
+            
+        }
+    }
+    //拼接查询字符串
+    HSepcSubTypeDetailModel *typeDeatilModel = array[indexPath.item];
+    //和当组的item组合查询数组，
+    [self appendingSelectSqlWithSection:indexPath.section andQuality:typeDeatilModel.quality];
+    
+    NSIndexPath *selectIndex = self.selectIndexPaths[indexPath.section];
+    if ((selectIndex.section == indexPath.section) &&(selectIndex.item == indexPath.item) && (selectIndex.length != 0)) {
+        typeDeatilModel.isSelect = YES;
+    }else{
+        typeDeatilModel.isSelect = NO;
+    }
+    
+    [[FMDBManager sharFMDBMabager] selectWithSql:self.selectSql result:^(id paramete) {
+        NSArray *arr = (NSArray *)paramete;
+        HSepcSubModel *specSubModel = self.dataArray[indexPath.section];
+        HSepcSubTypeDetailModel *DetailModel = specSubModel.typeDetail[indexPath.item];
+        NSInteger sum = 0;
+        for (NSInteger i = 0; i < arr.count; i++) {
+            HSpecSubGoodsDeatilModel *model = arr[i];
+            sum += [model.reserced integerValue];
+        }
+        DetailModel.reserced = [NSString stringWithFormat:@"%ld",sum];
+    }];
+    
+
+//
+    cell.fatherView = collectionView;
+    cell.deatilModel = array[indexPath.item];
+
+//    //设置cell的代理
+    cell.delegate = self;
+   
+    //
+    
+    
+    
+   //
+    return cell;
+}
+
+#pragma mark - BuyNumDelegate的代理方法
+- (void)addNumberOfStoreWith:(NSString *)num{
+    self.goodsDetailModel.reserced = num;
+    LOG(@"%@,%d,%@",[self class], __LINE__,self.goodsDetailModel.reserced)
+}
+#pragma mark -- 减少商品
+- (void)subtructNumberOfStoreWith:(NSString *)num{
+    self.goodsDetailModel.reserced = num;
+     LOG(@"%@,%d,%@",[self class], __LINE__,self.goodsDetailModel.reserced)
+}
+
+- (NSMutableArray *)specDeatil{
+    if (_specDeatil == nil) {
+        _specDeatil = [[NSMutableArray alloc] init];
+        
+    }
+    return _specDeatil;
+}
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    UICollectionReusableView *view = nil;
+    if (kind == UICollectionElementKindSectionHeader) {
+        
+        HSelectSpecHeader *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HSelectSpecHeader" forIndexPath:indexPath] ;
+        HSepcSubModel *specSub = self.dataArray[indexPath.section];
+        
+        headerView.title = specSub.type;
+        view = headerView;
+        
+    }else{
+        
+        if (indexPath.section == (self.dataArray.count - 1)) {
+            HBuyNumberFooter *footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HBuyNumberFooter" forIndexPath:indexPath];
+            footer.delegate = self;
+            
+            //都被选中的话
+            
+            
+            //全部选中的规格拼
+            [[FMDBManager sharFMDBMabager] selectWithSql:[self appendingAllSelectSelectStr] result:^(id paramete) {
+                NSArray *arr = (NSArray *)paramete;
+                
+                HSpecSubGoodsDeatilModel *deatilModel = [arr firstObject];
+                NSLog(@"%@, %d ,%@",[self class],__LINE__,deatilModel.reserced);
+
+                footer.storeCount = deatilModel.reserced;
+                
+            }];
+                
+                
+            
+
+            
+            
+            
+            return footer;
+            
+        }else{
+           HSelectSpecFooter *footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HSelectSpecFooter" forIndexPath:indexPath];
+            footer.backgroundColor = [UIColor colorWithHexString:@"e4e4e4"];
+            return footer;
+        }
+        
+        
+    }
+    
+    return view;
+}
+
+#pragma mark -- 拼接全部选中的字符串
+- (NSString *)appendingAllSelectSelectStr{
+    NSString *specRank = @"";
+    NSString *spec = @"";
+    
+    for (NSInteger i = 0; i < self.selectIndexPaths.count; i++) {
+        NSIndexPath *index = self.selectIndexPaths[i];
+        HSepcSubModel *sub = self.dataArray[index.section];
+        HSepcSubTypeDetailModel *model = sub.typeDetail[index.item];
+        NSString *quality = model.quality;
+        switch (i) {
+            case 0:
+            {
+                specRank = @"spec1";
+            }
+                break;
+            case 1:
+            {
+                specRank = @"spec2";
+            }
+                break;
+            case 2:
+            {
+                specRank = @"spec3";
+            }
+                break;
+            case 3:
+            {
+                specRank = @"spec4";
+            }
+                break;
+            case 4:
+            {
+                specRank = @"spec5";
+            }
+                break;
+                
+                
+            default:
+                break;
+        }
+        //如何selectSql是空的那么说明前面不需要加and
+        if (spec.length == 0) {
+            spec = [spec stringByAppendingFormat:@"%@ = '%@'",specRank,quality];
+            
+        }else{
+            spec = [spec stringByAppendingFormat:@" and %@ = '%@'",specRank,quality];
+        }
+    }
+    return spec;
+}
+
+#pragma mark - 实现cell的代理方法
+- (void)cateCarycell:(HSpecItem *)cateGaryitem atIndexPath:(NSIndexPath *)indexPath button:(UIButton *)button{
+    //之前点击的按钮
+    NSIndexPath *selecIndexPath = self.selectIndexPaths[indexPath.section];
+    HSepcSubModel *subModel = self.dataArray[indexPath.section];
+
+    //判断当前点击按钮和之前点击按钮是不是同一个
+    if (selecIndexPath.item != indexPath.item) {
+        //如果不取消之前选中按钮的选中状态。
+        HSpecItem *item = (HSpecItem *)[self.collectionView cellForItemAtIndexPath:selecIndexPath];
+        item.button.selected = NO;
+        HSepcSubTypeDetailModel *typeDetailModel = subModel.typeDetail[selecIndexPath.item];
+        typeDetailModel.isSelect = NO;
+
+    }
+    cateGaryitem.button.selected = YES;
+    //存放当前被选中的按钮的位置
+    self.selectIndexPaths[indexPath.section] = indexPath;
+    HSepcSubTypeDetailModel *typeDetailModel = subModel.typeDetail[indexPath.item];
+    typeDetailModel.isSelect = YES;
+    //存放选定的规格
+    [self editgoodsDetailModelWith:indexPath withQulity:typeDetailModel.quality];
+    
+   
+    
+    
+    
+   
+    //都被选中的话
+    
+    [[FMDBManager sharFMDBMabager] selectWithSql:[self appendingAllSelectSelectStr] result:^(id paramete) {
+        NSArray *arr = (NSArray *)paramete;
+        for (HSpecSubGoodsDeatilModel *model in arr) {
+            LOG(@"%@,%d,%@,%@,%@,%@,%@,%@",[self class], __LINE__,model.spec1,model.spec2,model.spec3,model.spec4,model.spec5,model.sub_id)
+        }
+        HSpecSubGoodsDeatilModel *deatilModel = [arr firstObject];
+        //规格全部选中的时候查询出来的价格
+        self.goodsDetailModel.price = deatilModel.price;
+        self.goodsDetailModel.image = deatilModel.image;
+        NSURL *url = ImageUrlWithString(deatilModel.image);
+        [self.goodsImage sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"accountBiiMap"] options:SDWebImageCacheMemoryOnly];
+        self.goodsDetailModel.sub_id = deatilModel.sub_id;
+        LOG(@"%@,%d,%@",[self class], __LINE__,deatilModel.price)
+        [self editGoodsPriceWithPrice:deatilModel.price];
+      
+    }];
+        
+        
+    
+    
+    [self.collectionView reloadData];
+
+}
+/**设置需要传递的规格的模型*/
+- (void)editgoodsDetailModelWith:(NSIndexPath *)indexPath withQulity:(NSString *)quality{
+        NSInteger num = indexPath.section;
+        switch (num) {
+            case 0:
+            {
+                self.goodsDetailModel.spec1 = quality;
+            }
+                break;
+            case 1:
+            {
+                self.goodsDetailModel.spec2 = quality;
+            }
+                break;
+            case 2:
+            {
+                self.goodsDetailModel.spec3 = quality;
+            }
+                break;
+            case 3:
+            {
+                self.goodsDetailModel.spec4 = quality;
+            }
+                break;
+            case 4:
+            {
+                self.goodsDetailModel.spec5 = quality;
+            }
+                break;
+                
+            default:
+                break;
+        }
+  
+}
+
+
+/**设置价格*/
+- (void)editGoodsPriceWithPrice:(NSString *)price{
+    CGFloat price1 = [price floatValue]/100;
+    NSString *price2 = [NSString stringWithFormat:@"%0.2f",price1];
+    NSMutableAttributedString *priceStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"￥%@",price2]];
+    [priceStr addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:10 * zkqScale],NSFontAttributeName, nil] range:NSMakeRange(0, 1)];
+    [priceStr addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:14 *zkqScale],NSFontAttributeName, nil] range:NSMakeRange(1, price2.length)];
+    self.price.attributedText = priceStr;
+}
+
+
+
+
+
+#pragma mark -- 第二步，拼接查询语句-- 将除当前组之外的被选择的规格和当前组的规格进行拼接
+- (void)appendingSelectSqlWithSection:(NSInteger)section andQuality:(NSString *)quality{
+    NSString *specRank = @"";
+    switch (section) {
+        case 0:
+        {
+            specRank = @"spec1";
+        }
+            break;
+        case 1:
+        {
+            specRank = @"spec2";
+        }
+            break;
+        case 2:
+        {
+            specRank = @"spec3";
+        }
+            break;
+        case 3:
+        {
+            specRank = @"spec4";
+        }
+            break;
+        case 4:
+        {
+            specRank = @"spec5";
+        }
+            break;
+            
+            
+        default:
+            break;
+    }
+    //如何selectSql是空的那么说明前面不需要加and
+    if (self.selectSql.length == 0) {
+        self.selectSql = [self.selectSql stringByAppendingFormat:@"%@ = '%@'",specRank,quality];
+        
+    }else{
+        self.selectSql = [self.selectSql stringByAppendingFormat:@" and %@ = '%@'",specRank,quality];
+    }
+}
+
+
+
+#pragma mark -- 拼接查询语句
+- (void)appendingSelectSql:(NSString *)sepcRank andQuality:(NSString *)quality{
+    //如何selectSql是空的那么说明前面不需要加and
+    if (self.selectSql.length == 0) {
+        self.selectSql = [self.selectSql stringByAppendingFormat:@"%@ = '%@'",sepcRank,quality];
+        
+    }else{
+        self.selectSql = [self.selectSql stringByAppendingFormat:@" and %@ = '%@'",sepcRank,quality];
+    }
+}
+#pragma makr -- 查寻相应等级的规格库存,由选中的规格指向没被选中的规格计算其库存
+- (void)editEverySpecWith:(NSArray *)arr withNum:(NSInteger)num{
+    //取出相应的规格
+    HSepcSubModel *subModel = self.dataArray[num];
+    for (NSInteger typeNum = 0; typeNum < subModel.typeDetail.count; typeNum++) {
+        HSepcSubTypeDetailModel *typeDeatil = subModel.typeDetail[typeNum];
+        NSInteger sum = 0;
+        for (NSInteger specDetailNum = 0; specDetailNum < arr.count; specDetailNum++) {
+            HSpecSubGoodsDeatilModel *specDeatil = arr[specDetailNum];
+            NSString *quality = @"";
+            switch (num) {
+                case 0:
+                {
+                    quality = specDeatil.spec1;
+                }
+                    break;
+                case 1:
+                {
+                    quality = specDeatil.spec2;
+                }
+                    break;
+                case 2:
+                {
+                    quality = specDeatil.spec3;
+                }
+                    break;
+                case 3:
+                {
+                    quality = specDeatil.spec4;
+                }
+                    break;
+                case 4:
+                {
+                    quality = specDeatil.spec5;
+                }
+                    break;
+                    
+                    
+                default:
+                    break;
+            }
+            
+            
+            
+            if ([typeDeatil.quality isEqualToString:quality]) {
+                sum += [specDeatil.reserced integerValue];
+            }
+        }
+        
+        typeDeatil.reserced = [NSString stringWithFormat:@"%lu",sum];
+        
+    }
+}
+
+- (void)selectAllDataEditEverySpecWithNum:(NSInteger)num{
+    HSepcSubModel *subModel = self.dataArray[num];
+    for (NSInteger typeNum = 0; typeNum < subModel.typeDetail.count; typeNum++) {
+        HSepcSubTypeDetailModel *typeDeatil = subModel.typeDetail[typeNum];
+        NSInteger sum = 0;
+        for (NSInteger specDetailNum = 0; specDetailNum < self.specDeatil.count; specDetailNum++) {
+            HSpecSubGoodsDeatilModel *specDeatil = self.specDeatil[specDetailNum];
+            NSString *quality = @"";
+            switch (num) {
+                case 0:
+                {
+                    quality = specDeatil.spec1;
+                }
+                    break;
+                case 1:
+                {
+                    quality = specDeatil.spec2;
+                }
+                    break;
+                case 2:
+                {
+                    quality = specDeatil.spec3;
+                }
+                    break;
+                case 3:
+                {
+                    quality = specDeatil.spec4;
+                }
+                    break;
+                case 4:
+                {
+                    quality = specDeatil.spec5;
+                }
+                    break;
+                    
+                    
+                default:
+                    break;
+            }
+            
+            if ([typeDeatil.quality isEqualToString:quality]) {
+                sum += [specDeatil.reserced integerValue];
+            }
+        }
+        
+        typeDeatil.reserced = [NSString stringWithFormat:@"%ld",sum];
+        LOG(@"%@,%d,%@,%@",[self class], __LINE__,typeDeatil.quality,typeDeatil.reserced)
+    }
+}
+
+#pragma mark -- 根据选中按钮规格那么找出相应的数组，
+- (void)editOtherSpecWith:(NSString *)specRank withQuality:(NSString *)quality withSpecSection:(NSInteger)specSection{
+    [[FMDBManager sharFMDBMabager] selectWithSql:[NSString stringWithFormat:@"%@ = '%@'",specRank,quality] result:^(id paramete) {
+        //按照一级规格查询出来的数组
+        NSArray *arr = (NSArray *)paramete;
+        
+        //根据有几个规格组来处理其他规格组的数组
+        for (NSInteger num = 0; num< self.selectIndexPaths.count; num++) {
+            switch (num) {
+                case 0:
+                {
+                    if (!(specSection == num)) {
+                        [self editEverySpecWith:arr withNum:num];
+                    }
+                   
+                }
+                    break;
+                case 1:
+                {
+                    if (!(specSection == num)) {
+                        [self editEverySpecWith:arr withNum:num];
+                    }
+                }
+                    break;
+                case 2:
+                {
+                    if (!(specSection == num)) {
+                        [self editEverySpecWith:arr withNum:num];
+                    }
+                }
+                    break;
+                case 3:
+                {
+                    if (!(specSection == num)) {
+                        [self editEverySpecWith:arr withNum:num];
+                    }
+                }
+                    break;
+                case 4:
+                {
+                    if (!(specSection == num)) {
+                        [self editEverySpecWith:arr withNum:num];
+                    }
+                }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }];
+}
+
+
+
+
+#pragma mark -- 数据源刷新
+- (void)setSepcModel:(HSepcModel *)sepcModel{
+    
+    self.sepcSaveModel = sepcModel;
+    [self.specDeatil removeAllObjects];
+    [self.dataArray removeAllObjects];
+    
+    [self.specDeatil addObjectsFromArray:sepcModel.goodsDeatil];
+    [self.dataArray addObjectsFromArray:sepcModel.spec];
+
+    [[FMDBManager sharFMDBMabager] selectWithSql:[self appendingAllSelectSelectStr] result:^(id paramete) {
+        NSArray *arr = (NSArray *)paramete;
+        HSpecSubGoodsDeatilModel *deatilModel = [arr firstObject];
+        //规格全部选中的时候查询出来的价格
+        self.goodsDetailModel.price = deatilModel.price;
+        self.goodsDetailModel.image = deatilModel.image;
+        NSURL *url = ImageUrlWithString(deatilModel.image);
+        [self.goodsImage sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"accountBiiMap"]options:SDWebImageCacheMemoryOnly];
+        self.goodsDetailModel.sub_id = deatilModel.sub_id;
+        [self editGoodsPriceWithPrice:deatilModel.price];
+        for (NSIndexPath *index in self.selectIndexPaths) {
+            HSepcSubModel *specSub = self.dataArray[index.section];
+            HSepcSubTypeDetailModel *typeDetailModel = specSub.typeDetail[index.item];
+            [self editgoodsDetailModelWith:index withQulity:typeDetailModel.quality];
+        }
+    }];
+    self.flowLayout.dataArr = self.dataArray;
+    [self.collectionView reloadData];
+    self.goodsDescribe.text = sepcModel.short_name;
+    
+}
+-(void)dealloc{
+    LOG(@"%@,%d,%@",[self class], __LINE__,@" specview销毁")
+}
+@end

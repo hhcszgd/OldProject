@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>聊天信息面板</title>
+
+<style type="text/css">
+
+body {
+	/*background-image:url(ChatWindowBG.png);*/
+	font-size:14px;
+	word-wrap: break-word;
+	}
+	
+img {
+	max-width:100px;
+	max-height:100px;
+}
+.messageTitle {
+    clear:both;
+	text-align:center; height:40px; line-height:40px;
+}
+.friendMessageHead {
+    float:left;
+    margin-top:-25px;
+    width:30px;
+    height:30px;
+    overflow:hidden;
+}
+.friendMessageView {
+    float:left;
+    margin-left:35px;
+    max-width:220px;
+	-webkit-border-image: url(bubble.png) 11 14 14 21 stretch stretch;
+	-moz-border-image: url(bubble.png) 11 14 14 21 stretch stretch;
+	border-width:11px 14px 14px 21px;
+}
+.myMessageHead {
+    float:right;
+    margin-top:-25px;
+    width:30px;
+    height:30px;
+    overflow:hidden;
+}
+.myMessageView {
+    float:right;
+    margin-right:35px;
+    max-width:220px;
+	-webkit-border-image: url(bubbleSelf.png) 11 19 13 14 stretch stretch;
+	-moz-border-image: url(bubbleSelf.png) 11 19 13 14 stretch stretch;
+	border-width:11px 19px 13px 14px;
+}
+
+</style>
+
+
+<script type="text/javascript">
+	
+	//获取html节点
+	function get(id)
+	{
+		return document.getElementById(id);	
+	}
+	
+	
+	//添加好友的消息
+	function addFriendMessage(title, content, headImage)
+	{
+		content = getContent(content);
+		var view = document.createElement("div");
+		var htmlContent = get("FriendMessage").innerHTML;
+		htmlContent = htmlContent.replace('{MessageTitle}', title).replace('{MessageContent}', content).replace('{MessageHead}', headImage);
+		view.innerHTML = htmlContent;
+		get("MessageContentDiv").appendChild(view);
+		delete view;
+		delete content;
+		scrollToButtom();
+	}
+	
+	
+	//添加自己的消息
+	function addMyMessage(title, content, headImage)
+	{
+		content = getContent(content);
+		var view = document.createElement("div");
+		var htmlContent = get("MyMessage").innerHTML;
+		htmlContent = htmlContent.replace('{MessageTitle}', title).replace('{MessageContent}', content).replace('{MessageHead}', headImage);
+		view.innerHTML = htmlContent;
+		get("MessageContentDiv").appendChild(view);
+		delete view;
+		delete content;
+		scrollToButtom();
+	}
+	
+	
+	//过滤消息
+	function getContent(content)
+	{
+		//过滤多余的连接 防止IOS的特殊操作造成系统崩溃
+		content = content.replace(/<a[^>]+>|<\/?a>/gi, "");
+		return content;
+	}
+	
+	
+	//显示传输的图片
+	function showImage(imageName, imageSrc)
+	{
+		var images = document.getElementsByName(imageName);
+		for (var i=0; i<images.length; i++) 
+		{
+			images[i].src = imageSrc;
+			images[i].onload = function()
+			{
+				scrollToButtom();
+			}
+			
+			images[i].onmousedown = function()
+			{				
+				callShowImage(this.src);
+			}
+		}
+	}
+	
+	function callIphoneFunction(functionName, param)
+	{
+		window.location = 'myWeb,' + functionName + ',' + param;
+	}
+	
+	
+	function callShowImage(imageSrc)
+	{
+        // 显示图片会退出程序，暂时去掉了。
+		callIphoneFunction('showImage', imageSrc);
+	}
+	
+	
+	function clearUserMessage()
+	{
+		get("MessageContentDiv").innerHTML = "";
+	}
+	
+	
+	function scrollToButtom()
+	{
+		if (document.body.scrollHeight > 0) 
+		{
+			window.scrollBy(0, document.body.scrollHeight);
+		}
+	}
+	
+	window.onresize = function() 
+	{
+		//scrollToButtom();
+	}
+	
+	
+	function test()
+	{
+		alert('test');
+	}
+	
+</script>
+
+</head>
+
+<body style="background-color: transparent;">
+
+<div id="MessageContentDiv">
+
+</div>
+
+<div id="FriendMessage" style="display:none;">
+	<div style="margin-right:20px;">
+    	<div class="messageTitle">{MessageTitle}</div>
+        <div class="friendMessageView">{MessageContent}</div>
+        <div style="clear:both;"></div>
+        <div class="friendMessageHead">{MessageHead}</div>
+    </div>
+</div>
+
+<div id="MyMessage" style="display:none;">
+    <div style="margin-left:20px;">
+    	<div class="messageTitle">{MessageTitle}</div>
+        <div class="myMessageView">{MessageContent}</div>
+        <div style="clear:both;"></div>
+        <div class="myMessageHead">{MessageHead}</div>
+    </div>
+</div>
+
+<div id="SystemMessage">
+    <div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+</script>

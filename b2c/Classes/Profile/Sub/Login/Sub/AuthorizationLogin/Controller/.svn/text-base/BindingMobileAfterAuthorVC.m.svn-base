@@ -1,0 +1,335 @@
+//
+//  BindingMobileAfterAuthorVC.m
+//  b2c
+//
+//  Created by wangyuanfei on 7/12/16.
+//  Copyright © 2016 www.16lao.com. All rights reserved.
+//
+
+#import "BindingMobileAfterAuthorVC.h"
+
+#import "CustomInputView.h"
+
+#import "UserInfo.h"
+
+#import "GDXmppStreamManager.h"
+#import "UMSocial.h"
+
+@interface BindingMobileAfterAuthorVC ()
+
+/** 手机号容器视图 */
+@property(nonatomic,weak)UIView * mobileContainer ;
+/** 手机号输入视图 */
+@property(nonatomic,weak)CustomInputView * mobileInputView ;
+/** 获取验证码点击按钮 */
+@property(nonatomic,weak)UIButton * gotAuthButton ;
+/** 验证码输入框 */
+@property(nonatomic,weak)CustomInputView * authcodeInput ;
+/** 绑定按钮 */
+@property(nonatomic,weak)UIButton * bindingButton ;
+/** 第三方账户信息 */
+@property(nonatomic,strong)  UMSocialAccountEntity *snsAccount ;
+/** 定时器 */
+@property(nonatomic,strong)NSTimer * timer ;
+/** 重新发送倒计时时间 */
+@property(nonatomic,assign)NSInteger  time ;
+/** 验证码间隔线 */
+@property(nonatomic,weak)UIView * fenge ;
+
+@end
+
+@implementation BindingMobileAfterAuthorVC
+
+- (void)viewDidLoad {
+    LOG(@"_%@_%d_%@",[self class] , __LINE__,self.keyParamete);
+    [super viewDidLoad];
+    self.snsAccount = self.keyParamete[@"paramete"];
+    LOG(@"_%@_%d_%@",[self class] , __LINE__,_snsAccount);
+    [self setupsubviews];
+    
+    // Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    LOG(@"_%@_%d_%@",[self class] , __LINE__,@"fuck , 内存警告");
+    // Dispose of any resources that can be recreated.
+}
+-(void)setupsubviews
+{
+    CGFloat rowH = 44 ;
+    CGFloat margin = 10 ;
+    
+    
+    
+    
+    CustomInputView * mobileInputView =[[CustomInputView alloc]initWithFrame:CGRectMake(0, self.startY+margin, self.view.bounds.size.width, rowH)];
+    self.mobileInputView = mobileInputView;
+    self.mobileInputView.textFont = [UIFont systemFontOfSize:13*SCALE];
+    mobileInputView.tipsTitle = @"请输入手机号 :";
+    CGSize  titleSize = [mobileInputView.tipsTitle sizeWithFont:self.mobileInputView.currentFont MaxSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)];
+    mobileInputView.backgroundColor = [UIColor whiteColor];
+    mobileInputView.customKeyboardType  =  UIKeyboardTypeNumbersAndPunctuation;
+    mobileInputView.customReturenType =  UIReturnKeyDone;
+    mobileInputView.CustomInputDelegate = self;
+    [self.view addSubview:mobileInputView];
+    mobileInputView.leftWidth = titleSize.width +3 ;
+    mobileInputView.inputPlaceholder = @"为了您的账户安全,请先绑定手机号码";
+
+    
+    
+    UIView * mobileContainer = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(mobileInputView.frame)+margin, self.view.bounds.size.width, rowH)];
+    mobileContainer.backgroundColor = [UIColor whiteColor];
+    self.mobileContainer = mobileContainer;
+    [self.view addSubview:mobileContainer];
+
+    /** 获取验证码点击按钮(变量命名失误,sorry) */
+    NSString * gotCodeStr = @"重新获取验证码";
+    CGSize gotCodeStrSize = [gotCodeStr sizeWithFont:[UIFont systemFontOfSize:17] MaxSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)];
+    UIButton * gotAuthButton  = [[UIButton alloc]initWithFrame:CGRectMake(self.mobileContainer.bounds.size.width - gotCodeStrSize.width, 0, gotCodeStrSize.width, self.mobileContainer.bounds.size.height-1)];
+    gotAuthButton.titleLabel.font = [UIFont systemFontOfSize:14*SCALE];
+    self.gotAuthButton = gotAuthButton;
+    
+    [self.gotAuthButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.gotAuthButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+    [gotAuthButton addTarget:self action:@selector(resentAuthcode:) forControlEvents:UIControlEventTouchUpInside];
+    [gotAuthButton setTitle:@"获取验证码" forState:UIControlStateNormal];
+    gotAuthButton.backgroundColor = THEMECOLOR;
+    
+//    [gotAuthButton setTitleColor:SubTextColor forState:UIControlStateNormal];
+    [self.mobileContainer addSubview:gotAuthButton];
+    
+    UIView * fenge = [[UIView alloc]initWithFrame:CGRectMake(self.gotAuthButton.frame.origin.x-1, 5, 2, self.mobileContainer.bounds.size.height - 5*2)];
+    self.fenge = fenge;
+    fenge.backgroundColor = [UIColor lightGrayColor];
+    [self.mobileContainer addSubview:fenge];
+    fenge.hidden = YES;
+    /** 手机号输入视图 */
+    CustomInputView * authcodeInput = [[CustomInputView alloc]initWithFrame:CGRectMake(0, 0,CGRectGetMinX(gotAuthButton.frame), self.mobileContainer.bounds.size.height)];
+    self.authcodeInput = authcodeInput;
+    self.authcodeInput.textFont = [UIFont systemFontOfSize:13*SCALE];
+    authcodeInput.tipsTitle = @"请输入验证码 :";
+
+    //    mobileInputView.li
+    authcodeInput.customKeyboardType = UIKeyboardTypeNumberPad;
+    authcodeInput.leftWidth = titleSize.width +3 ;
+//    authcodeInput.inputPlaceholder = @"新手机号";
+    [self.mobileContainer addSubview:authcodeInput];
+    
+   
+    
+    
+    /** 绑定按钮 */
+    UIButton * bindingButton  = [[UIButton alloc]initWithFrame:CGRectMake(margin*2, self.view.bounds.size.height - 44-self.startY, self.view.bounds.size.width-margin*2*2, rowH)];
+    
+    bindingButton.backgroundColor = [UIColor redColor];
+    [bindingButton setTitle:@"绑定" forState:UIControlStateNormal];
+    [bindingButton addTarget:self action:@selector(bindingAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.bindingButton = bindingButton;
+    [self.view addSubview:bindingButton];
+    
+
+    
+    
+}
+
+-(void)bindingAction:(UIButton*)sender
+{
+    LOG(@"_%@_%d_%@",[self class] , __LINE__,self.keyParamete);
+    LOG(@"_%@_%d_%@",[self class] , __LINE__,self.snsAccount.accessToken);
+    LOG(@"_%@_%d_%@",[self class] , __LINE__,self.snsAccount.openId);
+    if (self.mobileInputView.currentText.length==0) {
+        AlertInVC(@"手机号码为空");
+        return;
+    }
+    if (![self mobileLawful:self.mobileInputView.currentText]) {
+        AlertInVC(@"手机号格式不正确");
+        return;
+    }
+    if (self.authcodeInput.currentText.length == 0) {
+        AlertInVC(@"手机验证码为空");
+        return;
+    }
+    if (![self authcodeLawful:self.authcodeInput.currentText]) {
+        AlertInVC(@"验证码格式错误\n请输入手机短信中的六位数字的验证码");
+        return;
+    }
+    
+    
+    
+        [[UserInfo shareUserInfo] authorMobileAfterThirdPlayformWithMobile:self.mobileInputView.currentText mobileCode:self.authcodeInput.currentText accessToken:self.snsAccount.usid success:^(ResponseObject *responseObject) {
+            LOG(@"_%@_%d_%@",[self class] , __LINE__,responseObject.data);
+            if (responseObject.status==200) {
+                [UserInfo shareUserInfo].member_id = responseObject.data;
+
+                [[UserInfo shareUserInfo] gotPersonalInfoSuccess:^(ResponseStatus response) {
+                    
+                    if ((![GDXmppStreamManager ShareXMPPManager].XmppStream.isConnected && ![GDXmppStreamManager ShareXMPPManager].XmppStream.isConnecting) ) {
+                        LOG(@"_%@_%d_登录IM时用得token%@",[self class] , __LINE__,[UserInfo shareUserInfo].token);
+                        LOG(@"_%@_%d_%@",[self class] , __LINE__,[UserInfo shareUserInfo].imName);
+                        LOG(@"_%@_%d_%@",[self class] , __LINE__,[UserInfo shareUserInfo].token);
+                        [[GDXmppStreamManager ShareXMPPManager]loginWithJID:[XMPPJID jidWithUser:[UserInfo shareUserInfo].imName domain:@"jabber.zjlao.com" resource:@"iOS"] passWord:[UserInfo shareUserInfo].token];
+                        LOG(@"_%@_%d_%@",[self class] , __LINE__,@"执行登录");
+                    }
+                    
+                    LOG(@"_%@_%d_%d",[self class] , __LINE__,response);
+                    if (response>0) {
+//                        AlertInVC(@"绑定成功")
+//
+
+                    MBProgressHUD * hub = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                    hub.mode=MBProgressHUDModeText;
+                    hub.detailsLabelText=[NSString stringWithFormat:@"绑定成功"];
+                    [ hub hide:YES afterDelay:2];
+                        hub.completionBlock = ^(){
+                            [self.navigationController dismissViewControllerAnimated:YES completion:^{
+                            }];
+                        
+                        };
+                    }
+                } failure:^(NSError *error) {
+                    AlertInVC(@"登录失败,请重试")
+                }];
+
+            }else if (responseObject.status==-28){
+            AlertInVC(@"手机验证码不正确")
+            }else if (responseObject.status==-400){
+                AlertInVC(@"验证失败")
+            }else{
+                LOG(@"_%@_%d_%@",[self class] , __LINE__,@"操作失败");
+                AlertInVC(@"操作失败,请重试");
+            }
+        } failure:^(NSError *error) {
+            LOG(@"_%@_%d_%@",[self class] , __LINE__,error);
+            AlertInVC(@"操作失败,请重试");
+        }];
+}
+/** 判断验证码的合法性 */
+
+- (BOOL)authcodeLawful:(NSString *) textString
+{
+    NSString* number=@"^\\d{6}$";
+    NSPredicate *numberPre = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",number];
+    return [numberPre evaluateWithObject:textString];
+}
+/** 判断手机号的合法性 */
+
+- (BOOL) mobileLawful:(NSString *)mobileNumbel{
+    if (mobileNumbel.length==0) {
+        AlertInVC(@"手机号为空");
+        return NO;
+    }
+    /**
+     * 手机号码
+     * 移动：134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
+     * 联通：130,131,132,152,155,156,185,186
+     * 电信：133,1349,153,180,189,181(增加)
+     */
+    NSString * MOBIL = @"^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$";
+    /**
+     * 中国移动：China Mobile
+     * 134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
+     */
+    //    NSString * CM = @"^1(70|34[0-8]|(3[5-9]|5[017-9]|8[2378])\\d)\\d{7}$";
+    NSString * CM=@"^13[0-9]{9}$|14[0-9]{9}|15[0-9]{9}$|18[ 0-9]{9}|17[0-9]{9}$";
+    /**
+     * 中国联通：China Unicom
+     * 130,131,132,152,155,156,185,186
+     */
+    NSString * CU = @"^1(3[0-2]|5[256]|8[56])\\d{8}$";
+    /**
+     * 中国电信：China Telecom
+     * 133,1349,153,180,189,181(增加)
+     */
+    NSString * CT = @"^1((33|53|8[019])[0-9]|349)\\d{7}$";
+    
+    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBIL];
+    NSPredicate *regextestcm = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];
+    NSPredicate *regextestcu = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU];
+    NSPredicate *regextestct = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT];
+    
+    if (([regextestmobile evaluateWithObject:mobileNumbel]
+         || [regextestcm evaluateWithObject:mobileNumbel]
+         || [regextestct evaluateWithObject:mobileNumbel]
+         || [regextestcu evaluateWithObject:mobileNumbel])) {
+        return YES;
+    }
+    AlertInVC(@"请输入正确格式的手机号");
+    return NO;
+}
+
+/////////验证码按钮相关////////////
+-(void)navigationBack{
+    [self deleteTimer];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+-(void)deleteTimer
+{
+    self.fenge.hidden = YES;
+    self.gotAuthButton.enabled=YES;
+    [self.gotAuthButton setTitle:@"重新获取" forState:UIControlStateNormal];
+    //    [self.gotAuthcodeButton setTitleColor:@ forState:<#(UIControlState)#>]
+    self.gotAuthButton.backgroundColor = THEMECOLOR;
+    [self.timer invalidate];
+    self.timer=nil;
+}
+-(void)creatTimer
+{
+    self.gotAuthButton.enabled=NO;
+    self.fenge.hidden = NO ;
+    self.gotAuthButton.backgroundColor = [UIColor whiteColor];
+    NSTimer * timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(daojishi) userInfo:nil repeats:YES];
+    self.timer= timer;
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    
+    self.time=60;
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+-(void)daojishi
+{
+    
+    self.time-=1;
+    [self.gotAuthButton setTitle:[NSString stringWithFormat:@"%lds后重新获取",self.time] forState:UIControlStateNormal];
+    if (self.time==0) {
+        [self.gotAuthButton setTitle:@"重新获取" forState:UIControlStateNormal];
+        [self deleteTimer];
+    }
+}
+-(void)resentAuthcode:(UIButton*)sender
+{
+    if (![self mobileLawful:self.mobileInputView.currentText]) {
+        return;
+    }
+#pragma mark 手机号
+            [UserInfo shareUserInfo].mobile = self.mobileInputView.currentText;
+            [self.gotAuthButton setTitle:[NSString stringWithFormat:@"60s后重新获取"] forState:UIControlStateNormal];
+            [self creatTimer];
+            [[UserInfo shareUserInfo] gotMobileCodeWithType:Ohter Success:^(ResponseStatus response) {
+                
+                //                MBProgressHUD * hub = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                //                hub.mode=MBProgressHUDModeText;
+                //                [hub hide:YES afterDelay:1.5];
+                if (response==SHORTMESSAGE_SUCESS) {
+                    //                    hub.labelText=@"验证码发送成功";
+                    //                    hub.completionBlock = ^{
+                    //                        [self creatTimer];
+                    //                    };
+                }else if (response== SHORTMESSAGE_FAIL){
+                    MBProgressHUD * hub = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                    hub.mode=MBProgressHUDModeText;
+                    [hub hide:YES afterDelay:1.5];
+                    hub.labelText=@"验证码获取失败";
+                    hub.detailsLabelText=@"请重试";
+                    [self deleteTimer];
+                    
+                }
+            } failure:^(NSError *error) {
+                
+            }];
+    LOG(@"_%@_%d_%@",[self class] , __LINE__,@"重新发送验证码操作")
+}
+
+@end

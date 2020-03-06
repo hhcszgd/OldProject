@@ -1,0 +1,545 @@
+//
+//  PTableHeaderView.m
+//  b2c
+//
+//  Created by wangyuanfei on 3/29/16.
+//  Copyright © 2016 www.16lao.com. All rights reserved.
+//
+
+#import "PTableHeaderView.h"
+#import "PTableHeaderModel.h"
+#import "PTableHeaderCompose.h"
+#import "HNaviCompose.h"
+#import "HCellComposeModel.h"
+#import "POrderCellComposeModel.h"
+@interface PTableHeaderView()
+/** tableHeader的整体背景图片 */
+@property(nonatomic,weak)ActionBaseView * imgView ;
+/** 头像view的容器View */
+@property(nonatomic,weak)ActionBaseView * iconView ;
+/** 头像,等级,用户名的容器view */
+@property(nonatomic,weak)UIView * containerView ;
+/** 消息中心视图 */
+//@property(nonatomic,weak)ProfileMessageView * messageView ;
+@property(nonatomic,weak)  HNaviCompose * messageView ;
+@property(nonatomic,strong)  HCellComposeModel * messageModel ;
+/** 背景图片的实际尺寸 */
+@property(nonatomic,assign)CGSize  imgSize ;
+/** 用户名label */
+@property(nonatomic,weak)UILabel * accountNameLabel ;
+/** 等级view */
+@property(nonatomic,weak)UIImageView * levelImageView ;
+//@property(nonatomic,weak)ActionBaseView *  accountNameAndLevelView;
+/** 头部下方菜单项 */
+@property(nonatomic,weak)UIView * menuView ;
+
+/** 商品收藏 */
+@property(nonatomic,weak)PTableHeaderCompose * goodsCollect ;
+/** 店铺收藏 */
+@property(nonatomic,weak)PTableHeaderCompose * shopCollect ;
+/** 关注品牌 */
+//@property(nonatomic,weak)PTableHeaderCompose * attentionBrand ;
+////////////////
+//@property(nonatomic,weak)UIView * iconContainer ;
+
+@end
+
+@implementation PTableHeaderView
+
+
+
+-(instancetype)initWithFrame:(CGRect)frame{
+    if (self=[super initWithFrame:frame]) {
+        [self addsubviews];
+        [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(messageChanged:) name:MESSAGECOUNTCHANGED object:nil];
+    }
+    return self;
+
+}
+-(void)messageChanged:(NSNotificationCenter*)noti
+{
+    [self.messageView  changeMessageCount];
+}
+-(CGSize)imgSize{
+    UIImage *img = [UIImage imageNamed:@"bg_my"];
+//    UIImage *img = [UIImage imageNamed:@""];
+    CGSize imgsize = CGSizeZero;
+    if (img) {
+        imgsize = img.size ;
+    }else{
+        imgsize = CGSizeMake(333, 444);
+    }
+    
+    
+    
+    
+    return  CGSizeMake(screenW, screenW/imgsize.width*imgsize.height);
+}
+-(void)componentClick:(ActionBaseView*)sender
+{
+//    LOG(@"_%@_%d_%@",[self class] , __LINE__,sender.mode);
+    if ([self.TableHeaderDelegate respondsToSelector:@selector(actionWithTableHeaderComponent:)]) {
+        [self.TableHeaderDelegate actionWithTableHeaderComponent:sender];
+    }
+}
+
+-(UILabel * )accountNameLabel{
+    if(_accountNameLabel==nil){
+        UILabel * accountNameLabel = [[UILabel alloc]init];
+        accountNameLabel.font = [UIFont boldSystemFontOfSize:14*SCALE];
+        accountNameLabel.textColor = [UIColor whiteColor];
+        _accountNameLabel = accountNameLabel;
+        accountNameLabel.textAlignment = NSTextAlignmentCenter;
+        [self.containerView addSubview:accountNameLabel];
+    }
+    return _accountNameLabel;
+}
+
+-(UIImageView * )levelImageView{
+    if(_levelImageView==nil){
+        UIImageView * levelImageView = [[UIImageView alloc]init];
+        _levelImageView =levelImageView;
+        [self.containerView addSubview:levelImageView];
+    }
+    return _levelImageView;
+}
+
+-(UIView * )menuView{
+    if(_menuView==nil){
+        
+        UIView * menuView = [[UIView alloc]init];
+//        menuView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.33];
+        
+        menuView.backgroundColor = [UIColor clearColor];
+        _menuView =menuView;
+        [self addSubview:self.menuView];
+
+    }
+    return _menuView;
+}
+
+-(void)setPTableHeaderModel:(PTableHeaderModel *)pTableHeaderModel{
+    _pTableHeaderModel = pTableHeaderModel;
+    LOG(@"_%@_%d_%@",[self class] , __LINE__,pTableHeaderModel);
+    LOG(@"_%@_%d_头像的url地址是 ----------------%@",[self class] , __LINE__,pTableHeaderModel.iconUrl);
+    LOG(@"_%@_%d_当前用户名是是 ----------------%@",[self class] , __LINE__,pTableHeaderModel.accountName);
+    //    self.messageView.count =  pTableHeaderModel.messageCount;
+    //收藏商品数
+//    self.goodsCollect.composeCount = pTableHeaderModel.goodsCollectCount;
+//    self.shopCollect.composeCount = pTableHeaderModel.shopCollectCount;
+//    self.messageView.messageCount = pTableHeaderModel.messageCount;
+    if ([pTableHeaderModel.iconUrl containsString:@"head_images"]) {
+        self.iconView.backImageURLStr =  nil ;
+        self.iconView.backImageURLStr = pTableHeaderModel.iconUrl;
+    }else{
+        self.iconView.img = [UIImage imageNamed:@"bg_nohead"];
+    }
+
+    self.accountNameLabel.text=pTableHeaderModel.accountName;
+    self.levelImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"level_v%ld",pTableHeaderModel.level]];
+
+    
+    self.accountNameLabel.text=pTableHeaderModel.accountName;
+    
+    if (pTableHeaderModel.accountName.length>0) {
+        //        self.accountNameAndLevelView.hidden=NO;
+        self.accountNameLabel.hidden = NO ;
+        
+        self.accountNameLabel.text = pTableHeaderModel.accountName;
+        CGSize textSize = [pTableHeaderModel.accountName stringSizeWithFont:15*SCALE];
+        CGFloat imgW = 18*SCALE;
+        CGFloat imgH = imgW;
+//        CGFloat imgX = textSize.width;
+//        CGFloat imgY = 0 ;
+//        CGFloat margin= 5 ;
+        self.accountNameLabel.bounds = CGRectMake(0, 0, textSize.width+3, textSize.height+3);
+        self.accountNameLabel.center = CGPointMake(self.containerView.bounds.size.width*0.5, 79*SCALE+textSize.height);
+        self.levelImageView.bounds = CGRectMake(0, 0, imgW, imgH);
+
+        
+    }else{
+        self.accountNameLabel.hidden = YES
+        ;
+        
+    }
+    
+    if (pTableHeaderModel.level>0) {
+        self.levelImageView.hidden = NO;
+        CGFloat iconHalfW = self.containerView.bounds.size.width*0.5;
+        CGFloat keyValue = iconHalfW - sqrt(iconHalfW*iconHalfW*0.5) ;
+        self.levelImageView.center = CGPointMake(self.containerView.bounds.size.width-keyValue, self.containerView.bounds.size.height-keyValue);
+    }else{
+        self.levelImageView.hidden = YES;
+    }
+    
+    
+    
+    
+    
+    ////////////////
+    for (UIView * subView in self.menuView.subviews) {
+        [subView removeFromSuperview];
+        if (pTableHeaderModel.cellModel.items.count==0) {
+            [_menuView removeFromSuperview];
+        }
+    }
+//    if (pTableHeaderModel.cellModel.items.count!=0) {//登录时的网络数据
+    
+    //手动插进去一个价格投诉
+    POrderCellComposeModel * tousuModel = [[POrderCellComposeModel alloc]init];
+    tousuModel.actionKey = Tousu;
+    
+    tousuModel.url = [NSString stringWithFormat:@"%@/AppOrder/priceappeallist/orderlist",WAPDOMAIN];
+    tousuModel.title = @"价格举报";
+    [pTableHeaderModel.cellModel.items addObject:tousuModel];
+    
+        for (int i = 0 ; i< pTableHeaderModel.cellModel.items.count; i++) {
+            POrderCellComposeModel * subModel = pTableHeaderModel.cellModel.items[i];
+            subModel.judge=YES;
+            PTableHeaderCompose * subCompose = nil;
+            if ([subModel.actionKey isEqualToString:@"focusbrand"]) {//我的足迹//服务器要用前关注品牌的key我也没办法
+                subCompose = [[PTableHeaderCompose alloc]initWithStyle:PTableHeaderComposeImageStyle ];
+                subCompose.composeTitle = subModel.title;
+                subModel.actionKey = ActionFootHistory;
+                subCompose.model = subModel;
+                [self.menuView addSubview:subCompose];//防止把个人信息也插进去
+                subModel.keyParamete = @{@"paramete":subModel.url};
+            }else if ([subModel.actionKey isEqualToString:Tousu]) {//投诉
+                subCompose = [[PTableHeaderCompose alloc]initWithStyle:PTableHeaderComposeImageStyle ];
+                subCompose.composeTitle = subModel.title;
+                subModel.actionKey = Tousu;
+                subCompose.model = subModel;
+                subCompose.topImageView.image = [UIImage imageNamed:@"tousuiocn"];
+                [self.menuView addSubview:subCompose];//防止把个人信息也插进去
+                subModel.keyParamete = @{@"paramete":subModel.url};
+            }else if ([subModel.actionKey isEqualToString:@"goodscollect"]){
+                subCompose = [[PTableHeaderCompose alloc]initWithStyle:PTableHeaderComposeNumberStyle];
+                subModel.actionKey = ActionGoodsCollect;
+                subCompose.composeTitle = subModel.title;
+                [self.menuView addSubview:subCompose];
+                subModel.keyParamete = @{@"paramete":subModel.url};
+                subCompose.composeCount = [subModel.number integerValue];
+                subCompose.model = subModel;
+            }else if ([subModel.actionKey isEqualToString:@"shopcollect"]){
+                subCompose = [[PTableHeaderCompose alloc]initWithStyle:PTableHeaderComposeNumberStyle];
+                subModel.actionKey = ActionShopCollect;
+                subCompose.composeTitle = subModel.title;
+                [self.menuView addSubview:subCompose];
+                subCompose.composeCount = [subModel.number integerValue];
+                subModel.keyParamete = @{@"paramete":subModel.url};
+                subCompose.model = subModel;
+            }else if ([subModel.actionKey isEqualToString:@"???"]){//关注品牌
+                subCompose = [[PTableHeaderCompose alloc]initWithStyle:PTableHeaderComposeNumberStyle];
+                subModel.actionKey = ActionAttentionBrand;
+                subCompose.composeTitle = subModel.title;
+                [self.menuView addSubview:subCompose];
+                subCompose.composeCount = [subModel.number integerValue];
+                subModel.keyParamete = @{@"paramete":subModel.url};
+                subCompose.model = subModel;
+            }
+            [subCompose addTarget:self action:@selector(componentClick:) forControlEvents:UIControlEventTouchUpInside];
+        }
+//
+//    }else{//未登录时的本地数据
+//            for (int i = 0; i<3; i++) {
+//        
+//                PTableHeaderCompose * sub = nil;
+//                if (i!=2) {
+//                    sub = [[PTableHeaderCompose alloc]initWithStyle:PTableHeaderComposeNumberStyle];
+//                }else{
+//                    sub = [[PTableHeaderCompose alloc]initWithStyle:PTableHeaderComposeImageStyle];
+//                }
+//                //        sub.backgroundColor = randomColor;
+//                [_menuView addSubview:sub];
+//                BaseModel * model = [[BaseModel alloc]init];
+//                switch (i) {
+//                    case 0:
+//                    {
+//                        model.actionKey = ActionGoodsCollect;
+//                        model.title = @"商品收藏";
+//                        sub.composeTitle = model.title;
+//                        self.goodsCollect = sub;
+//                    }
+//                        break;
+//                    case 1:
+//                    {
+//                        model.actionKey = ActionShopCollect;
+//                        model.title = @"店铺收藏";
+//                        sub.composeTitle = model.title;
+//                        self.shopCollect  = sub;
+//                    }
+//                        break;
+//        //            case 2:
+//        //            {
+//        //                model.actionKey = ActionAttentionBrand;
+//        //                model.title = @"关注品牌";
+//        //                sub.composeTitle = model.title;
+//        //                self.attentionBrand =sub;
+//        //            }
+//        //                break;
+//                    case 2:
+//                    {
+//                        model.actionKey = ActionFootHistory;
+//                        model.title = @"我的足迹";
+//                        sub.composeTitle = model.title;
+//                    }
+//                        break;
+//                    default:
+//                        break;
+//                }
+//                model.judge=YES;
+//                sub.model = model;
+//                sub.composeCount = 0 ;//默认是0
+//                [sub addTarget:self action:@selector(componentClick:) forControlEvents:UIControlEventTouchUpInside];
+//            }
+//    
+//    }
+       [self setNeedsLayout];
+    [self layoutIfNeeded];
+
+    
+    
+    
+}
+
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    
+    self.imgView.frame = CGRectMake(0, -(self.imgSize.height-self.bounds.size.height), self.imgSize.width, self.imgSize.height);
+    
+
+    
+    
+    
+    
+    CGFloat iconViewW = 79*SCALE;
+    CGFloat iconViewH = iconViewW;
+    CGFloat iconViewCenterY = (47.5 + iconViewH*0.5)*SCALE;
+    
+    
+//    CGFloat containerX = 0 ;
+//    CGFloat containerY = 0 ;
+    CGFloat containerW = iconViewW ;
+    CGFloat containerH = iconViewH ;
+    
+    self.containerView.bounds=CGRectMake(0, 0, containerW, containerH);
+    self.containerView.center = CGPointMake(self.center.x, iconViewCenterY);
+    self.iconView.layer.cornerRadius = self.iconView.bounds.size.width*0.5;
+    self.iconView.layer.masksToBounds=YES;
+    self.iconView.layer.borderWidth=2*SCALE;
+    self.iconView.layer.borderColor=[UIColor whiteColor].CGColor;
+    
+    self.iconView.frame = self.containerView.bounds;
+    
+    //    self.accountName=nil;
+    CGFloat w = screenW/self.menuView.subviews.count ;
+    CGFloat h = 50*SCALE;
+    CGFloat y = self.bounds.size.height-h;
+    self.menuView.frame = CGRectMake(0, y, self.bounds.size.width, h);
+    for (int i = 0; i<self.menuView.subviews.count ; i++) {
+#pragma mark 下面这一行的类要重新自定义
+        ActionBaseView * sub = self.menuView.subviews[i];
+        sub.frame = CGRectMake(i*w, 0, w, h);
+//        sub.title = sub.model.title;
+        
+    }
+//    CGFloat messageViewW = 18.5*SCALE;
+    CGFloat messageViewW = 40*SCALE;
+    self.messageView.frame=CGRectMake(self.bounds.size.width-(15.5+messageViewW)*SCALE, 26*SCALE, messageViewW, messageViewW);
+    
+}
+
+
+-(void)addsubviews{
+    
+    
+    
+    //背景图
+    ActionBaseView * imgView = [[ActionBaseView   alloc]init];
+    imgView.backgroundColor = [UIColor colorWithHexString:@"ff9c70"];
+    imgView.img =[UIImage imageNamed:@"bg_my"];
+//    imgView.img =[UIImage imageNamed:@""];
+    self.imgView=imgView;
+    [self addSubview:self.imgView];
+    
+    //容器View
+    UIView  * containerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 79*SCALE, 79*SCALE)];
+    self.containerView = containerView;
+    [self addSubview:containerView];
+    //头像
+    ActionBaseView * iconView = [[ActionBaseView alloc]init];
+    self.iconView=iconView;
+    CGFloat iconViewW = 79*SCALE;
+    CGFloat iconViewH = iconViewW;
+
+    CGFloat containerW = iconViewW ;
+    CGFloat containerH = iconViewH ;
+    
+    self.iconView.bounds = CGRectMake(0, 0, containerW, containerH);
+    self.iconView.layer.cornerRadius = self.iconView.bounds.size.width*0.5;
+    self.iconView.layer.masksToBounds=YES;
+    self.iconView.layer.borderWidth=2*SCALE;
+    self.iconView.layer.borderColor=[UIColor whiteColor].CGColor;
+    iconView.backgroundColor = [UIColor whiteColor];
+    
+    [self.containerView addSubview:self.iconView];
+    BaseModel * iconViewModel = [[BaseModel alloc]init];
+    iconViewModel.actionKey = ActionAccountInfo;
+    iconViewModel.title = @"账户信息";
+    iconViewModel.judge=YES;
+    self.iconView.model=iconViewModel;
+    [iconView addTarget:self action:@selector(componentClick:) forControlEvents:UIControlEventTouchUpInside];
+
+    
+    [self setupMessageView];
+    
+}
+-(void)setupMessageView
+{
+    HNaviCompose * messageView = [[HNaviCompose alloc]init];
+    
+    self.messageView = messageView;
+    HCellComposeModel * messageModel = [[HCellComposeModel alloc]init ];
+    messageModel.actionKey = @"FriendListVC";
+//    messageModel.title = @"消息中心";
+    messageModel.imgForLocal = [UIImage imageNamed:@"nav_news"];
+    //    messageModel.messageCountInCompose=0;
+    messageModel.judge = YES;
+    messageView.bottomTitleColor = [UIColor whiteColor];
+    messageView.title  = @"消息中心";
+    
+//    ProfileMessageView * messageView = [[ProfileMessageView alloc]init];
+//    self.messageView = messageView ;
+    messageView.composeModel  = messageModel;
+    [self addSubview:messageView];
+    [messageView addTarget:self action:@selector(componentClick:) forControlEvents:UIControlEventTouchUpInside];
+//    BaseModel * messageViewModel = [[BaseModel alloc]init];
+////    messageViewModel.actionKey = ActionMessageCenter;
+//    messageViewModel.actionKey = @"FriendListVC";
+//    messageViewModel.title = @"消息中心";
+//    messageViewModel.judge=YES;
+//    messageView.model=messageViewModel;
+
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+//菜单栏
+//    UIView * menuView = [[UIView alloc]init];
+//    menuView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.33];
+//    self.menuView=menuView;
+//    [self addSubview:self.menuView];
+//
+//    for (int i = 0; i<3; i++) {
+//
+//        PTableHeaderCompose * sub = nil;
+//        if (i!=2) {
+//            sub = [[PTableHeaderCompose alloc]initWithStyle:PTableHeaderComposeNumberStyle];
+//        }else{
+//            sub = [[PTableHeaderCompose alloc]initWithStyle:PTableHeaderComposeImageStyle];
+//        }
+//        //        sub.backgroundColor = randomColor;
+//        [menuView addSubview:sub];
+//        BaseModel * model = [[BaseModel alloc]init];
+//        switch (i) {
+//            case 0:
+//            {
+//                model.actionKey = ActionGoodsCollect;
+//                model.title = @"商品收藏";
+//                sub.composeTitle = model.title;
+//                self.goodsCollect = sub;
+//            }
+//                break;
+//            case 1:
+//            {
+//                model.actionKey = ActionShopCollect;
+//                model.title = @"店铺收藏";
+//                sub.composeTitle = model.title;
+//                self.shopCollect  = sub;
+//            }
+//                break;
+////            case 2:
+////            {
+////                model.actionKey = ActionAttentionBrand;
+////                model.title = @"关注品牌";
+////                sub.composeTitle = model.title;
+////                self.attentionBrand =sub;
+////            }
+////                break;
+//            case 2:
+//            {
+//                model.actionKey = ActionFootHistory;
+//                model.title = @"我的足迹";
+//                sub.composeTitle = model.title;
+//            }
+//                break;
+//            default:
+//                break;
+//        }
+//        model.judge=YES;
+//        sub.model = model;
+//        sub.composeCount = 0 ;//默认是0
+//        [sub addTarget:self action:@selector(componentClick:) forControlEvents:UIControlEventTouchUpInside];
+//    }
+
+//
+//-(void)setCellModel:(PTableCellModel *)cellModel{
+//    _cellModel = cellModel;
+////    for (int i = 0 ; i< cellModel.items.count; i++) {
+////        POrderCellComposeModel * sub = cellModel.items[i];
+////        LOG(@"_%@_%d_新模型%@",[self class] , __LINE__,sub);
+////        PTableHeaderCompose * compose = self.menuView.subviews[i];
+////        compose.title = sub.title;
+////        compose.composeCount = [sub.number integerValue];
+//
+//
+//        for (UIView * subView in self.menuView.subviews) {
+//            [subView removeFromSuperview];
+//        }
+//        for (int i = 0 ; i< cellModel.items.count; i++) {
+//            POrderCellComposeModel * subModel = cellModel.items[i];
+//            subModel.judge=YES;
+//            PTableHeaderCompose * subCompose = nil;
+//            if ([subModel.actionKey isEqualToString:@"focusbrand"]) {//我的足迹//服务器要用前关注品牌的key我也没办法
+//                subCompose = [[PTableHeaderCompose alloc]initWithStyle:PTableHeaderComposeImageStyle ];
+//                subCompose.composeTitle = subModel.title;
+//                subModel.actionKey = ActionFootHistory;
+//                subCompose.model = subModel;
+//                [self.menuView addSubview:subCompose];//防止把个人信息也插进去
+//                subModel.keyParamete = @{@"paramete":subModel.url};
+//            }else if ([subModel.actionKey isEqualToString:@"goodscollect"]){
+//                subCompose = [[PTableHeaderCompose alloc]initWithStyle:PTableHeaderComposeNumberStyle];
+//                subModel.actionKey = ActionGoodsCollect;
+//                subCompose.composeTitle = subModel.title;
+//                [self.menuView addSubview:subCompose];
+//                subModel.keyParamete = @{@"paramete":subModel.url};
+//                subCompose.composeCount = [subModel.number integerValue];
+//                subCompose.model = subModel;
+//            }else if ([subModel.actionKey isEqualToString:@"shopcollect"]){
+//                subCompose = [[PTableHeaderCompose alloc]initWithStyle:PTableHeaderComposeNumberStyle];
+//                subModel.actionKey = ActionShopCollect;
+//                subCompose.composeTitle = subModel.title;
+//                [self.menuView addSubview:subCompose];
+//                subCompose.composeCount = [subModel.number integerValue];
+//                subModel.keyParamete = @{@"paramete":subModel.url};
+//                subCompose.model = subModel;
+//            }else if ([subModel.actionKey isEqualToString:@"???"]){//关注品牌
+//                subCompose = [[PTableHeaderCompose alloc]initWithStyle:PTableHeaderComposeNumberStyle];
+//                subModel.actionKey = ActionAttentionBrand;
+//                subCompose.composeTitle = subModel.title;
+//                [self.menuView addSubview:subCompose];
+//                subCompose.composeCount = [subModel.number integerValue];
+//                subModel.keyParamete = @{@"paramete":subModel.url};
+//                subCompose.model = subModel;
+//            }
+//             [subCompose addTarget:self action:@selector(componentClick:) forControlEvents:UIControlEventTouchUpInside];
+//        }
+//    [self setNeedsLayout];
+//    LOG(@"_%@_%d_子控件的数量是   xxxx   %ld",[self class] , __LINE__,self.menuView.subviews.count);
+//
+////    }
+//
+//}
+
+@end

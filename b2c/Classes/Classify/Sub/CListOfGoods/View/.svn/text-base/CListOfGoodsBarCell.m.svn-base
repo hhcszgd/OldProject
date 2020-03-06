@@ -1,0 +1,227 @@
+//
+//  CListOfGoodsBarCell.m
+//  b2c
+//
+//  Created by 0 on 16/4/25.
+//  Copyright © 2016年 www.16lao.com. All rights reserved.
+//
+#define goodLabelColor @"333333"
+#define goodSVLabelColor @"999999"
+#define storeNameColor @"333333"
+#define priceColor @"e95513"
+#define freightColor @"999999"
+
+
+#import "CListOfGoodsBarCell.h"
+
+@interface CListOfGoodsBarCell()
+/**商品图片*/
+@property (nonatomic, weak) UIImageView *goodImage;
+/**商品介绍*/
+@property (nonatomic, weak) UILabel *goodlabel;
+/**商品销售量*/
+@property (nonatomic, weak) UILabel *goodSVLabel;
+/**商品价格*/
+@property (nonatomic, weak) UILabel *goodPrice;
+/**店铺名称*/
+@property (nonatomic, weak) UILabel *storeName;
+
+/**运费*/
+@property (nonatomic, weak) UILabel *freightLabel;
+/**发货地点*/
+@property (nonatomic, weak) UILabel *addressLabel;
+@end
+@implementation CListOfGoodsBarCell
+- (UILabel *)goodlabel{
+    if (_goodlabel == nil) {
+        UILabel *goodlabel = [[UILabel alloc] init];
+        [goodlabel setNumberOfLines:2];
+        [goodlabel sizeToFit];
+        [goodlabel configmentfont:[UIFont systemFontOfSize:15 * SCALE] textColor:[UIColor colorWithHexString:goodLabelColor] backColor:[UIColor clearColor] textAligement:0 cornerRadius:0 text:@""];
+        _goodlabel = goodlabel;
+        [self.contentView addSubview:goodlabel];
+        
+    }
+    return _goodlabel;
+}
+- (UIImageView *)goodImage{
+    if (_goodImage == nil) {
+        UIImageView *goodImage = [[UIImageView alloc] init];
+        _goodImage = goodImage;
+        goodImage.layer.borderColor = [[UIColor colorWithHexString:@"e4e4e4"] CGColor];
+        goodImage.layer.borderWidth = 0.5;
+        [self.contentView addSubview:goodImage];
+    }
+    return _goodImage;
+}
+- (UILabel *)goodSVLabel{
+    if (_goodSVLabel == nil) {
+        UILabel *sv = [[UILabel alloc] init];
+        _goodSVLabel = sv;
+        [sv configmentfont:[UIFont systemFontOfSize:13 * SCALE] textColor:[UIColor colorWithHexString:goodSVLabelColor] backColor:[UIColor clearColor] textAligement:0 cornerRadius:0 text:@""];
+        [sv sizeToFit];
+        [self.contentView addSubview:sv];
+    }
+    return _goodSVLabel;
+}
+- (UILabel *)storeName{
+    if (_storeName == nil) {
+        UILabel *sr  = [[UILabel alloc] init];
+        _storeName = sr;
+        [sr configmentfont:[UIFont systemFontOfSize:13 * SCALE] textColor:[UIColor colorWithHexString:storeNameColor] backColor:[UIColor clearColor] textAligement:NSTextAlignmentRight cornerRadius:0 text:@""];
+        [sr sizeToFit];
+        [self.contentView addSubview:sr];
+    }
+    return _storeName;
+}
+- (UILabel *)goodPrice{
+    if (_goodPrice == nil) {
+        UILabel *price = [[UILabel alloc] init];
+        _goodPrice = price;
+        
+        [price sizeToFit];
+        [self.contentView addSubview:price];
+    }
+    return _goodPrice;
+}
+- (UILabel *)freightLabel{
+    if (_freightLabel == nil) {
+        UILabel *fre = [[UILabel alloc] init];
+        _freightLabel = fre;
+        [fre configmentfont:[UIFont systemFontOfSize:12 * SCALE] textColor:[UIColor colorWithHexString:freightColor] backColor:[UIColor clearColor] textAligement:0 cornerRadius:0 text:@""];
+        [fre sizeToFit];
+        [self.contentView addSubview:fre];
+    }
+    return _freightLabel;
+}
+- (UILabel *)addressLabel{
+    if (_addressLabel == nil) {
+        UILabel *ad = [[UILabel alloc] init];
+        _addressLabel = ad;
+        [ad configmentfont:[UIFont systemFontOfSize:12 * SCALE] textColor:[UIColor colorWithHexString:freightColor] backColor:[UIColor clearColor] textAligement:0 cornerRadius:0 text:@""];
+        [ad sizeToFit];
+        [self.contentView addSubview:ad];
+    }
+    return _addressLabel;
+}
+#pragma mark -- 初始化
+- (instancetype)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self layout];
+    }
+    return self;
+}
+#pragma mark -- 布局
+- (void)layout{
+    self.contentView.backgroundColor = [UIColor colorWithHexString:@"ffffff"];
+    
+    
+    //布局图片
+    [self.goodImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView.mas_left).offset(10);
+        make.top.equalTo(self.contentView.mas_top).offset(10);
+        make.bottom.equalTo(self.contentView.mas_bottom).offset(-10);
+         make.width.equalTo(self.goodImage.mas_height);
+    }];
+    //布局产品介绍
+    [self.goodlabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.goodImage.mas_top).offset(0);
+        make.left.equalTo(self.goodImage.mas_right).offset(10);
+        make.right.equalTo(self.contentView.mas_right).offset(-10);
+        
+    }];
+    //布局销售数量
+    [self.goodSVLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.contentView.mas_right).offset(-10);
+        make.bottom.equalTo(self.storeName.mas_top).offset(-10);
+        
+    }];
+    //布局店铺名称
+    [self.storeName mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.contentView.mas_bottom).offset(-10);
+        make.right.equalTo(self.contentView.mas_right).offset(-10);
+        make.width.equalTo(@(150 * SCALE));
+
+    }];
+    //布局价格
+    [self.goodPrice mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.freightLabel.mas_top).offset(-10);
+        make.left.equalTo(self.goodImage.mas_right).offset(10);
+    }];
+    //布局运费
+    [self.freightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.addressLabel.mas_right).offset(0);
+        make.bottom.equalTo(self.contentView.mas_bottom).offset(-10);
+    }];
+    //布局地址
+    [self.addressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.goodImage.mas_right).offset(10);
+        make.bottom.equalTo(self.contentView.mas_bottom).offset(-10);
+    }];
+    UIView *lineView = [[UIView alloc] init];
+    [self.contentView addSubview:lineView];
+    lineView.backgroundColor = [UIColor colorWithHexString:@"e4e4e4"];
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView).offset(10);
+        make.right.equalTo(self.contentView).offset(0);
+        make.bottom.equalTo(self.contentView).offset(0);
+        make.height.equalTo(@(0.5));
+    }];
+    
+    
+    
+}
+- (void)setClistModel:(ClistOfGoodsModel *)clistModel{
+    
+    NSURL *urlStr = ImageUrlWithString(clistModel.img);
+    [self.goodImage sd_setImageWithURL:urlStr placeholderImage:[UIImage imageNamed:@"accountBiiMap"] options:SDWebImageCacheMemoryOnly];
+    
+    NSString *price = [NSString stringWithFormat:@"￥%@",dealPrice(clistModel.price)];
+    NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:price];
+    [attributeStr addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:12 * SCALE],NSFontAttributeName, nil] range:NSMakeRange(0, 1)];
+    [attributeStr addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:16 *SCALE],NSFontAttributeName, nil] range:NSMakeRange(1, price.length -1)];
+    
+    [self.goodlabel setText:clistModel.short_name];
+    [self.goodSVLabel setText:[NSString stringWithFormat:@"月销%@笔",clistModel.sales_month]];
+    [self.goodPrice setAttributedText:attributeStr];
+    self.goodPrice.textColor = [UIColor colorWithHexString:priceColor];
+    [self.storeName setText:clistModel.shop_short_name];
+//    [self.addressLabel setText:clistModel.place];
+    [self configmentFreight:clistModel.freight];
+//    [self.freightLabel setText:[NSString stringWithFormat:@"运费:%@",clistModel.freight]];
+}
+
+- (void)configmentFreight:(NSString *)freight{
+    if (freight) {
+        if ([freight isEqualToString:@"0"]) {
+            self.freightLabel.text = @"免邮";
+        }else{
+            self.freightLabel.text = [NSString stringWithFormat:@"运费:%@",[NSString stringWithFormat:@"￥%@",dealPrice(freight)]];
+        }
+    }
+}
+
+- (void)setSubModel:(HStoreSubModel *)subModel{
+    
+    NSURL *urlStr = ImageUrlWithString(subModel.img);
+    [self.goodImage sd_setImageWithURL:urlStr placeholderImage:[UIImage imageNamed:@"accountBiiMap"] options:SDWebImageCacheMemoryOnly];
+
+    NSString *price = [NSString stringWithFormat:@"￥%@",dealPrice(subModel.price)];
+    NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:price];
+    [attributeStr addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:12 * SCALE],NSFontAttributeName, nil] range:NSMakeRange(0, 1)];
+    [attributeStr addAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:16 *SCALE],NSFontAttributeName, nil] range:NSMakeRange(1, price.length -1)];
+    [self.goodlabel setText:subModel.short_name];
+    [self.goodSVLabel setText:[NSString stringWithFormat:@"月销%@笔",subModel.sales_month]];
+    [self.goodPrice setAttributedText:attributeStr];
+    self.goodPrice.textColor = [UIColor colorWithHexString:priceColor];
+    [self.storeName setText:subModel.shop_short_name];
+    [self configmentFreight:subModel.freight];
+//    [self.addressLabel setText:subModel.place];
+//    [self.freightLabel setText:[NSString stringWithFormat:@"运费:%@",subModel.freight]];
+}
+
+
+
+
+@end

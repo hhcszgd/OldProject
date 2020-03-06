@@ -1,0 +1,469 @@
+//
+//  UserInfo.h
+//  TTmall
+//
+//  Created by wangyuanfei on 16/1/7.
+//  Copyright © 2016年 Footway tech. All rights reserved.
+//
+/**
+ 用户模型信息和相关获取个人相关信息的方法
+ */
+#import <Foundation/Foundation.h>
+#import "ResponseObject.h"
+#import "UMSocial.h"
+
+typedef enum : NSUInteger {
+    Register=1,
+    FindPassword=2,
+    Ohter = 3 
+} MobileCodeType;
+typedef void(^CallBackBlock)();
+
+//void(^loginSuccessBlock)() = ^() {
+//    
+//};
+
+@class AMCellModel;
+@protocol UserInfoDelete <NSObject>
+
+-(void)reloadShoppingCarData;
+//-(void)whenNetWorkingError;
+//-(void)whenNetWorkingConnect;
+
+@end
+@class UserInfoViewModel;
+@class PersonalInfo;
+@interface UserInfo : NSObject<NSCopying>
+@property(nonatomic,weak)id  <UserInfoDelete> delegate ;
+/** 自动增长 */
+@property(nonatomic,assign)NSInteger  ID ;
+
+/** 用户名*/
+@property(nonatomic,copy)NSString * name ;
+/** 自己写的,方便调试 */
+@property(nonatomic,copy,readonly)NSString * imName ;
+/** 性别 1.男,2.女,3.保密(默认)*/
+@property(nonatomic,assign)NSInteger  sex ;
+/** 昵称 */
+@property(nonatomic,copy)NSString * nickname ;
+/** 密码 */
+@property(nonatomic,copy)NSString * password ;
+/** 密码盐值 */
+@property(nonatomic,copy)NSString * saltcode ;
+/** 真实姓名 */
+@property(nonatomic,copy)NSString * true_name ;
+/** 证件类型 */
+@property(nonatomic,assign)NSInteger  id_type ;
+/** 证件号码 */
+@property(nonatomic,copy)NSString * id_number ;
+/** 电子邮件 */
+@property(nonatomic,copy)NSString * email ;
+/** 等级 */
+@property(nonatomic,assign)NSInteger  level ;
+/** 用户成长值(可提升会员等级level) */
+@property(nonatomic,assign)NSInteger  growth ;
+/** 用户积分(兑换L币) */
+@property(nonatomic,assign)NSInteger  integral ;
+/** 用户会员有效期初始时间 */
+@property(nonatomic,strong)NSDate * validity_start ;
+/** 用户头像 */
+@property(nonatomic,copy)NSString * head_images ;
+/** 手机号码 */
+@property(nonatomic,copy)NSString * mobile  ;
+/** 座机号码 */
+@property(nonatomic,copy)NSString * telephone ;
+
+/** 分机号码 */
+@property(nonatomic,assign)NSInteger telephone_ext ;
+/** 国家 */
+@property(nonatomic,copy)NSString * country ;
+/** 省份 */
+@property(nonatomic,copy)NSString * province ;
+/** 城市 */
+@property(nonatomic,copy)NSString * city ;
+/** 区/县 */
+@property(nonatomic,copy)NSString * area ;
+/** 具体地址 */
+@property(nonatomic,copy)NSString * address ;
+/** 生日 */
+@property(nonatomic,copy)NSString * birthday ;
+/** 兴趣爱好 */
+@property(nonatomic,copy)NSString * interested ;
+/** 婚姻状况(默认是3保密 , 1 未婚, 2 ,已婚) */
+@property(nonatomic,assign)NSInteger  marital_status ;
+//@property(nonatomic,copy    )NSString * marital_status ;
+/** 学历(1.小学，2.初中，3.高中或中专，4.大专，5.本科，6.研究生或硕士，7博士) */
+@property(nonatomic,assign)NSInteger  education ;
+/** 所属行业 */
+@property(nonatomic,assign)NSInteger industry ;
+/** 公司 */
+@property(nonatomic,copy)NSString * company ;
+/** 所属部门 */
+@property(nonatomic,copy)NSString * department ;
+/** 职位 */
+@property(nonatomic,copy)NSString * position ;
+/** 收入（1.2000~5000,2.5000~1万，3.1万以上） */
+@property(nonatomic,assign)NSInteger earning ;
+/** 会员状态 ,默认是1(1已激活，2锁定) */
+@property(nonatomic,assign)NSInteger  status ;
+/** 创建时间(服务器格式为timestamp时间戳也就是整形) */
+@property(nonatomic,assign)NSInteger create_at ;
+/** 最后一次修改时间数据格式同上 */
+@property(nonatomic,assign)NSInteger  update_at ;
+/** 注册时的ip地址 */
+@property(nonatomic,copy)NSString * registration_ip ;
+/** 最后一次登录的ip地址 */
+@property(nonatomic,copy)NSString * last_login_ip ;
+/** 最后一次登录时间 */
+@property(nonatomic,assign)NSInteger last_login_time ;
+/** 余额 */
+@property(nonatomic,assign)NSInteger  balance ;
+/** 冻结金额 */
+@property(nonatomic,assign)NSInteger  freeze ;
+/** 余额支付密码 */
+@property(nonatomic,copy)NSString *  balancepwd ;
+/** 是否实名认证（0、未认证，1、认证） */
+@property(nonatomic,assign)NSInteger  verified ;
+/** 银行卡号 */
+@property(nonatomic,copy)NSString * bank_card ;
+/** token */
+@property(nonatomic,copy)NSString * token ;
+
+/** key值 */
+@property(nonatomic,copy)NSString * key ;
+
+/** APPID */
+@property(nonatomic,copy)NSString * APPID ;
+
+/** VERSIONID */
+@property(nonatomic,copy)NSString * VERSIONID ;
+
+/** VERSIONMINI */
+@property(nonatomic,copy)NSString * VERSIONMINI ;
+
+/** DID */
+@property(nonatomic,copy)NSString * DID ;
+
+/** member_id */
+//@property(nonatomic,assign)NSInteger  member_id ;
+@property(nonatomic,copy)NSString * member_id ;
+/** member_id换成字符串 */
+/** 短信验证码 */
+@property(nonatomic,copy)NSString * mobileCode ;
+/** newpassword(修改密码时用)*/
+@property(nonatomic,copy)NSString * newpassword ;
+/** 用户注册时填写的手机号码 */
+@property(nonatomic,copy)NSString * registerPhoneNumber ;
+
+/** 用户是否登录 */
+@property(nonatomic,assign,readonly)BOOL isLogin ;
+
+/** 早起模拟购物车信息 */
+//@property(nonatomic,strong)NSMutableArray * shoppingCarInfo ;
+/** 最新网络获取购物车信息 */
+@property(nonatomic,strong)NSMutableArray * shoppingCarData ;
+/** 购物车商品总数 */
+@property(nonatomic,assign)NSInteger  shoppingCarGoodsCount ;
+/** 总消息数量(自加) */
+@property(nonatomic,assign)NSUInteger globleMessageCount ;
+/** 标识购物车数据是否发生变化 */
+@property(nonatomic,assign)BOOL  shopCarDataHasChange ;
+@property(nonatomic,strong)PersonalInfo * personalInfo ;
+//@property(nonatomic,strong)NSMutableArray * personalInfo ;
+/** 自定义用户名(非服务器) */
+@property(nonatomic,copy)NSString * userName ;
+@property(nonatomic,copy)NSString * urlStr ;
+/** 用户当前设置的图片质量 默认是0 , 智能模式 , 1 是wifi模式  2是3G模式 */
+@property(nonatomic,assign)NSUInteger  currentImgMode ;
+
+/** 登录成功回调 */
+//@property(nonatomic,copy) CallBackBlock loginSuccessBlack ;
+@property(nonatomic,copy)  void(^loginSuccessBlack)() ;
++(instancetype)shareUserInfo;
+//-(void)loadUserInfo;
+
+/** 用户信息初始化, 获取key值 */
+-(void )initialization;
+//-(void )initializationSuccess:(void(^)(id response))success failure:(void(^)(NSError*error))failure;//加个回调 , 获取key之后再执行登录
+/** 登录 */
+-(void)loginSuccess:(void(^)(ResponseStatus response))success failure:(void(^)(NSError*error))failure;
+/** 获取个人信息 */
+-(void)gotPersonalInfoSuccess:(void(^)(ResponseStatus response))success failure:(void(^)(NSError*error))failure;
+/** 注册 */
+-(void)registerSuccess:(void(^)(ResponseObject *response))success failure:(void(^)(NSError*error))failure;
+/** 个人信息归档 */
+
+-(void)save ;
+/** 个人信息解档 */
++(instancetype )read;
+/** 删除归档信息 */
++(void)deleteUserINfoResult:(void(^)(BOOL paramete))deleteResult;
+/** 退出登录 */
+-(void)loginOutResult:(void(^)(BOOL paramete))loginOutResult;
+/** 获取验证码 */
+-(void)gotMobileCodeWithType:(MobileCodeType)type Success:(void(^)(ResponseStatus response))success failure:(void(^)(NSError*error))failure;
+//
+/** 上传头像 */
+-(void)uploadPictureWithPicBase64:(NSString*)picBase64   targetType:(NSUInteger)type  success:(void(^)(id response))success failure:(void(^)(NSError*error))failure;
+/** 添加购物车 */
+
+-(void)addShopingCarWithGoods_id:(NSString *)goods_id goodsNum:(NSInteger)num sub_id:(NSInteger)sub_id now:(NSString *)now Success:(void(^)(ResponseObject *response))success failure:(void(^)(NSError*error))failure;
+/**获取购物车中商品的个数*/
+- (void)gotShopCarNumberSuccess:(void(^)(ResponseObject *responseObject))success failure:(void(^)(NSError *error))failure;
+/** 获取购物车数据 */
+-(void)gotShopingCarSuccess:(void(^)(ResponseStatus response))success failure:(void(^)(NSError*error))failure;
+/** 删除购物车 */
+-(void)deleteShopingCarWithGoodsID:(NSInteger)goodsID success:(void(^)(ResponseStatus response))success failure:(void(^)(NSError*error))failure;;
+/** 更改购物车商品数量 */
+-(void) changeCountOfGoodsInShopingCarWithGoodsId:(NSUInteger)goodsId goodsNum:(NSUInteger)goodsNum success:(void(^)(ResponseObject *response))success failure:(void(^)(NSError*error))failure;
+
+/** 确认订单接口 , 商品id通过字符串的形式传递给goods_id 字段  多个goodsid就用 , 连接 */
+-(void)confirmOrderWithGoodsId:(NSString*)goodsId addressID:(NSString*)addressID success:(void(^)(ResponseObject *response))success failure:(void(^)(NSError*error))failure;
+/** 获取分类列表*/
+-(void)gotClassifySuccess:(void(^)(ResponseObject* response))success failure:(void(^)(NSError*error))failure;
+/** 获取子分类 classID 取值范围 0...6 */
+-(void)gotSubClassifyWithClassID:(NSUInteger)classID success:(void(^)(ResponseObject* response))success failure:(void(^)(NSError*error))failure;
+/**获取商品列表页面的数据*/
+- (void)gotListOfGoodsWithClassID:(NSInteger)classID page:(NSInteger)pageNumber sort:(NSInteger)sort sortOrder:(NSString *)sortOrder success:(void(^)(ResponseObject *response))success failure:(void(^)(NSError*error))failure;
+/** 首页点击进入获取优惠券 */
+-(void)gotCouponsDataWithPageNum:(NSUInteger)pageNum price_id:(NSUInteger)price_id classify_id:(NSUInteger)classify_id  success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 获取优惠券详情数据 */
+-(void)gotCouponsDetailDataWithCouponsID:(NSUInteger)couponsID   success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+
+/** 领取优惠券 */
+-(void)gotCouponsWithCouponsID:(NSString*)couponsID   success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 正确的 获取首页个体自产数据 */
+-(void)gotIndividualDataSuccess:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+
+
+/** 获取首页田园牧歌数据 */
+-(void)gotCountrysideDataSuccess:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+
+/** 获取首页民族兄弟数据 */
+-(void)gotNationalDataSuccess:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+
+
+
+/**咨询与反馈页面*/
+- (void)gotAskAndFeedDataSuccess:(void(^)(ResponseObject *responseObject))success failure:(void(^)(NSError *error))failure;
+/**体验问题*/
+- (void)gotFeedBackDataSuccess:(void (^)(ResponseObject *responseObject))success failure:(void (^)(NSError *error))failure;
+
+/**提交体验问题*/
+- (void)postFeedBackDataWithquestionType:(NSString *)questionType questionDesc:(NSString *)questionDesc Success:(void (^)(ResponseObject *responseObject))success failure:(void (^)(NSError *error))failure;
+/**商品商家投诉*/
+- (void)gotComplaintDataSuccess:(void (^)(ResponseObject *responseObject))success failure:(void (^)(NSError *error))failure;
+#pragma mark -- 八个频道页面接口
+#pragma mark -- 厂家直销
+- (void)gotFactorySellsuccess:(void (^)(ResponseObject * response))success failure:(void (^)(NSError * error))failure;
+
+#pragma mark -- 女婴管
+- (void)gotBabySuccess:(void(^)(ResponseObject *response))success failure:(void (^)(NSError *error))failure;
+#pragma mark -- 特许经营
+- (void)gotFranchisesuccess:(void (^)(ResponseObject *response))success failure:(void(^)(NSError * error))failure;
+
+#pragma mark -- 超市
+- (void)gotSuperMarketsuccess:(void (^)(ResponseObject *response))success failure:(void(^)(NSError * error))failure;
+#pragma  mark -- 超市分类
+- (void)gotSuperMarketClassisysuccess:(void(^)(ResponseObject *response))success failure:(void(^)(NSError *error))failure;
+- (void)gotSuperMarketThreeLevelClassisyWithClassID:(NSUInteger)classID channel_id:(NSString *)channel_id success:(void(^)(ResponseObject *response))success failure:(void(^)(NSError *error))failure;
+
+
+#pragma mark -- 电器城
+- (void)gotHomeApplicancesuccess:(void (^)(ResponseObject *response))success failure:(void(^)(NSError * error))failure;
+
+
+
+/** 添加商品收藏 */
+
+-(void)addGoodsFavoriteWithGoods_id:(NSString *)goods_id  Success:(void(^)(ResponseObject *response))success failure:(void(^)(NSError*error))failure;
+/** 获取商品收藏 */
+-(void)gotGoodsFavoriteSuccess:(void(^)(ResponseObject* response))success failure:(void(^)(NSError*error))failure;
+/** 删除商品收藏 */
+-(void)deleteGoodsFavoriteWithGoodsID:(NSString *)goodsID success:(void(^)(ResponseStatus response))success failure:(void(^)(NSError*error))failure;
+/**判断商品是否收藏*/
+- (void)judgeGoodsIsCollectionWithGoodsID:(NSString *)goodsID success:(void(^)(ResponseObject *response))success failure:(void(^)(NSError *error))failure;
+///** 获取商品详情 */
+-(void)gotGoodsDetailDataWithGoodsID:(NSString *)goodsID success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+#pragma mark -- 获取商品评价
+- (void)gotEvaluateOfGoodsWithgoodsID:(NSString *)goodsID evluation:(NSInteger)evluate pageNumber:(NSInteger)pageNumber success:(void (^)(ResponseObject *responseObject))success failure:(void(^)(NSError *error))failure;
+#pragma mark -- 获取商品详情
+- (void)gotProdectDetailWithGoodID:(NSString *)goodsID success:(void(^)(ResponseObject *responseObject))success failure:(void(^)(NSError *error))failure;
+#pragma mark -- 获取看了又看
+- (void)gotProductSeeAndSeeWithGoodid:(NSString *)goodID page:(NSInteger)page success:(void(^)(ResponseObject *responseObjec))success failure:(void(^)(NSError *error))failure;
+#pragma mak -- 商品足迹的添加
+- (void)addGoodsFootmarkWithmember_id:(NSInteger)member_id cat_id:(NSInteger)cat_id goods_id:(NSInteger)goods_id success:(void (^)(ResponseObject *))success failure:(void (^)(NSError *))failure;
+#pragma mark -- 获取商品规格
+- (void)gotGoodsSpecWithgoods_id:(NSString *)goodID succes:(void(^)(ResponseObject *responseObject))succes failure:(void(^)(NSError *error))failure;
+
+
+#pragma mark -- 店铺首页
+-(void)gotShopDetailDataWithShopID:(NSString *)shopID success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+//-(void)gotCouponsDetailDataWithCouponsID:(NSUInteger)couponsID   success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+#pragma mark --- 全部商品
+- (void)gotStoreAllGoodsWithShopID:(NSString *)shopID sort:(NSInteger)sort sortOrder:(NSString *)sortOrder pageNumber:(NSInteger)pageNumber success:(void(^)(ResponseObject *responseObject))success failure:(void(^)(NSError *error))failure;
+/**店铺上新*/
+- (void)gotShopShangXinWithStoreID:(NSString *)storeID sort:(NSInteger)sort sortOrder:(NSString *)sortOrder pageNumber:(NSInteger)pageNumber success:(void(^)(ResponseObject *reponseObject))success failure:(void(^)(NSError *error))failure;
+/**全部分类点击查询接口*/
+- (void)gotShopGoodsDataWithClassID:(NSString *)classID sort:(NSInteger)sort sortOrder:(NSString *)sortOrder pageNumber:(NSInteger)pageNumber success:(void(^)(ResponseObject *responseOnject))success failure:(void (^)(NSError * error))failure;
+#pragma mark -- 商品的全部分类
+
+- (void)gotStoreAllClassWithShopID:(NSInteger)shopID success:(void(^)(ResponseObject *responseObject))success failure:(void(^)(NSError *error))failure;
+#pragma mark -- 店铺故事
+- (void)gotShopSotryDataWithShopID:(NSInteger)shopID success:(void(^)(ResponseObject *responseObject))success failure:(void(^)(NSError *error))failure;
+#pragma mark -- 店铺搜索
+- (void)gotShopSearchDataWithShopID:(NSString *)shopID keyword:(NSString *)keyword page:(NSInteger)page sort:(NSInteger)sort sortOrder:(NSString*)sortOrdr success:(void(^)(ResponseObject *responseObject))success failure:(void(^)(NSError *error))failure;
+#pragma mark -- 店铺资质
+- (void)gotSHopAptitudeDataWithShopID:(NSInteger)shopID success:(void(^)(ResponseObject *responseObject))success failure:(void(^)(NSError *error))failure;
+
+
+#pragma 店铺操作
+-(void)addShopFavoriteWithShop_id:(NSString *)shop_id   Success:(void(^)(ResponseObject *response))success failure:(void(^)(NSError*error))failure;
+/**获取店铺收藏*/
+-(void)gotShopFavoriteSuccess:(void(^)(ResponseObject* response))success failure:(void(^)(NSError*error))failure;
+/**删除店铺收藏*/
+-(void)deleteShopFavoriteWithShop_id:(NSString *)shop_id success:(void(^)(ResponseStatus response))success failure:(void(^)(NSError*error))failure;
+/**判断店铺是否收藏*/
+- (void)judgeShopIsCollectionWithShopID:(NSString *)shopID success:(void(^)(ResponseObject *response))success failure:(void(^)(NSError *error))failure;
+//-(void)uploadPictureWithPicData:(NSData*)picData success:(void(^)(ResponseStatus response))success failure:(void(^)(NSError*error))failure;
+
+////////////////////////////////以下方法直接返回网络数据/////////////////////////////////////
+-(void)gotProfileDataSuccess:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+-(void)gotHomeDataSuccess:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/**猜你喜欢*/
+-(void)gotGuessLikeDataWithChannel_id:(NSString *)channel_id PageNum:(NSUInteger)pageNum success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+#pragma 捞便宜
+-(void)gotLaoCheapDataWithPageNum:(NSUInteger)pageNum success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+
+#pragma 捞故事
+-(void)gotLaoStoryDataWithPageNum:(NSUInteger)pageNum success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+
+/** 全站搜索商品 */
+-(void)searchGoodsInGlobleWithKeyWord:(NSString*)keyWord channel_id:(NSString *)channel_id order:(NSUInteger)order sortOrder:(NSString *)sortOrder pageNum:(NSUInteger)pageNum success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 搜索页（热、历史） */
+-(void)gotSearchPageDataSuccess:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+
+/** 消息中心接口 */
+-(void)gotMessageCenterDataSuccess:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 提交订单后 , 查看订单商品列表 */
+-(void)gotOrderGoodsDetail:(NSString*)goodsID addressID:(NSString*)addressID success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 提交订单后 , 查看订单商品对应的优惠券 */
+-(void)gotOrderCouponseListWithGoodsID:(NSString*)goodsID success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 生成订单 */
+-(void)creatOrderWithUserGoods_ID:(NSString*)goodsID payMent:(NSString*)payment shipingType:(NSString*)shipingType invoiceOrNot:(NSString*)invoice couponsIDs:(NSString*)couponsIDs LBCount:(NSString*)lbCount      addressID:(NSString*)addressID success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 获取订单详情 */
+-(void)gotOrderDetailWithOrderID:(NSString*)orderID success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/**取消订单*/
+-(void)cancleorderID:(NSString*)orderID success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 获取地址列表 */
+
+-(void)gotAddressSuccess:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 新建收货地址 */
+-(void)creatNewAddressWithModel:(AMCellModel*)addressModel success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 修改收货地址 */
+-(void)editAddressWithAddressModel:(AMCellModel*)addressModel success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 删除收货地址 */
+-(void)deleteAddressWithAddressModel:(AMCellModel*)addressModel success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 设置为默认地址 */
+-(void)setDefaultAddressWithAddressModel:(AMCellModel*)addressModel success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+
+/** 获取国家列表 */
+-(void)gotCountryListSuccess:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 获取省份列表 */
+-(void)gotProvinceListWithCountry_id:(NSString*)country_id success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 获取城市列表 */
+-(void)gotCityListWithProvince_id:(NSString*)province_id success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 获取国省市区的总接口(改) */
+-(void)gotAreaListWithAreaType:(int)areaType areaID:(NSString*)areaID success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 余额支付 */
+-(void)payByBalanceWithOrderID:(NSString*)orderID success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 支付宝订单信息rsa加密 */
+-(void)encryptAlipayOrderID:(NSString*)orderID success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 验证支付宝支付结果 */
+-(void)verifyAlipayResult:(NSString*)alipayResult success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/**微信统一下单接口*/
+- (void)gotWeiXinUniformOrderWithorder_code:(NSString *)order_code Success:(void(^)(ResponseObject *responseObject))success failure:(void(^)(NSError *error))failure;
+/** 获取银联流水号tn */
+-(void)gotUnionTnWithOrderInfo:(NSString*)orderInfo success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 检查用户名或者手机号是否已经被注册 */
+-(void)checkUserNameOrMobileWithUserName:(NSString*)userName mobile:(NSString*)mobile email:(NSString*)email mobilecode:(NSString*)mobilecode success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 找回密码时 验证用户名是否存在 , 检查用户名时有返回值的,返回手机或者邮箱 跟上个方法属于同一个接口 , 为了明了分开写了*/
+-(void)checkUserNameOrMobileWithFindbackname:(NSString*)findbackname findbackmobile:(NSString*)findbackmobile findbackemail:(NSString*)findbackemail  success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 通过用户名或者手机找回密码 , 改邮箱找回时  , 判断用户是否绑定邮箱 跟上个方法属于同一个接口 , 为了明了分开写了*/
+
+-(void)gotEmaileByUsernameOrMobile:(NSString*)content success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 修改个人信息 */
+-(void)editUserInfoWithNewUserInfo:(UserInfo*)newUserInfo success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 重置登录密码 */
+-(void)resetPasswordWithAuthType:(NSString*)authType password:(NSString*)password success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 设置图片质量模式 */
+/**  0:waifai状态 1：非waifai状态*/
+-(void)setupNetworkStates:(NSUInteger)satus success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 获取当前账户余额 */
+-(void)gotBanlanceWithUserInfoSuccess:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+
+/** 验证旧登录密码的正确性 */
+-(void)checkOldLoginPasswordWithOldLoginPassword:(NSString*)oldLoginPassword success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+
+/** 执行修改/设置登录密码 */
+-(void)changeNewLoginPasswordWithNewLoginPassword:(NSString*)newLoginPassword success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/**全部订单页面*/
+- (void)gotMyAllOrderSuccess:(void(^)(ResponseObject *responseObject))success failure:(void(^)(NSError *error))failure;
+
+/** 验证旧支付密码的正确性 *///就不能合成一个接口吗 -_-!
+-(void)checkOldPayPasswordWithOldPayPassword:(NSString*)oldPayPassword success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+
+/** 执行修改支付密码 */
+-(void)changeNewPayPasswordWithNewPayPassword:(NSString*)newPayPassword success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+
+/** 获取国家编码 */
+-(void)gotCountryNumberWithSuccess:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+
+/** 修改绑定手机 */
+
+-(void)changeBoundMobileWithBoundMobile:(NSString*)boundMobile success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+
+/** 获取账户安全相关信息 */
+-(void)gotAccountSafeSuccess:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 通过邮箱找回密码 */
+-(void)findPasswordBackByEmailWithEmail:(NSString*)email success:(void(^)(ResponseObject * responseObject))success failure:(void(^)(NSError*error))failure;
+/** 检查版本 */
+-(void)checkVersionInfoSuccess:(void(^)(ResponseObject *responseObject))success failure:(void(^)(NSError *error))failure;
+
+/** 退出登录 */
+-(void)loginOutSuccess:(void(^)(ResponseObject *responseObject))success failure:(void(^)(NSError *error))failure;
+/** 首次第三方登录时 验证手机号码(会返回memberid) */
+-(void)authorMobileAfterThirdPlayformWithMobile:(NSString*)mobile mobileCode:(NSString*)mobileCode accessToken:(NSString*)accessToken success:(void(^)(ResponseObject *responseObject))success failure:(void(^)(NSError *error))failure;
+/** 第三方登录后,保存相关数据 source有三种 QQ sian weixin*/
+-(void)saveThirdPlayromAccountInfomationWithOpenID:(NSString*)openID accessToken:(NSString*)accessToken source:(NSString*)source success:(void(^)(ResponseObject *responseObject))success failure:(void(^)(NSError *error))failure;
+
+-(void)saveThirdPlayromAccountInfomationWithSnsAccount:(UMSocialAccountEntity *)snsAccount  origenRespons:(UMSocialResponseEntity *)origenRespons success:(void(^)(ResponseObject *responseObject))success failure:(void(^)(NSError *error))failure;
+/** 支付宝支付结果处理 */
+-(void)dealTheResultAfterAlipayWithPayType:(NSString*)payType payResult:(NSString*)payResult success:(void(^)(ResponseObject *responseObject))success failure:(void(^)(NSError *error))failure;
+
+/** 清楚足迹 */
+-(void)clearFootHistorySuccess:(void(^)(ResponseObject *responseObject))success failure:(void(^)(NSError *error))failure;
+@end
+
+
+
+
+
+
+
+
+
+
+
+static  NSString * PAYSUCCESS = @"PAYSUCCESS";//支付成功的通知名字
+static NSString *  CHANGEPASSWORDSUCCESS=@"CHANGEPASSWORDSUCCESS";//修改支付/登录密码成功
+static NSString *  LOGINSUCCESS=@"LOGINSUCCESS";//登录成功
+static NSString *  LOGINOUTSUCCESS=@"LOGINOUTSUCCESS";//退出成功
+static NSString * CREATEORDERSUCCESS=@"CREATEORDERSUCCESS";//生成订单成功
+static NSString * SHOPCARDATACHANGED = @"SHOPCARDATACHANGED";//购物车数据发生变化 (增删改了)
+static NSString * GOSHOPCARLOGINSUCCESS = @"GOSHOPCARLOGINSUCCESS";//点击购物车弹出登录界面的登录成功回调
+static NSString * MESSAGECOUNTCHANGED = @"MESSAGECOUNTCHANGED" ;//消息数量改变时
+static NSString * PROFILEDATACHANGED = @"PROFILEDATACHANGED"; //个人中心数据发生变化时
+static NSString * NOTICESOUNDMODE = @"NOTICESOUNDMODE";//通知声音模式
+static NSString * RECENTACCOUNTNAME = @"RECENTACCOUNTNAME";//最近一个登录的账号
+

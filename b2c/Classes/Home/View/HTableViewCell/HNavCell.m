@@ -1,0 +1,491 @@
+//
+//  HNavCell.m
+//  b2c
+//
+//  Created by wangyuanfei on 4/11/16.
+//  Copyright © 2016 www.16lao.com. All rights reserved.
+//
+
+#import "HNavCell.h"
+
+#import "HNavCellComposeView.h"
+
+@interface HNavCell()
+
+@property(nonatomic,weak)UIView * container ;
+/** 列数 */
+@property(nonatomic,assign)NSInteger  col ;
+
+@end
+
+@implementation HNavCell
+
+-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    if (self=[super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        UIView * container = [[UIView alloc]init];
+        container.backgroundColor = [UIColor whiteColor];
+        self.container = container ;
+        [self.contentView addSubview:container];
+        self.col = 5;
+    }
+    return self;
+}
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    CGFloat subX = 0 ;
+    CGFloat subY = 0 ;
+    CGFloat subW =  screenW /self.col;
+    CGFloat subH =  screenW /self.col;
+    self.container.frame = self.bounds;
+    for (int i = 0 ; i < self.container.subviews.count; i++) {
+        subX = i%self.col * subW;
+        subY = (i/self.col) * subH;
+        HNavCellComposeView * sub = self.container.subviews[i];
+        sub.frame = CGRectMake(subX, subY, subW, subH);
+    }
+    
+}
+
+
+-(void)setCellModel:(HCellModel *)cellModel{
+    [super setCellModel:cellModel];
+    
+    if ( self.container.subviews.count==0 || self.container.subviews.count != cellModel.items.count) {//当网络数据返回个数改变时
+        
+        
+        CGFloat totalH = 0;
+        CGFloat oneW = screenW /self.col;
+        CGFloat oneH = oneW;
+        if (cellModel.items.count%self.col ==0) {
+            totalH = oneH  * cellModel.items.count/self.col;
+        }else{
+            totalH = oneH  * (cellModel.items.count/self.col +1);
+        }
+
+        
+        NSArray *  containtViewConstraints  =self.contentView.constraints ;
+        [self.contentView removeConstraints:containtViewConstraints];
+        //移除容器视图的所有子控件
+        [self.container.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [obj removeFromSuperview];
+        }];
+        
+        LOG(@"_%@_%d_%@",[self class] , __LINE__,self.container.subviews);
+        
+
+        
+        
+        for (int i = 0 ; i< cellModel.items.count; i++) {
+            HNavCellComposeView * sub = [[HNavCellComposeView alloc]init];
+            [sub addTarget:self action:@selector(composeClick:) forControlEvents:UIControlEventTouchUpInside];
+            [self.container addSubview:sub];
+            //                sub.composeModel = cellModel.items[i];
+        }
+    }
+    //每次刷新tabView的重新赋值
+    for (int i = 0 ; i< cellModel.items.count ; i++) {
+        HNavCellComposeView*sub =self.container.subviews[i];
+        HCellComposeModel *composeModel = cellModel.items[i];
+        if (composeModel.value) {
+            composeModel.keyParamete = @{@"paramete": composeModel.value};
+        }
+        
+        sub.composeModel = composeModel;
+    }
+    
+    
+    //    }
+    
+    
+    
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+    
+    
+    
+    
+}
+
+@end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////
+////  HNavCell.m
+////  b2c
+////
+////  Created by wangyuanfei on 4/11/16.
+////  Copyright © 2016 www.16lao.com. All rights reserved.
+////
+//
+//#import "HNavCell.h"
+//
+//#import "HNavCellComposeView.h"
+//
+//@interface HNavCell()
+//
+//@property(nonatomic,weak)UIView * container ;
+///** 列数 */
+//@property(nonatomic,assign)NSInteger  col ;
+//
+//@end
+//
+//@implementation HNavCell
+//
+//-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+//    if (self=[super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+//        UIView * container = [[UIView alloc]init];
+//        container.backgroundColor = [UIColor whiteColor];
+//        self.container = container ;
+//        [self.contentView addSubview:container];
+//        self.col = 5;
+//        
+////        for (int i = 0 ;  i < 8 ;  i++) {
+////            HNavCellComposeView * sub = [[HNavCellComposeView alloc]init];
+////            [self.container addSubview:sub];
+////            [sub addTarget:self action:@selector(composeClick:) forControlEvents:UIControlEventTouchUpInside];
+////            //            sub.backgroundColor = randomColor;
+////        }
+////        
+////        
+////        [self.container mas_makeConstraints:^(MASConstraintMaker *make) {
+////            //            make.width.equalTo(self.contentView);
+////            make.left.top.right.equalTo(self.contentView);
+////            CGFloat cellHeight = 200*SCALE;
+////            make.height.equalTo(@(cellHeight));
+////        }];
+////        [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+////            make.left.right.equalTo(self);
+////            make.bottom.equalTo(self.container.mas_bottom).offset(1);
+////        }];
+//    }
+//    return self;
+//}
+//-(void)layoutSubviews{
+//    [super layoutSubviews];
+//    CGFloat subX = 0 ;
+//    CGFloat subY = 0 ;
+//    CGFloat subW =  screenW /self.col;
+//    CGFloat subH =  screenW /self.col;
+//    for (int i = 0 ; i < self.container.subviews.count; i++) {
+//        subX = i%self.col * subW;
+//        subY = (i/self.col) * subH;
+//        HNavCellComposeView * sub = self.container.subviews[i];
+//        sub.frame = CGRectMake(subX, subY, subW, subH);
+//    }
+//    
+//}
+//
+//
+//-(void)setCellModel:(HCellModel *)cellModel{
+//    [super setCellModel:cellModel];
+//    
+//    //    for (int i = 0 ; i < self.container.subviews.count; i++) {
+//    //        HNavCellComposeView * sub = self.container.subviews[i];
+//    //        sub.composeModel = cellModel.items[i];
+//    //
+//    //    }
+//    
+//    /** 要以数据为准 */
+////    for (int i = 0 ; i < cellModel.items.count; i++) {
+////        HNavCellComposeView * sub = self.container.subviews[i];
+////        sub.composeModel = cellModel.items[i];
+////        
+////    }
+//    //    LOG(@"_%@_%d_%@",[self class] , __LINE__,cellModel.items)
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    ////////,..,m/.,n.,mn.,mn.,mn.,mn.,mn.,
+//    //    if ( self.container.subviews.count==0 || self.container.subviews.count != cellModel.items.count) {//当网络数据返回个数改变时
+//    
+//    
+//    //        CGFloat topImageViewX = 0 ;
+//    //        CGFloat topImageViewY = 0 ;
+//    //        CGFloat topImageViewW = self.bounds.size.width;
+//
+//    
+//    
+//    
+////    CGFloat midMargin = 1 ;
+////    CGFloat topBottomMargin = 1 ;
+////    CGFloat oneH  = 75.5*SCALE ;
+//    //        CGFloat oneW  = (self.bounds.size.width - midMargin)/2;
+////    CGFloat totalTopMargin = 10*SCALE;
+//        if ( self.container.subviews.count==0 || self.container.subviews.count != cellModel.items.count) {//当网络数据返回个数改变时
+//        
+//            
+//            CGFloat totalH = 0;
+//            CGFloat oneW = screenW /self.col;
+//            CGFloat oneH = oneW;
+//            if (cellModel.items.count%self.col ==0) {
+//                totalH = oneH  * cellModel.items.count/self.col;
+//            }else{
+//                totalH = oneH  * (cellModel.items.count/self.col +1);
+//            }
+//            //移除原有的所有约束
+//            NSArray * containerConstraints = self.container.constraints;
+//            [self.container removeConstraints:containerConstraints];
+//            
+//            NSArray *  containtViewConstraints  =self.contentView.constraints ;
+//            [self.contentView removeConstraints:containtViewConstraints];
+//            //移除容器视图的所有子控件
+//            [self.container.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                [obj removeFromSuperview];
+//            }];
+//            
+//            LOG(@"_%@_%d_%@",[self class] , __LINE__,self.container.subviews);
+//            
+//            
+//            
+//            
+//            [self.container mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.left.right.equalTo(self.contentView);
+//                make.top.equalTo(self.contentView);
+//                make.height.equalTo(@(totalH));
+//            }];
+//            [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.left.right.equalTo(self);
+//                make.bottom.equalTo(self.container);
+//            }];
+//            //重新添加
+//            
+//            
+//            for (int i = 0 ; i< cellModel.items.count; i++) {
+//                HNavCellComposeView * sub = [[HNavCellComposeView alloc]init];
+//                [sub addTarget:self action:@selector(composeClick:) forControlEvents:UIControlEventTouchUpInside];
+//                [self.container addSubview:sub];
+////                sub.composeModel = cellModel.items[i];
+//            }
+//        }
+//    //每次刷新tabView的重新赋值
+//    for (int i = 0 ; i< cellModel.items.count ; i++) {
+//        HNavCellComposeView*sub =self.container.subviews[i];
+//        sub.composeModel = cellModel.items[i];
+//    }
+//    
+//    
+//       //    }
+//    
+//    
+//
+//    [self setNeedsLayout];
+//    [self layoutIfNeeded];
+//    
+//    
+//    
+//    
+//}
+//
+//
+//
+//
+////-(void)setCellModel:(HCellModel *)cellModel{
+////    [super setCellModel:cellModel];
+////    
+////    CGFloat totalH = 0;
+////    CGFloat oneW = screenW /self.col;
+////    CGFloat oneH = oneW;
+////    if (cellModel.items.count%self.col ==0) {
+////        totalH = oneH  * cellModel.items.count/self.col;
+////    }else{
+////        totalH = oneH  * (cellModel.items.count/self.col +1);
+////    }
+////    //移除原有的所有约束
+////    NSArray * containerConstraints = self.container.constraints;
+////    [self.container removeConstraints:containerConstraints];
+////    
+////    NSArray *  containtViewConstraints  =self.contentView.constraints ;
+////    [self.contentView removeConstraints:containtViewConstraints];
+////    //移除容器视图的所有子控件
+////    [self.container.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+////        [obj removeFromSuperview];
+////    }];
+////    
+////    LOG(@"_%@_%d_%@",[self class] , __LINE__,self.container.subviews);
+////    
+////    
+////    
+////    
+////    [self.container mas_makeConstraints:^(MASConstraintMaker *make) {
+////        make.left.right.equalTo(self.contentView);
+////        make.top.equalTo(self.contentView);
+////        make.height.equalTo(@(totalH));
+////    }];
+////    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+////        make.left.right.equalTo(self);
+////        make.bottom.equalTo(self.container);
+////    }];
+////    //重新添加
+////    
+////    
+////    for (int i = 0 ; i< cellModel.items.count; i++) {
+////        HNavCellComposeView * sub = [[HNavCellComposeView alloc]init];
+////        [sub addTarget:self action:@selector(composeClick:) forControlEvents:UIControlEventTouchUpInside];
+////        [self.container addSubview:sub];
+////        sub.composeModel = cellModel.items[i];
+////    }
+////
+////    
+////}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+////-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+////    if (self=[super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+////        UIView * container = [[UIView alloc]init];
+////        container.backgroundColor = [UIColor whiteColor];
+////        self.container = container ;
+////        [self.contentView addSubview:container];
+////        
+////        for (int i = 0 ;  i < 8 ;  i++) {
+////            HNavCellComposeView * sub = [[HNavCellComposeView alloc]init];
+////            [self.container addSubview:sub];
+////            [sub addTarget:self action:@selector(composeClick:) forControlEvents:UIControlEventTouchUpInside];
+//////            sub.backgroundColor = randomColor;
+////        }
+////    
+////        
+////        [self.container mas_makeConstraints:^(MASConstraintMaker *make) {
+//////            make.width.equalTo(self.contentView);
+////            make.left.top.right.equalTo(self.contentView);
+////            CGFloat cellHeight = 200*SCALE;
+////            make.height.equalTo(@(cellHeight));
+////        }];
+////        [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+////            make.left.right.equalTo(self);
+////            make.bottom.equalTo(self.container.mas_bottom).offset(1);
+////        }];
+////    }
+////    return self;
+////}
+////-(void)layoutSubviews{
+////    [super layoutSubviews];
+////    CGFloat subX = 0 ;
+////    CGFloat subY = 0 ;
+////    CGFloat subW = self.bounds.size.width/(self.container.subviews.count/2);
+////    CGFloat subH = self.bounds.size.height/2;
+////    for (int i = 0 ; i < self.container.subviews.count; i++) {
+////        subX = i%4 * subW;
+////        subY = (i/4) * subH;
+////        HNavCellComposeView * sub = self.container.subviews[i];
+////        sub.frame = CGRectMake(subX, subY, subW, subH);
+////    }
+////
+////}
+////
+////
+////-(void)setCellModel:(HCellModel *)cellModel{
+////    [super setCellModel:cellModel];
+////    
+//////    for (int i = 0 ; i < self.container.subviews.count; i++) {
+//////        HNavCellComposeView * sub = self.container.subviews[i];
+//////        sub.composeModel = cellModel.items[i];
+//////
+//////    }
+////    
+////    /** 要以数据为准 */
+////    for (int i = 0 ; i < cellModel.items.count; i++) {
+////        HNavCellComposeView * sub = self.container.subviews[i];
+////        sub.composeModel = cellModel.items[i];
+////        
+////    }
+//////    LOG(@"_%@_%d_%@",[self class] , __LINE__,cellModel.items)
+////}
+//@end

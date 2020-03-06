@@ -1,0 +1,185 @@
+//
+//  PayResultVC.m
+//  b2c
+//
+//  Created by wangyuanfei on 16/5/25.
+//  Copyright © 2016年 www.16lao.com. All rights reserved.
+//
+
+#import "PayResultVC.h"
+#import "BaseNavigationVC.h"
+#import "b2c-Swift.h"
+
+@interface PayResultVC ()
+
+@end
+
+@implementation PayResultVC
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+    self.backButtonHidden = YES;
+    if (self.payResult==0) {
+        self.payResult = [self.keyParamete[@"paramete"] integerValue];
+    }
+    LOG(@"_%@_%d_%ld",[self class] , __LINE__,_payResult);
+   
+    UIButton * rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 64, 4)];
+//    rightButton.backgroundColor = [UIColor greenColor];
+    [rightButton setTitle:@"订单中心" forState:UIControlStateNormal];
+    [rightButton addTarget:self action:@selector(orderCenter) forControlEvents:UIControlEventTouchUpInside];
+    [rightButton setTitleColor:MainTextColor forState:UIControlStateNormal];
+    rightButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    self.navigationBarRightActionViews=@[rightButton];
+    self.naviTitle = self.payResult ? @"支付成功" : @"支付失败";
+    [self setupUI];
+    // Do any additional setup after loading the view.
+}
+-(void)setupUI
+{
+    CGFloat centerX = self.view.bounds.size.width/2.0;
+    CGFloat iconCenterY = self.view.bounds.size.height/4.0;
+    UIImageView * tipsIcon = [[UIImageView alloc]init];
+    tipsIcon.image = [UIImage imageNamed:@"yiluliaodp"];
+    [self.view addSubview:tipsIcon];
+    tipsIcon.bounds = CGRectMake(0, 0, 88, 88);
+    tipsIcon.center = CGPointMake(centerX, iconCenterY);
+    
+    UILabel * tipsLabel = [[UILabel alloc]init];
+    tipsLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:tipsLabel];
+    tipsLabel.bounds = CGRectMake(0, 0, self.view.bounds.size.width, tipsLabel.font.lineHeight);
+    tipsLabel.center = CGPointMake(centerX, CGRectGetMaxY(tipsIcon.frame) + 44) ;
+    
+    CGFloat btnW = 88.0 ;
+    CGFloat btnH = 36.0 ;
+    CGFloat margin = 15 ;
+    CGFloat borderWidth = 1 ;
+    UIButton * leftBtn = [[UIButton alloc]init];
+    leftBtn.titleLabel.font = [UIFont systemFontOfSize:14*SCALE];
+    leftBtn.layer.borderWidth = borderWidth ;
+    leftBtn.layer.cornerRadius = 7 ;
+    leftBtn.layer.borderColor = SubTextColor.CGColor;
+    leftBtn.layer.masksToBounds = YES;
+    [leftBtn setTitleColor:SubTextColor forState:UIControlStateNormal];
+    [leftBtn addTarget:self action:@selector(leftBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:leftBtn];
+    leftBtn.bounds = CGRectMake(0, 0, btnW, btnH);
+    leftBtn.center = CGPointMake(centerX - btnW/2 - margin, CGRectGetMaxY(tipsLabel.frame) + 64);
+    
+    
+    UIButton * rightBtn = [[UIButton alloc]init];
+    rightBtn.layer.borderWidth = borderWidth ;
+    rightBtn.titleLabel.font = [UIFont systemFontOfSize:14*SCALE];
+    rightBtn.layer.cornerRadius = 7 ;
+    rightBtn.layer.borderColor = THEMECOLOR.CGColor;
+    rightBtn.layer.masksToBounds = YES;
+    [rightBtn setTitleColor:THEMECOLOR forState:UIControlStateNormal];
+    [rightBtn addTarget:self action:@selector(rightBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:rightBtn];
+    rightBtn.bounds = CGRectMake(0, 0, btnW, btnH);
+    rightBtn.center = CGPointMake(centerX + btnW/2 + margin, CGRectGetMaxY(tipsLabel.frame) + 64);
+    if (self.payResult == PaySuccess) {
+        tipsLabel.text  = @"恭喜您 , 支付成功了";
+//        tipsIcon.image  =  [UIImage imageNamed:@"icon_paysuccess"];
+         NSString *strResourcesBundle = [[NSBundle mainBundle] pathForResource:@"Resource" ofType:@"bundle"];
+         NSString * imgPath = [[NSBundle bundleWithPath:strResourcesBundle] pathForResource:@"icon_paysuccess@2x" ofType:@"png" inDirectory:@"Image"];
+        LOG(@"_%@_%d_%@",[self class] , __LINE__,imgPath);
+        tipsIcon.image = [UIImage imageWithContentsOfFile:imgPath];
+        [leftBtn setTitle:@"查看订单" forState:UIControlStateNormal];
+        [rightBtn setTitle:@"再去逛逛" forState:UIControlStateNormal];
+    }else{
+        tipsLabel.text = @"啊哦~支付失败了";
+        tipsIcon.image  =  [UIImage imageNamed:@"icon_payfail"];
+        [leftBtn setTitle:@"再去逛逛" forState:UIControlStateNormal];
+        [rightBtn setTitle:@"重新支付" forState:UIControlStateNormal];
+    }
+    
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    LOG(@"_%@_%d_%@",[self class] , __LINE__,@"fuck , 内存警告");
+    // Dispose of any resources that can be recreated.
+}
+-(void)leftBtnClick:(UIButton*)sender
+{
+    if (self.payResult == PaySuccess) {//点击查看订单
+        [self seeOrderDetail];
+    }else{//再去逛逛
+        [self strollAgain];
+    }
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (self.payResult == PaySuccess) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:PAYSUCCESS object:nil];
+    }else if(self.payResult == PayFailure){
+        
+    }
+
+    
+}
+
+-(void)rightBtnClick:(UIButton*)sender
+{
+    if (self.payResult) {//再去逛逛
+        [self strollAgain];
+    }else{//重新支付
+        [self payAgain];
+    }
+}
+//再去逛逛
+-(void)strollAgain
+{
+    [self.navigationController popToRootViewControllerAnimated:NO];//maintabbarVC 和 payresultVC 并列属于同同一个导航控制器
+//    [KeyVC shareKeyVC].rootViewController.selectedViewController
+//    UIViewController * current = [KeyVC shareKeyVC].rootViewController.selectedViewController ;
+//    [(BaseNavigationVC*)current popToRootViewControllerAnimated:NO];
+//    [current.navigationController popToRootViewControllerAnimated:YES];
+    
+    [[GDKeyVC share] selectChildViewControllerIndexWithIndex:0];
+
+//    [[KeyVC shareKeyVC] skipToTabbarItemWithIndex:0];//当前控制器已经是首页, 也就是index已经是0时 , 不生效
+    
+    
+//     [current.navigationController popToRootViewControllerAnimated:YES];
+}
+
+//重新支付
+-(void)payAgain
+{
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+//订单中心(全部订单页面)
+-(void)orderCenter
+{
+    /** http://m.zjlao.com/AppOrder/orderlist.html */
+        BaseModel * model = [[BaseModel alloc ]init];
+    model.actionKey = @"TotalOrderVC";
+    
+    model.keyParamete = @{@"paramete":[NSString stringWithFormat:@"%@/AppOrder/orderlist.html",WAPDOMAIN]};
+    [[SkipManager shareSkipManager] skipByVC:self withActionModel:model];
+//    [self.navigationController popToRootViewControllerAnimated:NO];
+}
+//查看订单详情
+-(void)seeOrderDetail//调到待发货
+{
+/** http://m.zjlao.com/AppOrder/orderlist2.html */
+    BaseModel * model = [[BaseModel alloc ]init];
+    model.actionKey = @"PendingSendVC";
+    model.keyParamete = @{@"paramete":[NSString stringWithFormat:@"%@/AppOrder/orderlist2.html",WAPDOMAIN]};
+    [[SkipManager shareSkipManager] skipByVC:self withActionModel:model];
+}
+/*
+#pragma mark - Navigation
+';;;;;;;;;;;;;;'/;'''
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end
