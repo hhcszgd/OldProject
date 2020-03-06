@@ -1,0 +1,66 @@
+/* 
+  SystemLanguage.strings
+  ZDLao
+
+  Created by WY on 2017/10/31.
+  Copyright © 2017年 com.16lao. All rights reserved.
+*/
+"title" = "system_english_title";
+"country_code" = "119";
+"language_identifier" = "en_us";
+"tabbar_item1_title" = "find.search";
+"tabbar_item2_title" = "interaction";
+"tabbar_item3_title" = "profile";
+"send" = "send";
+/*关于我*/
+"aboutMe" = "AboutMe";
+/*成就*/
+"achievement" = "achievement";
+/*内容*/
+"content" = "content";
+"login" = "login";
+"register" = "register";
+/*手机号方式*/
+"phoneType" = "phoneType";
+/*邮箱方式*/
+"emailType" = "emailType";
+"phoneNoNull" = "手机号码不能为空";
+/*邮箱不能为空*/
+"emailNoNull" = "邮箱不能为空";
+/*邮箱格式不对*/
+"emailFormatIsFalse" = "邮箱格式不对";
+/*完善个人信息*/
+"perfectUserInfo" = "完善个人信息";
+/*提交*/
+"submit" = "提交";
+/*昵称*/
+"nickname" = "昵称";
+/*输入昵称*/
+"enterNickName" = "输入昵称";
+/*性别*/
+"sex" = "性别";
+/*女*/
+"women" = "女";
+"men" = "男";
+"secrecy" = "保密";
+/*手机号绑定*/
+"phonebind" = "手机号绑定";
+/*验证*/
+"verification" = "验证";
+"propmt" = "绑定会让您的账号更加安全。\n 完成绑定后，您还可以通过手机号登陆嗨捞";
+"set" = "设置";
+"cleanCache" = "清理缓存";
+"noWIFIPicture" = "非WIFI环境下图片质量";
+"pushNotification" = "推送通知";
+"checkVersion" = "检查版本";
+"setAboutWe" = "关于我们";
+"setChangeLanguage" = "切换语言";
+"automaticTranslation" = "自动翻译";
+"choseLanguage" = "选择语言";
+
+
+///确认按钮
+"confirm" = "confirm";
+
+
+
