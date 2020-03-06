@@ -1,0 +1,13 @@
+//
+//  TestScrollViewProPerty.h
+//  b2c
+//
+//  Created by wangyuanfei on 16/8/2.
+//  Copyright © 2016年 www.16lao.com. All rights reserved.
+//
+
+#import "SecondBaseVC.h"
+
+@interface TestScrollViewProPerty : SecondBaseVC
+
+@end
